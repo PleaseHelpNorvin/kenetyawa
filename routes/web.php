@@ -33,7 +33,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     Route::get('/home',[IndexController::class,'index'])->name('homeview');
-    Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
+    Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
+    Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
 
 });

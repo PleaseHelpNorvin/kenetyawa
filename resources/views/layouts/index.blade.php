@@ -4,7 +4,7 @@
 <head>
     @include('includes.header')
 </head>
-
+    {{-- @include('css.template_css') --}}
 <body>
     @include('includes.navbar')
     
