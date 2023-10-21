@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -15,13 +16,18 @@ class ProfileController extends Controller
         $request->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        // dd($request->user()->image);
         
         if($request->user()->image){
             File::delete(public_path('images/'. $request->user()->image));
-        }
+        }   
 
-        $imageName = time().'.'.$request->images->extension();
-        $request->image->move(public_path('images/', $imageName));
+
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+
+
 
         User::where('id', auth()->user()->id)->update([
             'image' => $imageName

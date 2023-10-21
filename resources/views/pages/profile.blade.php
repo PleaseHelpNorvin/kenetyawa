@@ -2,17 +2,21 @@
 @section('content')
     {{-- <h1>Profile</h1> --}}
     {{-- <div class="container"> --}}
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('edit.profile')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
+
+            @if (session('message'))
+                <span class="text-success">{{ session('message') }}</span>
+            @endif
             <h1>Profile</h1>
             <div class="mb-3">
                 <label for="exampleInputEmail1">name</label>
-                <input type="name" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Enter Name">
+                <input type="name" class="form-control" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user -> name}}" readonly>
             </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user -> email}}" readonly>
             </div>
             <div class="mb-3">
                 <label for="exampleFormControlInput1" class="form-label">Image</label>

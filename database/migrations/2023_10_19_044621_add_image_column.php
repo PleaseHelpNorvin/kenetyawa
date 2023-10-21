@@ -13,7 +13,7 @@ return new class extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
-            $table->string('image')->after('email');
+            $table->string('image')->after('email')->nullable()->change();
         });
     }
 
@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         //
-        Schema::create('users', function (Blueprint $table) {
-            
+        Schema::table('users', function (Blueprint $table) {
+        
         });
     }
 };

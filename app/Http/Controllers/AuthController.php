@@ -22,14 +22,26 @@ class AuthController extends Controller
             'password' =>'required|min:6'
         ]);
 
-        $user = new User();
-        $user -> name = $request->name;
-        $user -> email = $request->email;
-        $user -> password = Hash::make($request->password);
-
-        $user -> save();
         
-        return back()-> with('success', 'Register Successfully');
+        $data = $request->all();
+        //$check = $this->create($data);
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password'])
+        ]);
+
+        return redirect()->intended('/home')->with('message','Great! You have Successfully loggedin');
+
+        // $user = new User();
+        // $user -> name = $request->name;
+        // $user -> email = $request->email;
+        // $user -> password = Hash::make($request->password);
+
+        // $user -> save();
+        
+        // return back()-> with('success', 'Register Successfully');
+        
     }
     
     public function loginView(){
