@@ -11,4 +11,6 @@
     integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
 </script>
 
-<title>Home</title>
+<title>@yield('title')</title>
+
+<link rel="icon" href="https://favicon.io/emoji-favicons/eye-in-speech-bubble" type="image/x-icon">

@@ -1,5 +1,7 @@
 @extends('layouts.index')
-@section('content')
+@section('title', 'Dashboard')
+@section('content' )
+
     <div class="container">
         <h1>this is dashboard page</h1>
     </div>

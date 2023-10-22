@@ -1,5 +1,8 @@
 @extends('layouts.index')
+@section('title', 'Profile')
+
 @section('content')
+
     {{-- <h1>Profile</h1> --}}
     {{-- <div class="container"> --}}
         <form action="{{ route('edit.profile')}}" method="POST" enctype="multipart/form-data">

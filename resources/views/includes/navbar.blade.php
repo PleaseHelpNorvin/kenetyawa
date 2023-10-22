@@ -4,8 +4,9 @@
         <div class="user">
             <img src="{!! asset('images/'.auth()->user()->image) !!}" width="25" height="35" class="user-img">
             <div>
-                <h2>test1</h2>
-                <p>test@test<p>
+                <h2>{{ Auth::user()->name}}</h2>
+                <p>{{ Auth::user()->email}}<p>
+                    
             </div>
             <img src="{{ asset('assets/sidenav-img/images/star.png')}}" class="star-img">
         </div>
