@@ -12,6 +12,7 @@ class ProfileController extends Controller
     public function showProfile(Request $request){
         return view('pages.profile',['user' => $request->user()]);
     }
+    
     public function updateImage(Request $request){
         $request->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -23,11 +24,8 @@ class ProfileController extends Controller
             File::delete(public_path('images/'. $request->user()->image));
         }   
 
-
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-
-
 
         User::where('id', auth()->user()->id)->update([
             'image' => $imageName

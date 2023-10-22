@@ -2,7 +2,7 @@
 <div class="header">
     <div class="side-nav">
         <div class="user">
-            <img src="{{ asset('assets/sidenav-img/images/user.png')}}" class="user-img">
+            <img src="{!! asset('images/'.auth()->user()->image) !!}" width="25" height="35" class="user-img">
             <div>
                 <h2>test1</h2>
                 <p>test@test<p>
