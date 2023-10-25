@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingPageController;
 
 
 
@@ -22,6 +23,8 @@ use App\Http\Controllers\DashboardController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::get('/', [LandingPageController::class,'showLandingPage']);
 Route::group(['middleware' => 'guest'], function(){
 
     Route::get('/register',[AuthController::class,'registerView'])->name('register');
@@ -34,6 +37,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     Route::get('/home',[IndexController::class,'index'])->name('homeview');
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
+    Route::get('/schedule',[DashboardController::class,'schedule'])->name('schedule');
     Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
 

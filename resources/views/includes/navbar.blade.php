@@ -1,28 +1,27 @@
-{{-- <p><a href="">logout</a></p> --}}
-<div class="header">
-    <div class="side-nav">
-        <div class="user">
-            <img src="{!! asset('images/'.auth()->user()->image) !!}" width="25" height="35" class="user-img">
-            <div>
-                <h2>{{ Auth::user()->name}}</h2>
-                <p>{{ Auth::user()->email}}<p>
-                    
-            </div>
-            <img src="{{ asset('assets/sidenav-img/images/star.png')}}" class="star-img">
+<div class="topnav">
+    <a class = "logo" href="{{ route('homeview')}}">SCHEDULING SYSTEM</a>
+    <div class="profile-dropdown">
+        <button id="profile-button" class="profile-button">
+            <img src="{!! asset('images/'.auth()->user()->image) !!}"  class="profile-image"> {{ Auth::user()->name}}
+        </button>
+        <div id="profile-content" class="profile-content">
+            <a href="{{ route('profileview')}}">Profile</a>
+            <a href="">Settings</a>
+            <a href="{{ route('logout')}}">Log Out</a>
         </div>
-        <ul>
-            <li><img src="{{ asset('assets/sidenav-img/images/rewards.png')}}"><a href="{{ route('homeview')}}" class="nav-link px-2 text-muted"><p>Home<p></a><li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><a href="{{ route('dashboardview')}}" class="nav-link px-2 text-muted"><p>Dashboard<p></a></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><a href="{{ route('profileview')}}" class="nav-link px-2 text-muted"><p>Profile<p></a></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/setting.png')}}"><p>settings</p></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><p>test2</p></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><p>test3</p></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><p>test4</p></li>
-            <li><img src="{{ asset('assets/sidenav-img/images/dashboard.png')}}"><p>test5</p></li>
-        </ul>
-        <ul>
-            <li><img src="{{ asset('assets/sidenav-img/images/logout.png')}}"><a href="{{ route('logout')}}" class="nav-link px-2 text-muted"><p>Logout<p></a></li>
-        </ul>
-        <div class="animation start-home"></div>
     </div>
+</div>
+
+<div class="sidenav" id="mySidenav">
+    <ul class="side-menu">
+        <li><a href="#">---</a></li>
+        {{-- <li><a href="{{ route('homeview')}}">Home</a></li> --}}
+        <li><a href="{{ route('dashboardview')}}">Dashboard</a></li>
+        <li><a href="{{ route('schedule')}}">Schedule</a></li>
+        <li><a href="#">Course List</a></li>
+        <li><a href="#">Teachers List</a></li>
+        <li><a href="#">Subject List</a></li>
+        <li><a href="#">Reports</a></li>
+
+    </ul>
 </div>

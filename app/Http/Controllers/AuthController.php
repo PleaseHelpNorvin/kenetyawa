@@ -61,7 +61,7 @@ class AuthController extends Controller
        if(Auth::attempt($credentials)){
         return redirect('/home') -> with('success', 'Login Sucessful');
        }
-       return back()-> with('error','Login Failed');
+       return back()-> with('error','bogoa sa giatay kalimot sa password');
     }
 
     public function logout(){

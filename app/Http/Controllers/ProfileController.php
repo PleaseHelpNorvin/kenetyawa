@@ -20,9 +20,10 @@ class ProfileController extends Controller
 
         // dd($request->user()->image);
         
-        if($request->user()->image){
-            File::delete(public_path('images/'. $request->user()->image));
-        }   
+        if (auth()->check() && auth()->user()->image) {
+            File::delete(public_path('images/' . auth()->user()->image));
+        }
+         
 
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);

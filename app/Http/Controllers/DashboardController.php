@@ -10,4 +10,8 @@ class DashboardController extends Controller
     public function showDashboard(){
         return view('pages.dashboard');
     }
+    
+    public function schedule(){
+        return view('pages.schedule');
+    }
 }

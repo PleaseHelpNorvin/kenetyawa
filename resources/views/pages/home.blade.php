@@ -3,7 +3,7 @@
 
 @section('content')
 
-    <div class="container">
+    {{-- <div class="container"> --}}
         <h1> this is home page</h1>
-    </div>
+    {{-- </div> --}}
 @endsection
