@@ -11,7 +11,15 @@ use Illuminate\Support\Facades\Session;
 class AuthController extends Controller
 {
     //
+    
+   
 
+    public function teacherID(){
+        return view('auth.teacherID');
+    }
+    public function studentID(){
+        return view('auth.studentID');
+    }
     public function registerView(){
         return view('auth.register');
     }
@@ -67,6 +75,6 @@ class AuthController extends Controller
     public function logout(){
         Session::flush();
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('showLandingPage');
     }
 }

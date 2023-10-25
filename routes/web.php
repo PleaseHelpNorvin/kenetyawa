@@ -24,9 +24,11 @@ use App\Http\Controllers\LandingPageController;
 //     return view('welcome');
 // });
 
-Route::get('/', [LandingPageController::class,'showLandingPage']);
+Route::get('/', [LandingPageController::class,'showLandingPage'])->name('showLandingPage');
 Route::group(['middleware' => 'guest'], function(){
 
+    Route::get('/studentID', [AuthController::class,'studentID'])->name('studentID');
+    Route::get('/teacherID', [AuthController::class,'teacherID'])->name('teacherID');
     Route::get('/register',[AuthController::class,'registerView'])->name('register');
     Route::get('/login',[AuthController::class,'loginView'])->name('login');
     Route::post('/register',[AuthController::class,'registerAuth'])->name('register');
