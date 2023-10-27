@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/css/navbar.css') !!}">
+<link rel="stylesheet" type="text/css" href="{!! asset('assets/css/layouts.css') !!}">
+<script src="{!! asset('assets/js/navbar.js') !!}"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+</script>
+
+
+{{-- calendar libraries --}}
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{!! asset('assets/calendar/fonts/icomoon/style.css')!!}">
+<link href='{!! asset('assets/calendar/fullcalendar/packages/core/main.css')!!}' rel='stylesheet' />
+<link href='{!! asset('assets/calendar/fullcalendar/packages/daygrid/main.css')!!}' rel='stylesheet' />
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="{!! asset('assets/calendar/css/bootstrap.min.css')!!}">
+<!-- Style -->
+<link rel="stylesheet" href="{!! asset('assets/calendar/css/style.css')!!}">
+<!-- Scripts -->
+<script src="{!! asset('assets/calendar/js/jquery-3.3.1.min.js')!!}"></script>
+<script src="{!! asset('assets/calendar/js/popper.min.js')!!}"></script>
+<script src="{!! asset('assets/calendar/js/bootstrap.min.js')!!}"></script>
+<script src="{!! asset('assets/calendar/fullcalendar/packages/core/main.js')!!}"></script>
+<script src="{!! asset('assets/calendar/fullcalendar/packages/interaction/main.js')!!}"></script>
+<script src="{!! asset('assets/calendar/fullcalendar/packages/daygrid/main.js')!!}"></script>
+
+{{-- modal library --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<title>@yield('title')</title>
+
+

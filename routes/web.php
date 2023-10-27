@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\IndexController;
+// use App\Http\Controllers\IndexController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\SubjectListController;
+use App\Http\Controllers\TeacherListController;
 
 
 
@@ -37,10 +41,16 @@ Route::group(['middleware' => 'guest'], function(){
 Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
-    Route::get('/home',[IndexController::class,'index'])->name('homeview');
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-    Route::get('/schedule',[DashboardController::class,'schedule'])->name('schedule');
     Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
+
+    Route::get('/subjectlist',[SubjectListController::class,'showSubjectList'])->name('subjectlistview');
+    Route::get('/teacherlist',[TeacherListController::class,'showTeacherList'])->name('teacherlistview');
+    Route::get('/schedule',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    Route::get('/reports',[ReportsController::class,'showReports'])->name('reportsview');
+
+
+
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
 
 });

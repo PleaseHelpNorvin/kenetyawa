@@ -8,6 +8,6 @@ class LandingPageController extends Controller
 {
     //
     public function showLandingPage(){
-        return view ('landingpage.landingpage');
+        return view ('landingpage.landing_pages.landingpage');
     }
 }

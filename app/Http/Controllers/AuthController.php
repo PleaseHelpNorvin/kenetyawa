@@ -15,13 +15,13 @@ class AuthController extends Controller
    
 
     public function teacherID(){
-        return view('auth.teacherID');
+        return view('admin.auth.teacherID');
     }
     public function studentID(){
-        return view('auth.studentID');
+        return view('admin.auth.studentID');
     }
     public function registerView(){
-        return view('auth.register');
+        return view('admin.auth.register');
     }
     public function registerAuth(request $request){
         $request -> validate([
@@ -39,7 +39,7 @@ class AuthController extends Controller
             'password' => Hash::make($data['password'])
         ]);
 
-        return redirect()->intended('/home')->with('message','Great! You have Successfully loggedin');
+        return redirect()->intended('/dashboard')->with('message','Great! You have Successfully loggedin');
 
         // $user = new User();
         // $user -> name = $request->name;
@@ -53,7 +53,7 @@ class AuthController extends Controller
     }
     
     public function loginView(){
-        return view('auth.login');
+        return view('admin.auth.login');
     }
     public function loginAuth(request $request){
         $request -> validate([
@@ -67,7 +67,7 @@ class AuthController extends Controller
        ];
 
        if(Auth::attempt($credentials)){
-        return redirect('/home') -> with('success', 'Login Sucessful');
+        return redirect('/dashboard') -> with('success', 'Login Sucessful');
        }
        return back()-> with('error','bogoa sa giatay kalimot sa password');
     }
