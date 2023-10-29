@@ -1,6 +1,6 @@
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-  Open Modal
-</button>
+{{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+    add Schedule
+</button> --}}
 
 <div class="modal" id="myModal" tabindex="-1">
   <div class="modal-dialog">

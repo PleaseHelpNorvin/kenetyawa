@@ -5,7 +5,7 @@
 @section('content')
 {{-- <div class="content"> --}}
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-        Open Modal
+        add schedule
       </button>    
       <div id='calendar'></div>
   {{-- </div> --}}
