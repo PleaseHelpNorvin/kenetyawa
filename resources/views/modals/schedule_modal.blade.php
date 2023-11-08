@@ -10,6 +10,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <form action="">
               <div class="form-group">
                   <label for="inputState">Faculty</label>
                   <select id="inputState" class="form-control">
@@ -58,6 +59,7 @@
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-primary">Save changes</button>
           </div>
+        </form> 
       </div>
   </div>
 </div>

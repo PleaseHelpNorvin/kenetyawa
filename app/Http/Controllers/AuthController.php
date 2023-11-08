@@ -23,6 +23,7 @@ class AuthController extends Controller
     public function registerView(){
         return view('admin.auth.register');
     }
+    
     public function registerAuth(request $request){
         $request -> validate([
             'name' => 'required',

@@ -32,6 +32,6 @@ class ProfileController extends Controller
             'image' => $imageName
         ]);
 
-        return redirect(route('edit.profile'))->with('message', 'Successfully Updated Image');
+        return redirect(route('edit.profile'))->with('message', 'Successfully Updated Image');  
     }
 }

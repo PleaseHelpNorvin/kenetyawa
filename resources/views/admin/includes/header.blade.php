@@ -6,7 +6,7 @@
 <script src="{!! asset('assets/js/navbar.js') !!}"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+{{-- bootstrap/modal library --}}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     
@@ -34,17 +34,14 @@
 <script src="{!! asset('assets/calendar/fullcalendar/packages/interaction/main.js')!!}"></script>
 <script src="{!! asset('assets/calendar/fullcalendar/packages/daygrid/main.js')!!}"></script>
 
-{{-- modal library --}}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 {{-- faculty list/subject list library --}}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
 <script src="{!! asset('assets/js/faculty_list.js') !!}"></script>
 
-
+{{-- font awewome --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <title>@yield('title')</title>
 
