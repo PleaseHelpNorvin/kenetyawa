@@ -63,4 +63,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     //delete routes
     Route::delete('delete_faculty/{id}', [TeacherListController::class,'deleteFaculty'])->name('deletefaculty');
+
+    Route::get('studentslist', [StudentController::class, 'DisplayStudents'])->name('displaystudents');
 });

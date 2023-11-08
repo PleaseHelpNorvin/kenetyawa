@@ -14,7 +14,7 @@ class TeacherListController extends Controller
     }
 
     public function updateFaculty(Request $request, $id){
-        
+
         $faculty = Faculty_List::find($id);
         
         if (!$faculty) {
@@ -63,10 +63,10 @@ class TeacherListController extends Controller
         return redirect()->route('teacherlistview')->with('success', 'Faculty member added successfully');
     }
 
-    public function showFaculty(){
-        $data = Faculty_List::all();
-        return compact($data);
-    }
+    // public function showFaculty(){
+    //     $data = Faculty_List::all();
+    //     return compact($data);
+    // }
    
     public function deleteFaculty(Request $request, string $id){
         

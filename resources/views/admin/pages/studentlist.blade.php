@@ -18,6 +18,7 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
         Add Schedule
     </button>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,15 +40,21 @@
         </div>
     </nav>
     <!-- nav BAR na sa babaw -->
+   
     <div class="row">
         <div class="col-md-3">
             <div class="list-group student-list">
-                <a href="#student1" class="list-group-item list-group-item-action">Student 1</a>
-                <a href="#student2" class="list-group-item list-group-item-action">Student 2</a>
-                <a href="#student3" class="list-group-item list-group-item-action">Student 3</a>
+                @forelse ($data as $students)
+
+                    <a href="#student1" class="list-group-item list-group-item-action">{{$students->name}}</a>
+
+                @empty
+                <p>no data inputed</p>
+            @endforelse
                 <!-- Add more student list items as needed -->
             </div>
         </div>
+     
         <div class="col-md-9">
             <section id="student1" class="content-block">
                 <!-- Student 1 content goes here -->
@@ -68,6 +75,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     // Add click event listeners to student list items to make them active and show/hide content blocks
