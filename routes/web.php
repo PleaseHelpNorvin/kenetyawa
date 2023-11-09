@@ -8,6 +8,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CourseListController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SubjectListController;
 use App\Http\Controllers\TeacherListController;
@@ -51,18 +52,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     Route::get('/reports',[ReportsController::class,'showReports'])->name('reportsview');
     Route::get('students', [StudentController::class, 'StudentListView'])->name('studentview');
+    Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
+    //faculty crud routes
     Route::get('/teacherlist/edit/{id}', [TeacherListController::class, 'teacherlistEdit'])->name('teacherlist.edit');
     Route::put('/teacherlist/update/{id}', [TeacherListController:: class, 'updateFaculty'])->name('teacherlist.update');
-
-    //form routes
+    Route::delete('delete_faculty/{id}', [TeacherListController::class,'deleteFaculty'])->name('deletefaculty');
     Route::post('/teacherlist',[TeacherListController::class, 'facultyFetch'])->name('facultyfetch');
 
-    //edit routes
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
 
-    //delete routes
-    Route::delete('delete_faculty/{id}', [TeacherListController::class,'deleteFaculty'])->name('deletefaculty');
 
+    //student crud routes
     Route::get('studentslist', [StudentController::class, 'DisplayStudents'])->name('displaystudents');
+    Route::post('studentslist/add', [StudentController::class, 'CreateStudents'])->name('add.student');
 });

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
-            $table->integer('id');
+        Schema::create('studentbatch', function (Blueprint $table) {
+            $table->id();
             $table->string('student_no');
-            $table->primary(['id', 'student_no']); // Specify multiple primary key columns
-            $table->string('name');
+            $table->string('year');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->string('block');
-            $table->string('course');
-            $table->integer('contact_no');
-            $table->string('email');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('studentbatch');
     }
 };

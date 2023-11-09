@@ -22,11 +22,12 @@
         <li>===</li>
         {{-- <li @if(Request::is('dashboard*')) class="active" @endif><a href="{{ route('dashboardview') }}">Dashboard</a></li> --}}
         <li @if(Request::is('schedule*')) class="active" @endif><a href="{{ route('scheduleview') }}" >Schedule</a></li>
-        <li  @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}">Faculty List</a></li>
-        <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" >Subject List</a></li>
+        <li  @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}">Faculty List(done)</a></li>
+        {{-- <li  @if(Request::is('courselist*')) class="active" @endif><a href="{{ route('viewcourselist') }}">Course List</a></li> --}}
+        {{-- <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" >Subject List</a></li> --}}
         <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview') }}" >Student List</a></li>
         <li  @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Reports</a></li>
-        {{-- <li  @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview') }}">Reports</a></li> --}}
+        
         {{-- <li @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Porn Star List</a></li> --}}
     </ul>
 </div>
