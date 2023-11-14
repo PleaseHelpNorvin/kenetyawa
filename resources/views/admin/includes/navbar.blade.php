@@ -17,20 +17,28 @@
     </div>
 </div>
 
-  <div class="sidenav" id="mySidenav">
+
+<div class="sidenav" id="mySidenav">
     <ul class="side-menu">
         <li>===</li>
-        {{-- <li @if(Request::is('dashboard*')) class="active" @endif><a href="{{ route('dashboardview') }}">Dashboard</a></li> --}}
-        <li @if(Request::is('schedule*')) class="active" @endif><a href="{{ route('scheduleview') }}" >Schedule</a></li>
-        <li  @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}">Faculty List(done)</a></li>
-        {{-- <li  @if(Request::is('courselist*')) class="active" @endif><a href="{{ route('viewcourselist') }}">Course List</a></li> --}}
-        {{-- <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" >Subject List</a></li> --}}
-        <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview') }}" >Student List</a></li>
-        <li  @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Reports</a></li>
-        
-        {{-- <li @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Porn Star List</a></li> --}}
+        <li class="parent">
+            <a href="#" class="toggle-submenu">Schedule</a>
+            <ul class="submenu">
+                <li> <a href="{{ route('scheduleview') }}">Calendar</a></li>
+                <li><a href="{{ route('teacherscheduleview') }}">Teacher Scheds</a></li>
+                <li><a href="{{ route('studentscheduleview') }}">Student Scheds</a></li>
+                <!-- Add more sub-schedule items as needed -->
+            </ul>
+        </li>
+        <li @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}">Faculty List(done)</a></li>
+        <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" >Subject List</a></li>
+        <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview',['batchId' => 'null', 'block' => 'null']) }}" >Student List</a></li>
+        <li @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Reports</a></li>
     </ul>
 </div>
+
+
+
 
 <style>
     .side-menu a.active {
@@ -38,4 +46,26 @@
         color: black;
       
     }
+
+        /* Initially hide the submenu */
+    .submenu {
+        display: none;
+    }
+
+    /* Style for the active (clicked) parent item */
+    .parent.active .submenu {
+        display: block;
+    }
 </style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    // Toggle the submenu when the parent is clicked
+    $('.toggle-submenu').click(function (e) {
+        e.preventDefault();
+        $(this).siblings('.submenu').slideToggle();
+    });
+});
+</script>
+

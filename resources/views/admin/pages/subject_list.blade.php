@@ -28,6 +28,6 @@
             </tbody>
         </table>
         <!-- Pagination -->
-        <ul id="pagination" class="pagination"></ul>
+        {{-- <ul id="pagination" class="pagination"></ul> --}}
     </div>
 @endsection

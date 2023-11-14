@@ -50,6 +50,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/subjectlist',[SubjectListController::class,'showSubjectList'])->name('subjectlistview');
     Route::get('/teacherlist',[TeacherListController::class,'showTeacherList'])->name('teacherlistview');
     Route::get('/schedule',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
+    Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
+
+
     Route::get('/reports',[ReportsController::class,'showReports'])->name('reportsview');
     Route::get('students', [StudentController::class, 'StudentListView'])->name('studentview');
     Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
@@ -59,11 +63,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/teacherlist/update/{id}', [TeacherListController:: class, 'updateFaculty'])->name('teacherlist.update');
     Route::delete('delete_faculty/{id}', [TeacherListController::class,'deleteFaculty'])->name('deletefaculty');
     Route::post('/teacherlist',[TeacherListController::class, 'facultyFetch'])->name('facultyfetch');
+    Route::get('/searchfaculty',[TeacherListController::class, 'search'])->name('faculty.search');
 
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
 
 
     //student crud routes
-    Route::get('studentslist', [StudentController::class, 'DisplayStudents'])->name('displaystudents');
+    Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
     Route::post('studentslist/add', [StudentController::class, 'CreateStudents'])->name('add.student');
+    
 });

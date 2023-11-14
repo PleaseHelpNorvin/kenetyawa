@@ -15,6 +15,14 @@
         <h2>Faculty List</h2>
         <!-- Search bar -->
         
+    <div class="form-group">
+
+        <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('faculty.search') }}">
+            <input class="form-control mr-sm-3" name="search_faculty" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>        
+        
         {{-- <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search Faculty"> --}}
         <table class="table table-striped table-bordered">
             <thead>
@@ -55,7 +63,21 @@
             </tbody>
         </table>
         <!-- Pagination -->
-        <ul id="pagination" class="pagination"></ul>
+        {{-- {{ $data->links() }} --}}
+        {!! $data->links() !!}
+        {{-- <ul id="pagination" class="pagination"></ul> --}}
     </div>
+
+    <style>
+            .pagination {
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination li {
+        margin: 0 5px;
+    }
+
+    </style>
 @endsection
 

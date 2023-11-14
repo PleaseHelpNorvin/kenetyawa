@@ -38,11 +38,16 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-<script src="{!! asset('assets/js/faculty_list.js') !!}"></script>
+{{-- <script src="{!! asset('assets/js/faculty_list.js') !!}"></script> --}}
 
 {{-- font awewome --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 <title>@yield('title')</title>
 
+{{-- side-menus --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 

@@ -11,7 +11,7 @@
 
                     @csrf
                     @method('PUT')
-                    
+
                     <div class="form-group">
                         <label for="inputIdNo">ID no</label>
                         <input type="text" name="id_no" class="form-control" id="inputIdNo"
