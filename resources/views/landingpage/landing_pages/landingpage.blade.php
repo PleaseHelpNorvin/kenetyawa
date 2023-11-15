@@ -2,12 +2,17 @@
 @section('title', 'LandingPage')
 @section('content' )
 
-    <div class="container">
-            
-        <h3 class="centered-text">ACCESS AS</h3>
-        <a href="{{ route('login')}}" class="rounded-link">Admin</a>
-        <a href="/teacherID" class="rounded-link">Teacher</a>
-        <a href="/studentID" class="rounded-link">Student</a>
-    </div>
+<div class="container">
+    <h3 class="centered-text">ACCESS AS</h3>
+    <a href="{{ route('login')}}" class="bn31">
+        <span class="bn31span">Admin</span>
+    </a>
+    <a href="/teacherID" class="bn31">
+        <span class="bn31span">Teacher</span>
+    </a>
+    <a href="/studentID" class="bn31">
+        <span class="bn31span">Student</span>
+    </a>
+</div>
 
 @endsection

@@ -9,5 +9,5 @@ class block extends Model
 {
     use HasFactory;
     protected $table = "blocks";
-
+    protected $fillable = ['block_name','batch_id'];
 }

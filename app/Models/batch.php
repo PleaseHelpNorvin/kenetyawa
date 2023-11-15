@@ -9,5 +9,6 @@ class batch extends Model
 {
     use HasFactory;
     protected $table = "studentbatch";
+    protected $fillable = ['batch_name'];
 
 }

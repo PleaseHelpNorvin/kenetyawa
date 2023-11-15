@@ -1,65 +1,37 @@
-/* <style> */
-/* Define CSS styles for your elements here */
+/* Your existing CSS styles */
 
-.container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Add rounded borders to the <a> elements */
-.rounded-link {
-    display: inline-block;
-    padding: 10px 40px 10px 40px;
-    border: 2px solid #57b846; /* Use the same button color as the previous example */
-    border-radius: 25px; /* Use a similar border-radius value */
-    text-align: center;
+.bn31 {
+    background-image: linear-gradient(to right, #006175 0%, #00a950 100%);
+    border-radius: 40px;
+    box-sizing: border-box;
+    color: #00a84f;
+    display: block;
+    height: 50px;
+    font-size: 1.4em;
+    padding: 4px;
+    position: relative;
     text-decoration: none;
-    margin: 5px; /* Add some spacing between the links */
-    color: #fff; /* Change text color to white */
-    background-color: #57b846; /* Change background color to match the button color */
-
+    width: 7em;
+    z-index: 2;
+   margin: 50px;
 }
 
-.rounded-link:hover {
-    background-color: #333333; /* Change background color on hover */
-    border-color: #333333; /* Change border color on hover */
-}
-
-/* Center the "ACCESS WITH" text */
-.centered-text {
-    text-align: center;
-    font-size: 30px;
-    color: #333333; /* You can set the color as needed */
-}
-
-/* Define your top navigation bar styles */
-.topnav {
-    background: #333333;
-    overflow: hidden;
-}
-
-.logo {
+.bn31:hover {
     color: #fff;
-    text-decoration: none;
-    padding: 15px;
-    font-size: 24px;
-}
-/* Common Styles */
-body {
-font-family: Poppins-Regular, sans-serif;
-background: linear-gradient(-135deg, #c850c0, #4158d0);
-height: 100%;
-margin: 0;
-padding: 0;
-display: flex;
-align-items: center;
-justify-content: center;
+    text-decoration: none; 
 }
 
+.bn31 .bn31span {
+    align-items: center;
+    background: #0e0e10;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    transition: background 0.5s ease;
+    width: 100%;
+}
 
-/* Add more common styles here */
-
-/* </style> */
+.bn31:hover .bn31span {
+    background: transparent;
+}

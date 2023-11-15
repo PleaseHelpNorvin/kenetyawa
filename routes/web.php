@@ -12,7 +12,8 @@ use App\Http\Controllers\CourseListController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SubjectListController;
 use App\Http\Controllers\TeacherListController;
-
+use App\Http\Controllers\BatchController;
+use App\Http\Controllers\BlockController;
 
 
 /*
@@ -71,5 +72,21 @@ Route::group(['middleware' => 'auth'], function(){
     //student crud routes
     Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
     Route::post('studentslist/add', [StudentController::class, 'CreateStudents'])->name('add.student');
+
+
+  
+    // Add Batch
+Route::post('/add-batch', [BatchController::class, 'addBatch'])->name('add.batch');
+
+// Add Block
+Route::post('/add-block', [BlockController::class, 'addBlock'])->name('add.block');
+
+//delete student
+// web.php or routes/web.php
+Route::delete('/delete/student/{student}', [StudentController::class , 'DeleteStudents'])->name('delete.student');
+
+// web.php or routes/web.php 
+Route::put('/update/student/{student}',[StudentController::class , 'updateStudents'])->name('update.student');
+
     
 });
