@@ -11,13 +11,13 @@ class ScheduleController extends Controller
 {
     //
     public function showSchedule(){
-        return view('admin.pages.calendar');
+        return view('admin.pages.schedule.calendar');
     }
     public function showTeacherSchedule(){
-        return view('admin.pages.teacherschedule');
+        return view('admin.pages.schedule.teacherschedule');
     }
     public function showStudentSchedule(){
       
-        return view('admin.pages.studentschedule');
+        return view('admin.pages.schedule.studentschedule');
     }
 }

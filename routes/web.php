@@ -47,26 +47,28 @@ Route::group(['middleware' => 'auth'], function(){
 
     // pages routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-    Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
     Route::get('/subjectlist',[SubjectListController::class,'showSubjectList'])->name('subjectlistview');
     Route::get('/teacherlist',[TeacherListController::class,'showTeacherList'])->name('teacherlistview');
     Route::get('/schedule',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
-
+   
 
     Route::get('/reports',[ReportsController::class,'showReports'])->name('reportsview');
     Route::get('students', [StudentController::class, 'StudentListView'])->name('studentview');
     Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
     //faculty crud routes
-    Route::get('/teacherlist/edit/{id}', [TeacherListController::class, 'teacherlistEdit'])->name('teacherlist.edit');
-    Route::put('/teacherlist/update/{id}', [TeacherListController:: class, 'updateFaculty'])->name('teacherlist.update');
+    Route::get('/searchfaculty',[TeacherListController::class, 'search'])->name('faculty.search');
+    Route::get('/addteacher', [TeacherListController::class, 'addteacher'])->name('addteacher');
+    Route::get('/editteacher{id}', [TeacherListController::class, 'editteacher'])->name('editteacher');
     Route::delete('delete_faculty/{id}', [TeacherListController::class,'deleteFaculty'])->name('deletefaculty');
     Route::post('/teacherlist',[TeacherListController::class, 'facultyFetch'])->name('facultyfetch');
-    Route::get('/searchfaculty',[TeacherListController::class, 'search'])->name('faculty.search');
-
+    Route::put('/updateTeacher/{id}',[TeacherListController::class, 'updateTeacher']);
+   
+    //Profile Routes
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
+    Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
 
 
     //student crud routes

@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
     //
     public function showDashboard(){
-        return view('admin.pages.dashboard');
+        return view('admin.pages.dashboard.dashboard');
     }
     
     // public function schedule(){

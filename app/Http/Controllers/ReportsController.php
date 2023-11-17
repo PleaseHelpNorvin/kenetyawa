@@ -8,6 +8,6 @@ class ReportsController extends Controller
 {
     //
     public function showReports(){
-        return view ('admin.pages.reports');
+        return view ('admin.pages.reports.reports');
     }
 }

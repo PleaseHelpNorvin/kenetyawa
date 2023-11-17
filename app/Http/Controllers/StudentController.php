@@ -37,7 +37,6 @@ class StudentController extends Controller
         $selectedBlock = block::find($block);
         $selectedBatch = batch::find($batch_id);
         $blocks = block::where('batch_id', $batch_id)->get();
-        
     }
 
     if ($batch_id != 'null' && $block != 'null') {
@@ -48,7 +47,7 @@ class StudentController extends Controller
             
     }
 
-    return view('admin.pages.studentlist', compact('batches', 'blocks', 'selectedBatch', 'students', 'batch_id', 'block','selectedBlock'));
+    return view('admin.pages.student.studentlist', compact('batches', 'blocks', 'selectedBatch', 'students', 'batch_id', 'block','selectedBlock'));
 }
 
 
@@ -69,7 +68,7 @@ class StudentController extends Controller
         //->where('students.block', $blockId)
        // ->where('students.batch',$batchId)
         
-        return view('admin.pages.students_by_block', [
+        return view('admin.pages.student.students_by_block', [
             'selectedBatch' => $selectedBatch,
             'selectedBlock' => $selectedBlock,
             'students' => $students,

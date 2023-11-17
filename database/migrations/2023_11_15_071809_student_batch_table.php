@@ -20,7 +20,7 @@ return new class extends Migration
         // Create blocks table
         Schema::create('blocks', function (Blueprint $table) {
             $table->id();
-            $table->string('block_name')->unique();;
+            $table->string('block_name');
             $table->foreignId('batch_id');
             $table->timestamps();
         });

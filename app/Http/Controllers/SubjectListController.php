@@ -8,7 +8,7 @@ class SubjectListController extends Controller
 {
     //
     public function showSubjectList(){
-        return view('admin.pages.subject_list');
+        return view('admin.pages.subject.subject_list');
     }
     public function viewSubjectList(){
         

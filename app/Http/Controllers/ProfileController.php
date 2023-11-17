@@ -10,7 +10,7 @@ class ProfileController extends Controller
 {
     //
     public function showProfile(Request $request){
-        return view('admin.pages.profile',['user' => $request->user()]);
+        return view('admin.pages.profile.profile',['user' => $request->user()]);
     }
     
     public function updateImage(Request $request){

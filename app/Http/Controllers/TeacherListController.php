@@ -13,13 +13,35 @@ use Illuminate\Http\Request;
 class TeacherListController extends Controller
 {
     //
-
-  
+    public function editteacher($id){
+        $teachers =Faculty_List::find($id);
+        return view('admin.pages.teacher.edit_teacher', compact('teachers'));
+    }
+    public function updateTeacher(Request $request, $id){
+        $teachers = Faculty_List::find($id);
+        $validatedData = $request->validate([
+            'id_no' => 'required',
+            'faculty_name' => 'required',
+            'faculty_course' => 'required',
+            'faculty_email' => 'required|email',
+        ]);
+    
+        $teachers->update([
+            'id_no' => $validatedData['id_no'],
+            'name' => $validatedData['faculty_name'],
+            'course' => $validatedData['faculty_course'],
+            'email' => $validatedData['faculty_email'],
+        ]);
+        return redirect('teacherlist')->with('message',"Teacher Updated Successfully");
+    }
+    public function addteacher(){
+        return view('admin.pages.teacher.add_teacher');
+    }
     
     public function showTeacherList()
     {
         $data = Faculty_List::latest()->paginate(4);
-        return view('admin.pages.faculty_list', compact('data'));
+        return view('admin.pages.teacher.faculty_list', compact('data'));
     }
 
     public function search(Request $request)
@@ -28,7 +50,7 @@ class TeacherListController extends Controller
         
         $data = Faculty_List::where('name', 'LIKE', '%' . $searchQuery . '%')->paginate(0);
 
-        return view('admin.pages.faculty_list', compact('data'));
+        return view('admin.pages.teacher.faculty_list', compact('data'));
     }
 
     public function facultyFetch(Request $request){
@@ -63,34 +85,7 @@ class TeacherListController extends Controller
         return redirect(route('teacherlistview'))->with('message','Successfully deleted');
     }
 
-    public function teacherlistEdit(){
-        return view("modals.faculty_modal_edit");
-    }
-
-    public function updateFaculty(Request $request, $id){
-
-        $faculty = Faculty_List::find($id);
-        
-        if (!$faculty) {
-            return redirect()->route('teacherlistview')->with('error', 'Faculty member not found');
-        }
     
-        $validatedData = $request->validate([
-            'id_no' => 'required',
-            'faculty_name' => 'required',
-            'faculty_course' => 'required',
-            'faculty_email' => 'required|email',
-        ]);
-    
-        $faculty->update([
-            'id_no' => $validatedData['id_no'],
-            'name' => $validatedData['faculty_name'],
-            'course' => $validatedData['faculty_course'],
-            'email' => $validatedData['faculty_email'],
-        ]);
-    
-        return redirect()->route('teacherlistview')->with('success', 'Faculty member updated successfully');
-    }
 
    
 }
