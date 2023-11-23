@@ -5,15 +5,17 @@
     <div class="container mt-5">
         <h2>Teacher List</h2>
 
-        <!-- Search bar -->
         <div class="form-group">
+            <a href="{{ route('addteacher') }}" class="btn btn-primary">Add Teacher</a>
+        </div>
+
+         <!-- Search bar -->
+         <div class="form-group">
             <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('faculty.search') }}">
                 <input class="form-control mr-sm-3" name="search_faculty" type="search" placeholder="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
-
-        <a href="{{ route('addteacher') }}" class="btn btn-primary">Add Teacher</a>
 
         <table class="table table-striped table-bordered mt-3">
             <thead>

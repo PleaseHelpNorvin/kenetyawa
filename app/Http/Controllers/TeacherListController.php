@@ -17,6 +17,7 @@ class TeacherListController extends Controller
         $teachers =Faculty_List::find($id);
         return view('admin.pages.teacher.edit_teacher', compact('teachers'));
     }
+    
     public function updateTeacher(Request $request, $id){
         $teachers = Faculty_List::find($id);
         $validatedData = $request->validate([
@@ -44,8 +45,7 @@ class TeacherListController extends Controller
         return view('admin.pages.teacher.faculty_list', compact('data'));
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $searchQuery = $request->input('search_faculty');
         
         $data = Faculty_List::where('name', 'LIKE', '%' . $searchQuery . '%')->paginate(0);

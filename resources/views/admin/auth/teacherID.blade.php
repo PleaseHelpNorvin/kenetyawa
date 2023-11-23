@@ -4,14 +4,14 @@
 
 @section('content')
 
-<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+<form class="login100-form validate-form" method="POST" action="{{ route('teacheridpost') }}">
                     @csrf
   
   
                     <span class="login100-form-title">Teacher Id</span>
-                    @if (Session::has('error'))
+                    @if (Session::has('message'))
                         <div class="alert alert-danger" role="alert">
-                            {{ Session::get('error') }}
+                            {{ Session::get('message') }}
                         </div>
                     @endif
                     <div class="wrap-input100 validate-input" data-validate="Valid teacherID is required: ex@abc.xyz">

@@ -3,12 +3,26 @@
 {{-- @include('modals.add_student_modal') --}}
 
 @section('content')
+<nav class="navbar navbar-expand-lg navbar-light bg-light border">
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+  
+                <li class="nav-item">
+                    <a href="{{ route('teacherscheduleview',['teacherId' => 'null']) }}" class="nav-link">Teacher Schedule</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ route('studentscheduleview',['teacherId' => 'null']) }}" class="nav-link">Student Schedule</a>
+              </li>
+        </ul>
+    
+    </div>
+  </nav>
     <h2 class="mt-4">School Data</h2>
 
     <div class="container mt-3">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle" type="button" id="batchDropdown" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false">
                 Batches
             </button>
             <div class="dropdown-menu" aria-labelledby="batchDropdown">
@@ -19,7 +33,7 @@
         </div>
 
         <div class="table-responsive mt-3">
-            <table id="example" class="table table-striped table-bordered" style="width:100%">  
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>Block</th>
@@ -30,9 +44,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <button class="btn btn-secondary block-button" data-batch="1" data-block="Block A">Block A</button>
-                            <button class="btn btn-secondary block-button" data-batch="1" data-block="Block B">Block B</button>
-                            <button class="btn btn-secondary block-button" data-batch="2" data-block="Block A">Block A</button>
+                            <button class="btn btn-secondary block-button" data-batch="1" data-block="Block A">Block
+                                A</button>
+                            <button class="btn btn-secondary block-button" data-batch="1" data-block="Block B">Block
+                                B</button>
+                            <button class="btn btn-secondary block-button" data-batch="2" data-block="Block A">Block
+                                A</button>
                         </td>
                         <td>
                             <ul class="list-group student-list" data-block="" data-batch="">
@@ -48,6 +65,7 @@
                                     <tr>
                                         <th>Teacher</th>
                                         <th>Subject</th>
+                                        <th>Room</th>
                                         <th>Day</th>
                                         <th>Time</th>
                                     </tr>
@@ -57,12 +75,14 @@
                                     <tr>
                                         <td>Teacher A</td>
                                         <td>Math</td>
+                                        <th>slab1</th>
                                         <td>Monday</td>
                                         <td>10:00 AM - 12:00 PM</td>
                                     </tr>
                                     <tr>
                                         <td>Teacher B</td>
                                         <td>Science</td>
+                                        <th>slab3</th>
                                         <td>Wednesday</td>
                                         <td>2:00 PM - 4:00 PM</td>
                                     </tr>
@@ -83,17 +103,17 @@
 
     <script>
         // new DataTable('#example');
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#example').DataTable();
         });
 
-        $(document).ready(function () {
-            $('.dropdown-item').click(function () {
+        $(document).ready(function() {
+            $('.dropdown-item').click(function() {
                 const batch = $(this).data('batch');
                 $('.dropdown-toggle#batchDropdown').html(`Batch ${batch}`);
             });
 
-            $('.block-button').click(function () {
+            $('.block-button').click(function() {
                 const block = $(this).data('block');
                 const batch = $(this).data('batch');
                 $('.student-list[data-block]').hide();

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\students;
+use App\Models\Faculty_List;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,9 +19,42 @@ class AuthController extends Controller
     public function teacherID(){
         return view('admin.auth.teacherID');
     }
+    public function teacherInfo(){
+        return view('admin.auth.teacherInfo');
+    }
+    public function teacherIdPost(Request $request){
+        // dd($request->teacherID);
+
+       $teacherid = Faculty_List::where('id_no',$request->teacherID)->first();
+    //    dd($teacherid);
+
+       if($teacherid){
+        return redirect()->route('teacherinfo') -> with('success', 'Login Sucessful');
+       }
+       return back()-> with('message','bogoa sa giatay kalimot sa password');
+    }
+
+   
+
     public function studentID(){
         return view('admin.auth.studentID');
     }
+    public function studentInfo(){
+        return view('admin.auth.studentInfo');
+    }
+    public function studentIdPost(Request $request){
+        // dd('studentIdPost');
+        $studentid = students::where('student_no', $request->studentID)->first();
+        // dd($studentid);
+        if($studentid){
+            return redirect()->route('studentinfo') -> with('success', 'Login Sucessful');
+        }
+        return back()-> with('message','bogoa sa giatay kalimot sa password');
+    }
+
+
+
+    
     public function registerView(){
         return view('admin.auth.register');
     }

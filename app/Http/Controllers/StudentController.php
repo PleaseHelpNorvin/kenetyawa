@@ -20,7 +20,7 @@ class StudentController extends Controller
     
         $blocks = block::where('batch_id', $batchId)->get();
     
-        return view('admin.pages.blocks', ['selectedBatch' => $selectedBatch, 'blocks' => $blocks]);
+        return view('admin.pages.student.blocks', ['selectedBatch' => $selectedBatch, 'blocks' => $blocks]);
     }
 
    public function StudentListView($batch_id, $block)
@@ -37,6 +37,7 @@ class StudentController extends Controller
         $selectedBlock = block::find($block);
         $selectedBatch = batch::find($batch_id);
         $blocks = block::where('batch_id', $batch_id)->get();
+        
     }
 
     if ($batch_id != 'null' && $block != 'null') {
@@ -51,78 +52,64 @@ class StudentController extends Controller
 }
 
 
-    public function displayStudentsByBlock($batchId, $blockId){
+public function CreateStudents(Request $request , $batch_id,$block)
+{
 
-        $selectedBatch = batch::find($batchId);
-        $selectedBlock = block::find($blockId);
+    $selectedBlock = block::find($block);
+    $selectedBatch = batch::find($batch_id);
+    $validatedData = $request->validate([
+        'student_no' => 'required|string|max:255',
+        'student_name' => 'required|string|max:255',
+        'student_block' => 'required', // Assuming 'blocks' is the name of the blocks table
+        'student_batch' => 'required', // Assuming 'batches' is the name of the batches table
+        'student_course' => 'required|string|max:255',
+        'student_contact_no' => 'required|string|max:255',
+        'student_email' => 'required|email|max:255',
+    ]);
 
-            if (!$selectedBatch || !$selectedBlock) {
-                abort(404);
-            }
+    students::create([
+        'student_no' => $validatedData['student_no'],
+        'name' => $validatedData['student_name'],
+        'block' => $validatedData['student_block'],
+        'batch' => $validatedData['student_batch'],
+        'course' => $validatedData['student_course'],
+        'contact_no' => $validatedData['student_contact_no'],
+        'email' => $validatedData['student_email'],
+    ]);
 
-        $students = students::get(); 
-   // select('batch.batch')
-  //  where('batch', $batchId)
-   // /->leftJoin('batch','students.batch','=','batch.batch_no')
-   // ->leftJoin('block','students.block','=','block.block_no')
-        //->where('students.block', $blockId)
-       // ->where('students.batch',$batchId)
-        
-        return view('admin.pages.student.students_by_block', [
-            'selectedBatch' => $selectedBatch,
-            'selectedBlock' => $selectedBlock,
-            'students' => $students,
-        ]);
-    }
+    // Assuming $selectedBatch and $selectedBlock are available
+    return redirect()->route('studentview', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id])->with('success', 'Student added successfully');
+}
 
-    public function CreateStudents(Request $request)
-    {
-        $validatedData = $request->validate([
-            'student_no' => 'required',
-            'student_name' => 'required',
-            'student_block' => 'required',
-            'student_batch' => 'required', // Corrected field name
-            'student_course' => 'required',
-            'student_contact_no' => 'required',
-            'student_email' => 'required|email',
-        ]);
-
-        students::create([
-            'student_no' => $validatedData['student_no'],
-            'name' => $validatedData['student_name'],
-            'block' => $validatedData['student_block'],
-            'batch' => $validatedData['student_batch'], // Corrected field name
-            'course' => $validatedData['student_course'],
-            'contact_no' => $validatedData['student_contact_no'],
-            'email' => $validatedData['student_email'],
-        ]);
-
-        return redirect()->back()->with('success', 'Block added successfully');
-    }
-
-    // ... (other methods)
-
-    // Other methods for updating and deleting students can be implemented here.
-
-    // public function DisplayStudents() {
-    //     $data = students::all();
-    //     return view('admin.pages.studentlist', compact('data'));
-
-    // }
-    public function updateStudents(Request $request, students $student)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            // Add other validation rules for other fields
-        ]);
+public function updateStudents(Request $request, students $student)
+{
+    $selectstudent = students::find($student);
     
-        $student->update([
-            'name' => $request->input('name'),
-            // Update other fields as needed
-        ]);
-    
-        return redirect()->back()->with('success', 'Student updated successfully');
-    }
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'student_no' => 'required|string|max:255',
+        'batch' => 'required', // Assuming batches table has an 'id' field
+        'block' => 'required', // Assuming blocks table has an 'id' field
+        'course' => 'required|string|max:255',
+        'contact_no' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        // Add other validation rules for other fields
+    ]);
+
+    $student->update([
+        'name' => $request->input('name'),
+        'student_no' => $request->input('student_no'),
+        'batch' => $request->input('batch'),
+        'block' => $request->input('block'),
+        'course' => $request->input('course'),
+        'contact_no' => $request->input('contact_no'),
+        'email' => $request->input('email'),
+        // Update other fields as needed
+    ]);
+
+    return redirect()->route('studentview', ['batchId' => $student->batch, 'block' => $student->block]);
+}
+
 
     public function DeleteStudents(students $student)
 {
@@ -130,4 +117,21 @@ class StudentController extends Controller
 
     return redirect()->back()->with('success', 'Student deleted successfully');
 }
+
+
+public function showaddstudent($batch_id, $block){
+
+    $selectedBlock = block::find($block);
+    $selectedBatch = batch::find($batch_id);
+  
+    return view('admin.pages.student.add_student', compact('selectedBatch','selectedBlock'));
+
+}
+
+public function showeditstudent($student){
+    $selectstudent = students::find($student);
+
+    return view('admin.pages.student.edit_student',compact('selectstudent'));
+}
+
 }

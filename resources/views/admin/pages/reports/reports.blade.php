@@ -2,5 +2,32 @@
 @section('title', 'Profile')
 
 @section('content')
-    <h1>this is report page</h1>
+    <div class="container mt-4">
+        <h2>Reports with Bootstrap Cards</h2>
+        <div class="row">
+            @forelse ($data as $report)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('images/reports/' . $report->image) }}" class="card-img-top" alt="{{ $report->reporttitle }}">
+                        <div class="card-body">
+                            <p>ID= {{$report->id}}</p>
+                            <h5 class="card-title">{{ $report->reporttitle }}</h5>
+                            <p class="card-text">{{ $report->description }}</p>
+
+                            <form action="{{ route('deletereport', $report->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <a href="{{ route('editreportpage', ['id' => $report->id]) }}" class="btn btn-primary mr-2">Edit</a>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <div class="col-md-12">
+                    <p>No reports available.</p>
+                </div>
+            @endforelse
+        </div>
+    </div>
 @endsection

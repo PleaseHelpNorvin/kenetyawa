@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+<form class="login100-form validate-form" method="POST" action="{{ route('studentidpost') }}">
                     @csrf
   
   

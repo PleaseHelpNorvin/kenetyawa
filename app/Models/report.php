@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class subjectlist extends Model
+class report extends Model
 {
     use HasFactory;
-    protected $table = "subjectlist";
-    protected $fillable = ['subject_code','description'];
+    protected $table = "report";
+    protected $fillable = ['reporttitle', 'description','image'];
 }
