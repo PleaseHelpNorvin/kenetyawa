@@ -46,23 +46,11 @@ class ScheduleController extends Controller
 
     public function showTeacherSchedule(){
      
-              $selectTeacher = Faculty_List::latest()->get();
+        $selectTeacher = Faculty_List::latest()->get();
 
-    // $teacherSchedules = teacherschedules::leftJoin('facultylist', 'teacherschedule.faculty_list_id', '=', 'facultylist.id_no')
-    //     ->leftJoin('rooms', 'teacherschedule.room_id', '=', 'rooms.roomcode')
-    //     ->leftjoin('subject', 'teacherschedule.subject_id', '=', 'subject.subjectcode')
-    //     ->select(
-    //         'teacherschedule.day','teacherschedule.time_from','teacherschedule.time_to','teacherschedule.year','teacherschedule.semester', // select all columns from teacherschedule
-    //         'facultylist.name as teacher_name','facultylist.id as faculty_id',
-    //         'rooms.roomcode', 
-    //         'subject.subjectcode', 'subject.subjectname'
-    //     )
-    //     ->get();
-    //         // dd($teacherSchedules);
+        return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher'));
     
-    return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher'));
-    
-}
+    }
 // public function showTeacherIDSchedule($teacherID) {
 //     $selectTeacher = Faculty_List::latest()->get();
     
@@ -83,26 +71,56 @@ class ScheduleController extends Controller
 
    
 
-    public function addTeacherSchedulepage(){
-        $selectTeacher = Faculty_List::latest()->get();
-        $selectSubject = subject::latest()->get();
-        $selectRoom = room::latest()->get();
-        
+    public function addTeacherSchedulepage(Request $request){
+        // $selectSchedule = teacherschedules::find('teacherID');
+        // $selectTeacherId = Faculty_List::find($teacherID);
+        $selectTeacher = Faculty_List::get();
+        $selectSubject = subject::get();
+        $selectRoom = room::get();
+        // dd($selectTeacher);
         return view('admin.pages.schedule.teacherschedule.add_teacherschedule', compact('selectTeacher','selectSubject','selectRoom') );
     }
-    public function addTeacherSchedulePost(){
-        $teacherSchedules = Teacher::select('facultylist.*', 'subject.subjectname', 'rooms.roomcode')
-            ->join('subject', 'facultylist.id_no', '=', 'subject.subjectcode')
-            ->join('rooms', 'facultylist.id_no', '=', 'rooms.roomcode')
-            ->get();
-    
-        return view('teacher_schedule.index', compact('teacherSchedules'));
-    }
 
+    public function addTeacherSchedulePost(Request $request){
+        // $selectTeacher = Faculty_List::find($teacherID);
+        // dd(addTeacherSchedulePost);
+        // $selectSubject = Subject::find($request->subject); // Assuming subject ID comes from the form
+        // $selectRoom = Room::find($request->room);
+
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'teacher_name' => 'required|exists:facultylist,id',
+            'subject' => 'required|exists:subject,id',
+            'room' => 'required|exists:rooms,id',
+            'day' => 'required',
+            'year' => 'required',
+            'semester'=>'required',
+            'time_from' => 'required',
+            'time_to' => 'required'
+        ]);
+
+        // Create a new TeacherSchedule instance and populate it with validated data
+        $teacherSchedule = teacherschedules::create([
+            'faculty_list_id' => $validatedData['teacher_name'],
+            'subject_id' => $validatedData['subject'],
+            'room_id' => $validatedData['room'],
+            'day' => $validatedData['day'],
+            'year'=>$validatedData['year'],
+            'semester'=>$validatedData['semester'],
+            'time_from' => $validatedData['time_from'],
+            'time_to' => $validatedData['time_to']
+        ]);
+        // return redirect()->route('studentview', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id])->with('success', 'Student added successfully');
+        // Redirect to a view or route after successfully adding the schedule
+        // ['teacherID' => 'null']
+        // ['teacherID' => $selectTeacher->id]
+        return redirect()->route('teacherscheduleview')->with('success', 'Teacher schedule added successfully!');
+    
+    }
 
 
     public function showStudentSchedule(){
-      
+    
         return view('admin.pages.schedule.studentschedule');
     }
 }

@@ -21,9 +21,9 @@
 
 <div class="container mt-3">
     
-  <a href="{{ route('addteacherschedule')}}" class="btn btn-primary">Add Teacher Schedule</a>
+  <a href="{{ route('addteacherschedule') }}" class="btn btn-primary">Add Teacher Schedule</a>
 
- <div class="form-group">
+ {{-- <div class="form-group">
       <div class="dropdown">
           <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
               Select Option
@@ -36,13 +36,12 @@
           </ul>
         
       </div>
- </div>
+ </div> --}}
   
   <div class="table-responsive mt-3">
       <table id="example" class="table table-striped table-bordered" style="width:100%">
           <thead>
               <tr>
-                  
                   <th>Teachers</th>
                   <th>Teacher Schedules</th>
               </tr>
@@ -96,10 +95,9 @@
                                   <td>{{$sched->time_from}}-{{$sched->time_to}}</td>
                                   <td>{{$sched->year}}</td>
                                   <td>{{$sched->semester}}</td>
-
                                   <td>
-                                      <a href="" class="btn btn-success">edit</a>
-                                      <button class="btn btn-danger">delete</button>
+                                      <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                                      <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                   </td>
                               </tr>
                               @empty

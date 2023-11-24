@@ -14,23 +14,35 @@
                         <div class="mb-3">
                             <label for="inputIdNo" class="form-label">ID no</label>
                             <input type="text" name="id_no" class="form-control" id="inputIdNo" placeholder="Enter ID no" value="{{ $teachers->id_no}}">
+                            @if ($errors->has('id_no'))
+                                <span class="text-danger">{{ $errors->first('id_no') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="inputName" class="form-label">Name</label>
                             <input type="text" name="faculty_name" class="form-control" id="inputName" placeholder="Enter Name" value="{{ $teachers->name}}">
+                            @if ($errors->has('faculty_name'))
+                                <span class="text-danger">{{ $errors->first('faculty_name') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="inputCourse" class="form-label">Course</label>
                             <input type="text" name="faculty_course" class="form-control" id="inputCourse" placeholder="Enter Course" value="{{ $teachers->course}}">
+                            @if ($errors->has('faculty_course'))
+                                <span class="text-danger">{{ $errors->first('faculty_course') }}</span>
+                            @endif
                         </div>
                         <div class="mb-3">
                             <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" name="faculty_email" class="form-control" id="inputEmail" placeholder="Enter Email" value="{{ $teachers->email}}">
+                            <input type="text" name="faculty_email" class="form-control" id="inputEmail" placeholder="Enter Email" value="{{ $teachers->email}}">
+                            @if ($errors->has('faculty_email'))
+                                <span class="text-danger">{{ $errors->first('faculty_email') }}</span>
+                            @endif
                         </div>
                     </div>
                     <div class="card-footer text-end">
-                        <a href="{{ route('teacherlistview') }}" class="btn btn-secondary me-2">Close</a>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <a href="{{ route('teacherlistview') }}" class="btn btn-secondary me-2"><i class="fa fa-window-close"></i></a>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"> Save</i></button>
                     </div>
                 </div>
             </form>

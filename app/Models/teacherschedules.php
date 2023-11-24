@@ -13,6 +13,8 @@ class teacherschedules extends Model
 {
     use HasFactory;
     protected $table ="teacherschedule";
+    protected $fillable = ['faculty_list_id','day','time_from','time_to','year','semester','faculty_list_id','room_id','subject_id'];
+
     
     // public function teacher()
     // {

@@ -39,10 +39,10 @@
                         <td>{{ $teachers->email }}</td>
                         <td>
                             <form action="{{ route('deletefaculty', $teachers->id) }}" method="POST">
-                                <a href="{{ url('editteacher' . $teachers->id) }}" class="btn btn-success btn-sm">Edit</a>
+                                <a href="{{ url('editteacher' . $teachers->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                <button class="btn btn-danger btn-sm" type="submit"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

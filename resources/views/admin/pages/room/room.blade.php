@@ -24,10 +24,10 @@
             <td>{{ $room->roomcode }}</td>
             <td>
               <form action="{{ route('deleteroom', $room->id)}}" method="post">
-                <a href="{{ route('editroompage', ['id'=>$room->id])}}" class="btn btn-primary btn-sm">Edit</a>
+                <a href="{{ route('editroompage', ['id'=>$room->id])}}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
               </form>
               </td>
         </tr>

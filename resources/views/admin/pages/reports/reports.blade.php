@@ -17,8 +17,8 @@
                             <form action="{{ route('deletereport', $report->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{ route('editreportpage', ['id' => $report->id]) }}" class="btn btn-primary mr-2">Edit</a>
-                                <button type="submit" class="btn btn-danger">Delete</button>
+                                <a href="{{ route('editreportpage', ['id' => $report->id]) }}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
+                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
                             </form>
                         </div>
                     </div>

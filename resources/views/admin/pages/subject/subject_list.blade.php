@@ -43,11 +43,11 @@
                             {{-- <form action="{{ route('deletesubject', $subject->id) }}" method="POST"> --}}
                                 {{-- <a href="{{ url('editsubject/' . $subject->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
                                 <a href="{{ route('editsubjectpage', ['id' => $subject->id]) }}"
-                                    class="btn btn-primary btn-sm">Edit</a>
+                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
                                 {{-- <a type="submit" class="btn btn-danger btn-sm">Delete</a> --}}
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>

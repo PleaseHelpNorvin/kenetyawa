@@ -10,8 +10,8 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     //
-    public function getBlocks($batchId)
-    {
+    public function getBlocks($batchId){
+        
         $selectedBatch = batch::find($batchId);
     
         if (!$selectedBatch) {
@@ -23,8 +23,8 @@ class StudentController extends Controller
         return view('admin.pages.student.blocks', ['selectedBatch' => $selectedBatch, 'blocks' => $blocks]);
     }
 
-   public function StudentListView($batch_id, $block)
-{
+   public function StudentListView($batch_id, $block){
+
     $batches = batch::all();
     $blocks = block::all();
     $students = [];
@@ -52,8 +52,7 @@ class StudentController extends Controller
 }
 
 
-public function CreateStudents(Request $request , $batch_id,$block)
-{
+public function CreateStudents(Request $request , $batch_id,$block){
 
     $selectedBlock = block::find($block);
     $selectedBatch = batch::find($batch_id);
@@ -77,7 +76,6 @@ public function CreateStudents(Request $request , $batch_id,$block)
         'email' => $validatedData['student_email'],
     ]);
 
-    // Assuming $selectedBatch and $selectedBlock are available
     return redirect()->route('studentview', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id])->with('success', 'Student added successfully');
 }
 

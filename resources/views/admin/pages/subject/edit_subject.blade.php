@@ -23,8 +23,8 @@
                     <input type="text" name="" class="form-control" id="inputAction" placeholder="Enter Action">
                 </div> --}}
                 <div class="text-end">
-                    <a href="{{ route('subjectlistview') }}" class="btn btn-secondary me-2">Close</a>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="{{ route('subjectlistview') }}" class="btn btn-secondary me-2"><i class="fa fa-window-close"></i></a>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Save</button>
                 </div>
             </form>
         </div>

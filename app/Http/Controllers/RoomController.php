@@ -38,7 +38,7 @@ class RoomController extends Controller
 
         return view('admin.pages.room.edit_room', compact('room'));
     }
-    public function updateRoompage(Request $request, $id){
+    public function updateRoom(Request $request, $id){
         $room = room::find($id);
         $validatedData = $request->validate([
             'room_code' => 'required',

@@ -134,10 +134,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/addroompost', [RoomController::class, 'addRoomPost'])->name('addroompost');
     Route::delete('/deleteroom/{id}', [RoomController::class, 'deleteRoom'])->name('deleteroom');
     Route::get('/editroom/{id}',[RoomController::class, 'editRoompage'])->name('editroompage');
+    Route::put('/updateroom/{id}', [RoomController::class, 'updateRoom'])->name('updateroom');
 
     //teacher schedule routes
-  
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
-    Route::get('/schedule/teacher/add', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
+    Route::get('/schedule/teacher/add/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
+    Route::post('/schedule/teacher/post/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
 
 });

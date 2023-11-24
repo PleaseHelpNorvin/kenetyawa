@@ -4,7 +4,7 @@
 {{-- test --}}
 
 <div class="topnav">
-    <a class="logo" href="{{ route('dashboardview')}}">SCHEDULING SYSTEM</a>
+    <a class="logo" href="{{ route('dashboardview')}}"> <i class="fa fa-calendar"></i> SCHEDULING SYSTEM</a>
     <div class="profile-dropdown">
         <button id="profile-button" class="profile-button">
             <img src="{!! asset('images/'.auth()->user()->image) !!}" class="profile-image"> {{ Auth::user()->name}}
@@ -30,12 +30,12 @@
     
             </ul>
         </li> --}}
-        <li @if(Request::is('scheduleviewnav*')) class="active" @endif><a href="{{ route('scheduleviewnav')}}">Schedule</a></li>
-        <li @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}">Faculty List(done)</a></li>
-        <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview',['batchId' => 'null', 'block' => 'null']) }}" >Student List</a></li>
-        <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" >Subject List</a></li>
-        <li @if(Request::is('roomlist*')) class="active" @endif><a href="{{ route('showroom') }}" >Room List</a></li>
-        <li @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}">Reports</a></li>
+        <li @if(Request::is('scheduleviewnav*')) class="active" @endif><a href="{{ route('scheduleviewnav')}}"><i class="fa fa-calendar"></i> Schedule</a></li>
+        <li @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}"><i class="fas fa-chalkboard-teacher"></i> Faculty List</a></li>
+        <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview',['batchId' => 'null', 'block' => 'null']) }}" ><i class="fa fa-graduation-cap"></i> Student List</a></li>
+        <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" ><i class="fa fa-book"></i> Subject List</a></li>
+        <li @if(Request::is('roomlist*')) class="active" @endif><a href="{{ route('showroom') }}" ><i class="fa fa-solid fa-hotel"></i> Room List</a></li>
+        <li @if(Request::is('reports*')) class="active" @endif><a href="{{ route('reportsview') }}"><i class="fa fa-rocket"></i> Reports</a></li>
     </ul>
 </div>
 
