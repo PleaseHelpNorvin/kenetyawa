@@ -1,64 +1,119 @@
 @extends('admin.layouts.index')
 @section('title', 'Subject List')
-{{-- @include('modals.subject_list_modal') --}}
+@include('modals.subject_list_modal')
 
 @section('content')
-    
+    <h1>This is a Subject List Page</h1>
 
-    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
-        add Subject
-      </button> --}}
+    <div class="container-fluid">
 
-    <div class="container mt-5">
-        <h2>Subject List</h2>
-        <div class="form-group">
-        <a href="{{ route('addsubjectpage') }}" class="btn btn-primary">Add Subject</a>
+        <div class="col-lg-12">
+            <div class="row">
+                <!-- FORM Panel -->
+                <div class="col-md-4">
+                <form action="{{ route('addsubjectpost') }}" method="POST" id="manage-subject">
+    @csrf
+
+    <div class="card">
+        <div class="card-header">
+            Subject Form
         </div>
-        <!-- Search bar -->
-        <div class="form-group">
-            <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('subject.search') }}">
-                <input class="form-control mr-sm-3" name="search_subject" type="search" placeholder="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+        <div class="card-body">
+            <input type="hidden" name="id">
+
+            <div class="mb-3">
+                <label for="inputSubjectCode" class="form-label">Subject Code</label>
+                <input type="text" name="subject_code" class="form-control" id="inputSubjectCode" placeholder="Enter Subject Code">
+                @if ($errors->has('subject_code'))
+                    <span class="text-danger">{{ $errors->first('subject_code') }}</span>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="inputSubjectName" class="form-label">Subject Name</label>
+                <input type="text" name="Subject_name" class="form-control" id="inputSubjectName" placeholder="Enter Subject Name">
+                @if ($errors->has('Subject_name'))
+                    <span class="text-danger">{{ $errors->first('Subject_name') }}</span>
+                @endif
+            </div>
+
         </div>
-        {{-- <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search Subject"> --}}
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Subject Code</th>
-                    <th>Subject Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Faculty data goes here -->
-                @forelse ($data as $subject)
-                    <tr>
-                        <td>{{ $subject->id }}</td>
-                        <td>{{ $subject->subjectcode }}</td>
-                        <td>{{ $subject->subjectname }}</td>
-                        <td>
+
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-md-12 text-end">
+                    <a href="{{ route('subjectlistview') }}" class="btn btn-secondary me-2"><i class="fa fa-window-close"></i> Cancel</a>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+                </div>
+                <!-- FORM Panel -->
+
+                <!-- Table Panel -->
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>Subject List</b>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">#</th>
+                                        <th class="text-center">Subject</th>
+                                        <th class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @forelse ($data as $subject) 
+                                    <tr>
+                                 
+                                        <td class="text-center">{{ $subject->id}}</td>
+                                        <td class="">
+                                
+                                        
+                                        <p>Subject: <b>{{ $subject->subjectname}}</b></p>
+                                          <p>Description: <small><b>{{ $subject->subjectcode}}</b></small></p>
+
+                                        </td>
+                                     <td>
                             <form action="{{ route('deletesubject', $subject->id) }}" method="POST">
                             {{-- <form action="{{ route('deletesubject', $subject->id) }}" method="POST"> --}}
-                                {{-- <a href="{{ url('editsubject/' . $subject->id) }}" class="btn btn-primary btn-sm">Edit</a> --}}
+                                {{-- <a href="{{ url('editsubject/' . $subject->id) }}" class="btn btn-primary">Edit</a> --}}
                                 <a href="{{ route('editsubjectpage', ['id' => $subject->id]) }}"
-                                    class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                    class="btn btn-primary "><i class="fas fa-edit"></i></a>
                                 @csrf
                                 @method('DELETE')
-                                {{-- <a type="submit" class="btn btn-danger btn-sm">Delete</a> --}}
-                                <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                {{-- <a type="submit" class="btn btn-danger ">Delete</a> --}}
+                                <button type="submit" class="btn btn-danger "><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
-                    </tr>
+                                    </tr>
+                                    @empty <p>no data inputed</p>
+                                        
+                                 @endforelse
+                                            
 
-                @empty
-                    <p>no data inputed</p>
-                @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Table Panel -->
+            </div>
+        </div>
 
-            </tbody>
-        </table>
-        <!-- Pagination -->
-        {!! $data->links() !!}
     </div>
+    <style>
+
+        td {
+            vertical-align: middle !important;
+        }
+
+    </style>
+
 @endsection
