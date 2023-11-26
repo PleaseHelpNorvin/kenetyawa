@@ -34,16 +34,18 @@ class ScheduleController extends Controller
             
             // Handle when $teacherId is not null
             
-            $teacherSchedules = teacherschedules::where('faculty_list_id', $teacherID)->get();
+            $teacherSchedules = teacherschedules::leftJoin('rooms', 'teacherschedule.room_id', '=', 'rooms.roomcode')
+            ->leftJoin('subject', 'teacherschedule.subject_id', '=', 'subject.subjectcode')
+            ->where('teacherschedule.faculty_list_id', $teacherID)
+            ->select('teacherschedule.*', 'rooms.roomcode', 'subject.subjectcode','subject.subjectname')
+            ->get();
           
             // $selectRoom = room::find($teacherID);
             // $selectSubject = subject::find($teacherID);
                             
         }
-    
         return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher', 'teacherSchedules','selectRoom','selectSubject'));
     }
-
 
     public function showTeacherSchedule(){
      
@@ -52,25 +54,6 @@ class ScheduleController extends Controller
         return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher'));
     
     }
-// public function showTeacherIDSchedule($teacherID) {
-//     $selectTeacher = Faculty_List::latest()->get();
-    
-//     $teacherSchedules = []; // Initialize $teacherSchedules variable
-
-//     if ($teacherID === 'null') {
-//         // Handle when $teacherId is null
-//         $selectTeacher = Faculty_List::latest()->get();
-//     } else {
-        
-//         // Handle when $teacherId is not null
-//         $teacherSchedules = teacherschedules::where('faculty_list_id', $teacherID)->get();
-//     }
-
-//     return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher', 'teacherSchedules'));
-// }
-
-
-   
 
     public function addTeacherSchedulepage(Request $request){
         // $selectSchedule = teacherschedules::find('teacherID');
@@ -90,26 +73,27 @@ class ScheduleController extends Controller
 
         // Validate the incoming request data
         $validatedData = $request->validate([
-            'teacher_name' => 'required|exists:facultylist,id',
-            'subject' => 'required|exists:subject,id',
-            'room' => 'required|exists:rooms,id',
+            'teacher_name' => 'required',
+            'subject' => 'required',
+            'room' => 'required',
             'day' => 'required',
             'year' => 'required',
-            'semester'=>'required',
+            'semester' => 'required',
             'time_from' => 'required',
-            'time_to' => 'required'
+            'time_to' => 'required',
         ]);
 
         // Create a new TeacherSchedule instance and populate it with validated data
-        $teacherSchedule = teacherschedules::create([
+        $newSchedule = teacherschedules::create([
             'faculty_list_id' => $validatedData['teacher_name'],
             'subject_id' => $validatedData['subject'],
             'room_id' => $validatedData['room'],
             'day' => $validatedData['day'],
-            'year'=>$validatedData['year'],
-            'semester'=>$validatedData['semester'],
+            'year' => $validatedData['year'],
+            'semester' => $validatedData['semester'],
             'time_from' => $validatedData['time_from'],
-            'time_to' => $validatedData['time_to']
+            'time_to' => $validatedData['time_to'],
+            // Add other fields as needed
         ]);
         // return redirect()->route('studentview', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id])->with('success', 'Student added successfully');
         // Redirect to a view or route after successfully adding the schedule
@@ -118,12 +102,21 @@ class ScheduleController extends Controller
         return redirect()->route('teacherscheduleview')->with('success', 'Teacher schedule added successfully!');
     
     }
+    public function deleteTeacherSchedule(Request $request, string $id){
+        
+        $data = teacherschedules::where('id', $id)->delete();
+    
+        return redirect(route('teacherscheduleview'))->with('message','Successfully deleted');
+    }
 
+    //STUDENT SCHEDULE FUNCTIONS
 
     public function showStudentSchedule(){
     
         return view('admin.pages.schedule.studentschedule.studentschedule');
     }
+    
+   
 
     
 }

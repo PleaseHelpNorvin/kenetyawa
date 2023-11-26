@@ -16,7 +16,7 @@
                         <select class="form-control" id="teacher_name" name="teacher_name" >
                             <option value="">Select Teacher</option>
                             @foreach ($selectTeacher as $teacher)
-                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                                <option value="{{ $teacher->id_no }}">{{ $teacher->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                         <select class="form-control" id="subject" name="subject" >
                             <option value="">Select Subject</option>
                             @foreach ($selectSubject as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->subjectcode }}</option>
+                                <option value="{{ $subject->subjectcode }}">{{ $subject->subjectcode }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -34,7 +34,7 @@
                         <select class="form-control" id="room" name="room" >
                             <option value="">Select Room</option>
                             @foreach ($selectRoom as $room)
-                                <option value="{{ $room->id }}">{{ $room->roomcode }}</option>
+                                <option value="{{ $room->roomcode }}">{{ $room->roomcode }}</option>
                             @endforeach
                         </select>
                     </div>

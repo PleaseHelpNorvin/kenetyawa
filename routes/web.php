@@ -33,6 +33,7 @@ use App\Http\Controllers\TeacherListController;
 // });
 
     Route::get('/', [LandingPageController::class,'showLandingPage'])->name('showLandingPage');
+
 Route::group(['middleware' => 'guest'], function(){
     //login/register routes
     Route::get('/studentID', [AuthController::class,'studentID'])->name('studentID');
@@ -51,15 +52,11 @@ Route::group(['middleware' => 'guest'], function(){
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
-
-    // pages routes
+    // dashboard routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-    Route::get('/schedule',[ScheduleController::class,'showSchedulenav'])->name('scheduleviewnav');
-
-    Route::get('/schedule/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    
     // Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
    
-
     Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
     //faculty crud routes
@@ -75,41 +72,21 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('/profile', [ProfileController::class, 'updateImage'])->name('edit.profile');
     Route::get('/profile',[ProfileController::class,'showProfile'])->name('profileview');
 
-
     //student crud routes
-    // Route::get('students', [StudentController::class, 'StudentListView'])->name('studentview');
-    // Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
-    // Route::post('studentslist/add', [StudentController::class, 'CreateStudents'])->name('add.student');
-    // // Add Batch
-    // Route::post('/add-batch', [BatchController::class, 'addBatch'])->name('add.batch');
-    // // Add Block
-    // Route::post('/add-block', [BlockController::class, 'addBlock'])->name('add.block');
-    // //delete student
-    // // web.php or routes/web.php
-    // Route::delete('/delete/student/{student}', [StudentController::class , 'DeleteStudents'])->name('delete.student');
-    // // web.php or routes/web.php 
-    // Route::put('/update/student/{student}',[StudentController::class , 'updateStudents'])->name('update.student');
-
-     //student crud routes
-     Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
-
-
-     Route::get('studentslistadd/{batchId}/{block}', [StudentController::class, 'showaddstudent'])->name('add.student');
-     Route::post('studentslistadd/{batchId}/{block}', [StudentController::class, 'CreateStudents'])->name('add.savestudent');
-   
-     // Add BatchshowTeacherSchedule
- Route::post('/add-batch', [BatchController::class, 'addBatch'])->name('add.batch');
- 
- // Add Block
- Route::post('/add-block', [BlockController::class, 'addBlock'])->name('add.block');
- 
- //delete student
- // web.php or routes/web.php
- Route::delete('/delete/student/{student}', [StudentController::class , 'DeleteStudents'])->name('delete.student');
- 
- // web.php or routes/web.php 
- Route::put('/update/student/{student}',[StudentController::class , 'updateStudents'])->name('update.student');
- Route::get('/update/studentview/{student}', [StudentController::class, 'showeditstudent'])->name('view.student');
+    Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
+    Route::get('studentslistadd/{batchId}/{block}', [StudentController::class, 'showaddstudent'])->name('add.student');
+    Route::post('studentslistadd/{batchId}/{block}', [StudentController::class, 'CreateStudents'])->name('add.savestudent');
+    
+    // Add BatchshowTeacherSchedule
+    Route::post('/add-batch', [BatchController::class, 'addBatch'])->name('add.batch');
+    // Add Block
+    Route::post('/add-block', [BlockController::class, 'addBlock'])->name('add.block');
+    //delete student
+    // web.php or routes/web.php
+    Route::delete('/delete/student/{student}', [StudentController::class , 'DeleteStudents'])->name('delete.student');
+    // web.php or routes/web.php 
+    Route::put('/update/student/{student}',[StudentController::class , 'updateStudents'])->name('update.student');
+    Route::get('/update/studentview/{student}', [StudentController::class, 'showeditstudent'])->name('view.student');
 
     //subjectlist routes
     Route::get('/subjectlist',[SubjectListController::class,'showSubjectList'])->name('subjectlistview');
@@ -136,13 +113,17 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/editroom/{id}',[RoomController::class, 'editRoompage'])->name('editroompage');
     Route::put('/updateroom/{id}', [RoomController::class, 'updateRoom'])->name('updateroom');
 
+    //schedule routes
+    Route::get('/schedule',[ScheduleController::class,'showSchedulenav'])->name('scheduleviewnav');
+    Route::get('/schedule/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     //teacher schedule routes
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/teacher/add/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacher/post/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
+    Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
 
-        //student schedule routes
+    //student schedule routes
 
-        Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentschedule');
+    Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
 
 });
