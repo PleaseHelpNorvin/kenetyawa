@@ -132,4 +132,7 @@ public function showeditstudent($student){
     return view('admin.pages.student.edit_student',compact('selectstudent'));
 }
 
+
+
+
 }

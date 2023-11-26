@@ -57,7 +57,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule',[ScheduleController::class,'showSchedulenav'])->name('scheduleviewnav');
 
     Route::get('/schedule/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
-    Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
+    // Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
    
 
     Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
@@ -140,5 +140,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/teacher/add/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacher/post/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
+
+        //student schedule routes
+
+        Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentschedule');
 
 });

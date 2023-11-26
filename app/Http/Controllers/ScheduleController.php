@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 class ScheduleController extends Controller
 {
     //
+    
     public function showSchedulenav(){
         return view('admin.pages.schedule.calendar');
     }
@@ -121,6 +122,8 @@ class ScheduleController extends Controller
 
     public function showStudentSchedule(){
     
-        return view('admin.pages.schedule.studentschedule');
+        return view('admin.pages.schedule.studentschedule.studentschedule');
     }
+
+    
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     @include('landingpage.landing_includes.landing_header')
-    <style>
+    <!-- <style>
         body {
             font-family: 'Poppins-Regular', sans-serif;
             height: 100vh;
@@ -23,7 +23,7 @@
         }
 
         /* Add other styles as needed */
-    </style>
+    </style> -->
 </head>
 <body>
     {{-- @include('landingpage.landing_includes.landingnav') --}}
