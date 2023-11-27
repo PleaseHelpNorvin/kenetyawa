@@ -12,6 +12,19 @@
             display: none;
         }
     </style>
+    {{-- <script>
+    $(document).ready(function() {
+        $('.select-teacher').click(function() {
+            // Get the teacher ID from the href attribute
+            var teacherID = $(this).attr('href').split('=')[1];
+            var selectedTeacher = $(this).text();
+    
+            // Update the button text with the selected teacher's name
+            $('.btn.btn-primary.dropdown-toggle').text(selectedTeacher);
+        });
+    });
+    </script> --}}
+
 
     <div class="container mt-3">
 
@@ -26,7 +39,8 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('studentscheduleview') }}"
-                            class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule</a>
+                            class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student
+                            Schedule</a>
                     </li>
                 </ul>
             </div>
@@ -37,11 +51,17 @@
         <div class="form-group">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                Select teacher
+                {{-- select teacher  --}}
+                @if ($activeTeacher)
+                    {{ $activeTeacher->name }}
+                @else
+                    Select Teacher
+                @endif
+
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 @foreach ($selectTeacher as $teacher)
-                    <a class="dropdown-item"
+                    <a class="dropdown-item select-teacher"
                         href="{{ route('scheduleview', ['teacherID' => $teacher->id_no]) }}">{{ $teacher->name }}</a>
                 @endforeach
             </div>
@@ -102,7 +122,7 @@
                         @if ($sched->day == 'Sunday')
                             <tr>
                                 <td>{{ $sched->subjectname }}</td>
-                                <td>{{ $sched->roomcode }}</td> 
+                                <td>{{ $sched->roomcode }}</td>
                                 <td>{{ $sched->day }}</td>
                                 <td>
                                     @if ($sched->time_from && $sched->time_to)
@@ -445,7 +465,6 @@
                 }
             }
         </script>
-
     </div>
     <style>
         /* CSS */

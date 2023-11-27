@@ -132,6 +132,31 @@ public function showeditstudent($student){
     return view('admin.pages.student.edit_student',compact('selectstudent'));
 }
 
+public function deleteBatchAndAssociatedBlocksAndStudents($batch_id)
+{
+    $batch = Batch::find($batch_id);
+    
+    if (!$batch) {
+        abort(404);
+    }
+
+    $batch->deleteWithBlocksAndStudents();
+
+    return redirect()->back()->with('success', 'Batch and associated blocks & students deleted successfully');
+}
+
+public function deleteBlockAndAssociatedStudents($block_id)
+{
+    $block = Block::find($block_id);
+    
+    if (!$block) {
+        abort(404);
+    }
+
+    $block->deleteWithStudents();
+
+    return redirect()->back()->with('success', 'Block and associated students deleted successfully');
+}
 
 
 

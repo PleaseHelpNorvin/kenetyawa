@@ -88,6 +88,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/update/student/{student}',[StudentController::class , 'updateStudents'])->name('update.student');
     Route::get('/update/studentview/{student}', [StudentController::class, 'showeditstudent'])->name('view.student');
 
+    // Define routes to handle batch and block deletion
+    Route::delete('/delete/batch/{batchId}', [StudentController::class, 'deleteBatchAndAssociatedBlocksAndStudents'])->name('deleteBatch');
+    Route::delete('/delete/block/{block_id}', [StudentController::class, 'deleteBlockAndAssociatedStudents'])->name('deleteBlock');
+
+
     //subjectlist routes
     Route::get('/subjectlist',[SubjectListController::class,'showSubjectList'])->name('subjectlistview');
     Route::get('/addsubject',[SubjectListController::class,'addSubjectpage'])->name('addsubjectpage');
@@ -121,6 +126,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule/teacher/add/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacher/post/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
     Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
+    // Route::post('/store-selected-teacher', 'ScheduleController@storeSelectedTeacher')->name('storeSelectedTeacher');
 
     //student schedule routes
 

@@ -22,10 +22,13 @@ class ScheduleController extends Controller
     }
     public function showSchedule($teacherID){
         $selectTeacher = Faculty_List::latest()->get();
-    
+        $activeTeacher = $selectTeacher->firstWhere('id_no', $teacherID);
+
+
         $teacherSchedules = []; // Initialize $teacherSchedules variable
         $selectRoom = room::find($teacherID);
         $selectSubject = subject::find($teacherID);
+      
 
         if ($teacherID === 'null') {
             // Handle when $teacherId is null
@@ -44,7 +47,7 @@ class ScheduleController extends Controller
             // $selectSubject = subject::find($teacherID);
                             
         }
-        return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher', 'teacherSchedules','selectRoom','selectSubject'));
+        return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher', 'teacherSchedules','selectRoom','selectSubject','activeTeacher'));
     }
 
     public function showTeacherSchedule(){
@@ -115,7 +118,10 @@ class ScheduleController extends Controller
     
         return view('admin.pages.schedule.studentschedule.studentschedule');
     }
+
+
     
+
    
 
     
