@@ -13,7 +13,7 @@
                         <a href="{{ route('scheduleview', ['teacherID' => 'null']) }}" class="nav-link">Teacher Schedule</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('studentscheduleview') }}" class="nav-link">Student Schedule</a>
+                    <a href="{{ route('studentscheduleview', ['BatchId' => 'null', 'BlockId' => 'null']) }}" class="nav-link">Student Schedule</a>
                     </li>
 
                 </ul>

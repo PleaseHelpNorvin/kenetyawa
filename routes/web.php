@@ -128,6 +128,6 @@ Route::group(['middleware' => 'auth'], function(){
 
     //student schedule routes
 
-    Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
+    Route::get('/schedule/student/{BatchId}/{BlockId}',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
 
 });

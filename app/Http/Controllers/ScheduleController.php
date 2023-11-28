@@ -6,6 +6,8 @@ use App\Models\teacherschedules;
 use App\Models\Faculty_List;
 use App\Models\room;
 use App\Models\subject;
+use App\Models\batch;
+use App\Models\block;
 
 
 use App\Utils\Paginate;
@@ -122,12 +124,19 @@ class ScheduleController extends Controller
     }
 
     //STUDENT SCHEDULE FUNCTIONS
-
-    public function showStudentSchedule(){
+    public function showStudentSchedule($BatchId, $BlockId) {
+        $getBtach = batch::get();
+        $getBlock = [];
     
-        return view('admin.pages.schedule.studentschedule.studentschedule');
+        if ($BatchId != 'null') {
+            $getBlock = block::where('batch_id', $BatchId)->get();
+        }
+    
+        $findBatch = batch::find($BatchId);
+    
+        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch'));
     }
-
+    
 
     
 

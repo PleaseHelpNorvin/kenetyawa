@@ -31,14 +31,36 @@
                       class="nav-link {{ request()->routeIs('scheduleview*') ? 'active' : '' }}">Teacher Schedule</a>
               </li>
               <li class="nav-item">
-                  <a href="{{ route('studentscheduleview') }}"
+                  <a href="{{ route('studentscheduleview', ['BatchId' => 'null' ,'BlockId' => 'null']) }}"
                       class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule</a>
               </li>
           </ul>
       </div>
   </nav>
 
-  <h1>This is student schedule</h1>
+<div class="form-group">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Select Batch
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach($getBtach as $Batch)
+                <a class="dropdown-item select-teacher" href="{{ route('studentscheduleview', ['BatchId' => $Batch->id ,'BlockId' => 'null']) }}">{{ $Batch->batch_name }}</a>
+        @endforeach
+        </div>
+       
+    </div>
 
+    @if($getBlock)
+    <div class="form-group">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Select Block
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach($getBlock as $block)
+                <a class="dropdown-item select-teacher" href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">{{ $block->block_name }}</a>
+            @endforeach
+        </div>
+    </div>
+@endif
 
 @endsection
