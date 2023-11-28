@@ -1,5 +1,5 @@
 @extends('admin.layouts.index')
-@section('title', 'Student Schedule ')
+@section('title', 'Schedule ')
 
 @section('content')
     <style>
@@ -12,19 +12,6 @@
             display: none;
         }
     </style>
-    {{-- <script>
-    $(document).ready(function() {
-        $('.select-teacher').click(function() {
-            // Get the teacher ID from the href attribute
-            var teacherID = $(this).attr('href').split('=')[1];
-            var selectedTeacher = $(this).text();
-    
-            // Update the button text with the selected teacher's name
-            $('.btn.btn-primary.dropdown-toggle').text(selectedTeacher);
-        });
-    });
-    </script> --}}
-
 
     <div class="container mt-3">
 
@@ -39,13 +26,11 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('studentscheduleview') }}"
-                            class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student
-                            Schedule</a>
+                            class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule</a>
                     </li>
                 </ul>
             </div>
         </nav>
-
 
         <!-- Dropdown for Selecting Teacher -->
         <div class="form-group">

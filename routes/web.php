@@ -54,9 +54,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     // dashboard routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-    
-    // Route::get('/schedule/student',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
-   
+       
     Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
     //faculty crud routes
@@ -120,7 +118,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     //schedule routes
     Route::get('/schedule',[ScheduleController::class,'showSchedulenav'])->name('scheduleviewnav');
-    Route::get('/schedule/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     //teacher schedule routes
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/teacher/add/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
