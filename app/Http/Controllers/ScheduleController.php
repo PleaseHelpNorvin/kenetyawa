@@ -8,7 +8,7 @@ use App\Models\room;
 use App\Models\subject;
 use App\Models\batch;
 use App\Models\block;
-
+use App\Models\StudentSchedule;
 
 use App\Utils\Paginate;
 use Illuminate\Support\Arr;
@@ -133,12 +133,41 @@ class ScheduleController extends Controller
         }
     
         $findBatch = batch::find($BatchId);
+        $findBlock = block::find($BlockId);
+        $selectStudentSchedule = StudentSchedule::get();
     
-        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch'));
+        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch','findBlock','selectStudentSchedule'));
     }
     
 
-    
+    public function addStudentSchedule($BatchId, $BlockId){
+        $selectTeacher = Faculty_List::get();
+        $selectSubject = subject::get();
+        $selectRoom = room::get();
+        $findBatch = batch::find($BatchId);
+        $findBlock = block::find($BlockId);
+        return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch','findBlock','selectTeacher','selectSubject','selectRoom'));
+    }
+
+    public function addScheduleSave(Request $request ,$BatchId, $BlockId)
+    {
+        $findBatch = batch::find($BatchId);
+        $findBlock = block::find($BlockId);
+        $request->validate([
+            'block_id' => 'required',
+            'batch_id' => 'required',
+            'room_code' => 'required|string|max:255',
+            'subject_name' => 'required|string|max:255',
+            'teacher_name' => 'required|string|max:255',
+            'day' => 'required',
+            'time_in' => 'required|date_format:H:i',
+            'time_out' => 'required|date_format:H:i|after:time_in',
+        ]);
+
+        StudentSchedule::create($request->all());
+
+        return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
+    }
 
    
 

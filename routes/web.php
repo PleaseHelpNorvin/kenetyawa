@@ -130,4 +130,7 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('/schedule/student/{BatchId}/{BlockId}',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
 
+    Route::get('/schedule/student/addSchedule/{BatchId}/{BlockId}',[ScheduleController::class,'addStudentSchedule'])->name('addStudentSchedule');
+    // addScheduleSave
+    Route::post('/schedule/student/addScheduleSave/{BatchId}/{BlockId}',[ScheduleController::class,'addScheduleSave'])->name('addScheduleSave');
 });

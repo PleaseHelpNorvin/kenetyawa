@@ -61,6 +61,61 @@
             @endforeach
         </div>
     </div>
+
 @endif
+
+  @if($findBlock)
+    <a href="{{ route('addStudentSchedule', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}" class = "btn btn-success">Add Schedule</a>
+    <br><br>
+    <table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($selectStudentSchedule as $selectSched)
+        <tr>
+            @if($selectSched->day == 'Sunday')
+            <td>
+              <p>{{ $selectSched->subject_name }}</p>
+            </td>
+            @endif
+            <td>
+            <p>test</p>
+            </td>
+            <td>
+            <p>test</p>
+            </td>
+            <td>
+            <p>test</p>
+            </td>
+            <td>
+            <p>test</p>
+            </td>
+            <td>
+            <p>test</p>
+            </td>
+            <td>
+            <p>test</p>
+            </td>
+        </tr>
+        @endforeach
+        <!-- Additional rows can be added for different weeks or entries -->
+    </tbody>
+</table>
+
+
+
+@endif
+
+
+
 
 @endsection
