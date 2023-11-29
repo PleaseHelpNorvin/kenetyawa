@@ -5,7 +5,7 @@
 
 @section('content')
 
-
+<div class="container mt-3">
     <!-- Batch links -->
     <h2>Select Batch</h2>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
@@ -30,9 +30,9 @@
                     </div>
 
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary">Add Batch</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Batch</button>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBatch">
-                            <i class="fas fa-trash">Batch</i>
+                            <i class="fas fa-trash"></i>Batch
                         </button>
                     </div>
                 </div>
@@ -65,9 +65,9 @@
                                     <input type="hidden" name="batch_id" value="{{ $selectedBatch->id }}">
                                 </div>
                                 <div class="col-md-6">
-                                    <button type="submit" class="btn btn-primary">Add Block</button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i> Block</button>
                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteBlock">
-                                        <i class="fas fa-trash">Block</i>
+                                        <i class="fas fa-trash"></i>Block
                                     </button>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
     @if ($selectedBlock)
         <br>
         <a href="{{ route('add.student', ['batchId' => $batch_id, 'block' => $selectedBlock->id]) }}"
-            class="btn btn-primary">Add Student</a>
+            class="btn btn-primary"><i class="fa fa-plus"></i> Student</a>
     @endif
 
     @if ($students && count($students) > 0)
@@ -147,6 +147,6 @@
         <p>No students found for the selected batch and block.</p>
     @endif
 
-
+</div>
 
 @endsection

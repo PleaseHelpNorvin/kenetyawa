@@ -2,6 +2,7 @@
 @section('title', 'Room List')
 
 @section('content')
+<div class="container mt-3">
     <div class="container-fluid">
 
         <div class="col-lg-12">
@@ -96,5 +97,5 @@
         }
 
     </style>
-
+</div>
 @endsection

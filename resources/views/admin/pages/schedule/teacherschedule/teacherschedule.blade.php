@@ -108,10 +108,11 @@
             selectedContent.style.display = 'block';
         }
 
-        // Reset background color for all navigation items
+        // Reset background color for all navigation items and set text color to white
         var allItems = document.querySelectorAll('.nav-item');
         allItems.forEach(function (item) {
             item.style.backgroundColor = '';
+            item.style.color = '#ffffff'; // Set text color to white
         });
 
         // Set background color for the clicked navigation item

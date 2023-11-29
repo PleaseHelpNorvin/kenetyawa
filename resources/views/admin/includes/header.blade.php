@@ -34,11 +34,27 @@
 <script src="{!! asset('assets/calendar/fullcalendar/packages/interaction/main.js')!!}"></script>
 <script src="{!! asset('assets/calendar/fullcalendar/packages/daygrid/main.js')!!}"></script>
 
+{{-- CALENDAR -02 --}}
+
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+{{-- <link rel="stylesheet" href="css/style.css"> --}}
+<link rel="stylesheet" href="{!! asset('assets/calendar-02/calendar-02/css/style.css')!!}">
+
+<script src="{!! asset('assets/calendar-02/calendar-02/js/jquery.min.js') !!}"></script>
+<script src="{!! asset('assets/calendar-02/calendar-02/js/popper.js') !!}"></script>
+<script src="{!! asset('assets/calendar-02/calendar-02/js/bootstrap.min.js') !!}"></script>
+<script src="{!! asset('assets/calendar-02/calendar-02/js/main.js') !!}"></script>
+
+
+    {{-- <script src="js/jquery.min.js"></script> --}}
+    {{-- <script src="js/popper.js"></script> --}}
+    {{-- <script src="js/bootstrap.min.js"></script> --}}
+    {{-- <script src="js/main.js"></script> --}}
+
+
 {{-- faculty list/subject list library --}}
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-{{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
-{{-- <script src="{!! asset('assets/js/faculty_list.js') !!}"></script> --}}
 
 {{-- font awewome --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">

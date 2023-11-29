@@ -3,7 +3,7 @@
 @include('modals.subject_list_modal')
 
 @section('content')
-    <h1>This is a Subject List Page</h1>
+<div class="container mt-3">
 
     <div class="container-fluid">
 
@@ -115,5 +115,5 @@
         }
 
     </style>
-
+</div>
 @endsection
