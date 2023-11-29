@@ -1,5 +1,6 @@
 @extends('admin.layouts.index')
 @section('title', 'Student List')
+
 @section('content')
 
 

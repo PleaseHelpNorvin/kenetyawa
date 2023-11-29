@@ -1,5 +1,8 @@
 @extends('admin.layouts.index')
 @section('title', 'Student List')
+@include('admin.pages.student.delete_batch_modal')
+@include('admin.pages.student.delete_block_modal')
+
 @section('content')
 
 
@@ -14,16 +17,9 @@
                         <a href="{{ route('studentview', ['batchId' => $batch->id, 'block' => 'null']) }}"
                             class="nav-link">{{ $batch->batch_name }}</a>
                     </li>
-                    <form action="{{ route('deleteBatch', ['batchId' => $batch->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger"
-                            onclick="return confirm('Are you sure you want to delete this batch and associated blocks & students?')"><i
-                                class="fas fa-trash"></i></button>
-                    </form>
                 @endforeach
             </ul>
-            <form action="{{ route('add.batch') }}" method="POST" class="mb-4">
+            <form action="{{ route('add.batch') }}" method="POST" >
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -35,9 +31,10 @@
 
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-primary">Add Batch</button>
-
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteBatch">
+                            <i class="fas fa-trash">Batch</i>
+                        </button>
                     </div>
-
                 </div>
             </form>
         </div>
@@ -57,15 +54,6 @@
                                     {{ $block->block_name }}
                                 </a>
                             </li>
-                            <!-- Blade Template for Deleting Block -->
-                            <form action="{{ route('deleteBlock', ['block_id' => $block->id]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <a type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Are you sure you want to delete this block and associated students?')">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </form>
                         @endforeach
                     </ul>
                     <div>
@@ -78,6 +66,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-primary">Add Block</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#DeleteBlock">
+                                        <i class="fas fa-trash">Block</i>
+                                    </button>
                                 </div>
                             </div>
                         </form>

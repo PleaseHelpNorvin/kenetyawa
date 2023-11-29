@@ -2,120 +2,71 @@
 @section('title', 'StudentSchedule ')
 
 @section('content')
-<style>
-  /* Your existing styles */
-  .navbar {
-      margin-bottom: 20px;
-  }
+    <style>
+        /* Your existing styles */
+        .navbar {
+            margin-bottom: 20px;
+        }
 
-  .nav-content {
-      display: none;
-  }
-  .navbar-nav .nav-item .nav-link.active {
-      color: blue;
-      /* Set the text color to black for the active link */
-      /* Additional styles for the active state */
-  }
-</style>
+        .nav-content {
+            display: none;
+        }
+
+        .navbar-nav .nav-item .nav-link.active {
+            color: blue;
+            /* Set the text color to black for the active link */
+            /* Additional styles for the active state */
+        }
+    </style>
 
 
-<div class="container mt-3">
+    <div class="container mt-3">
 
-  <!-- Navigation Links -->
-  <!-- Navigation Links -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light border">
-      <div class="container-fluid">
-          <ul class="navbar-nav">
-              <li class="nav-item">
-                  <a href="{{ route('scheduleview', ['teacherID' => 'null']) }}"
-                      class="nav-link {{ request()->routeIs('scheduleview*') ? 'active' : '' }}">Teacher Schedule</a>
-              </li>
-              <li class="nav-item">
-                  <a href="{{ route('studentscheduleview', ['BatchId' => 'null' ,'BlockId' => 'null']) }}"
-                      class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule</a>
-              </li>
-          </ul>
-      </div>
-  </nav>
+        <!-- Navigation Links -->
+        <!-- Navigation Links -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+            <div class="container-fluid">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="{{ route('scheduleview', ['teacherID' => 'null']) }}"
+                            class="nav-link {{ request()->routeIs('scheduleview*') ? 'active' : '' }}">Teacher Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('studentscheduleview', ['BatchId' => 'null', 'BlockId' => 'null']) }}"
+                            class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student
+                            Schedule</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-<div class="form-group">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Select Batch
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        @foreach($getBtach as $Batch)
-                <a class="dropdown-item select-teacher" href="{{ route('studentscheduleview', ['BatchId' => $Batch->id ,'BlockId' => 'null']) }}">{{ $Batch->batch_name }}</a>
-        @endforeach
+        <div class="form-group">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Select Batch
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @foreach ($getBtach as $Batch)
+                    <a class="dropdown-item select-teacher"
+                        href="{{ route('studentscheduleview', ['BatchId' => $Batch->id, 'BlockId' => 'null']) }}">{{ $Batch->batch_name }}</a>
+                @endforeach
+            </div>
+
         </div>
-       
-    </div>
 
-    @if($getBlock)
-    <div class="form-group">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Select Block
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            @foreach($getBlock as $block)
-                <a class="dropdown-item select-teacher" href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">{{ $block->block_name }}</a>
-            @endforeach
-        </div>
-    </div>
+        @if ($getBlock)
+            <div class="form-group">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select Block
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    @foreach ($getBlock as $block)
+                        <a class="dropdown-item select-teacher"
+                            href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">{{ $block->block_name }}</a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
 
-@endif
-
-  @if($findBlock)
-    <a href="{{ route('addStudentSchedule', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}" class = "btn btn-success">Add Schedule</a>
-    <br><br>
-    <table class="table table-bordered">
-    <thead class="thead-dark">
-        <tr>
-            <th>Sunday</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($selectStudentSchedule as $selectSched)
-        <tr>
-            @if($selectSched->day == 'Sunday')
-            <td>
-              <p>{{ $selectSched->subject_name }}</p>
-            </td>
-            @endif
-            <td>
-            <p>test</p>
-            </td>
-            <td>
-            <p>test</p>
-            </td>
-            <td>
-            <p>test</p>
-            </td>
-            <td>
-            <p>test</p>
-            </td>
-            <td>
-            <p>test</p>
-            </td>
-            <td>
-            <p>test</p>
-            </td>
-        </tr>
-        @endforeach
-        <!-- Additional rows can be added for different weeks or entries -->
-    </tbody>
-</table>
-
-
-
-@endif
-
-
-
-
-@endsection
+    @endsection
