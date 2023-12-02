@@ -17,7 +17,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" style="margin-right: 10px;"
                                         onclick="return confirm('Are you sure you want to delete this block and associated students?')">
-                                        <i class="fas fa-trash">{{ $block->block_name }}</i>
+                                        <i class="fas fa-trash"></i>{{ $block->block_name }}
                                     </button>
                                 </form>
                             </li>

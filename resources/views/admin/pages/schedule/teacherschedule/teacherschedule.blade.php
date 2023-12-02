@@ -1,5 +1,5 @@
 @extends('admin.layouts.index')
-@section('title', 'Schedule ')
+@section('title', 'Teacher Schedule ')
 @section('content')
 
 <style>
@@ -79,9 +79,8 @@
                                 <td>{{ $sched->semester }}</td>
                                 <td>
                                     <form action="{{ route('deletesteacherchedule', $sched->id) }}" method="POST">
-                                        @csrf
+                                        <a href="{{ route('vieweditteachersched', ['id' => $sched->id, 'teacherID' => $sched->faculty_list_id]) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>                                        @csrf
                                         @method('DELETE')
-                                        <a href="" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                         <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                     </form>
                                 </td>

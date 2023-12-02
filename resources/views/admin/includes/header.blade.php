@@ -1,6 +1,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>@yield('title')</title>
+
 <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/navbar.css') !!}">
 <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/layouts.css') !!}">
 <script src="{!! asset('assets/js/navbar.js') !!}"></script>
@@ -44,12 +46,9 @@
 {{-- font awewome --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<title>@yield('title')</title>
-
 {{-- side-menus --}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script> 
-
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 
 {{-- jquery ajax --}}

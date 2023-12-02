@@ -109,8 +109,56 @@ class ScheduleController extends Controller
         // ['teacherID' => 'null']
         // ['teacherID' => $selectTeacher->id]
         return redirect()->route('scheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
-    
     }
+
+    public function viewEditTeacherSched(Request $request,$id ){
+        $teacherSchedule = teacherschedules::findOrFail($id);
+        
+        $teachers = Faculty_List::get();
+        $activeTeacher = $teachers->firstWhere('id_no', $id);        
+           
+        $subjects = subject::get();
+        $rooms = room::all();
+        $days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    
+        return view('admin.pages.schedule.teacherschedule.edit_teacherschedule', compact('teacherSchedule', 'teachers', 'subjects', 'rooms','days','activeTeacher'));
+    }
+
+    public function updateTeacherSchedPost(Request $request, $id){
+
+   $teacherSchedule = teacherschedules::findOrFail($id);
+
+   $validatedData = $request->validate([
+       'teacher_name' => 'required',
+       'subject' => 'required',
+       'room' => 'required',
+       'day' => 'required',
+       'year' => 'required',
+       'semester' => 'required',
+       'time_from' => 'required',
+       'time_to' => 'required'
+   ]);
+
+   // Update the teacher schedule using the update method
+   $teacherSchedule->update([
+       'faculty_list_id' => $request->input('teacher_name'),
+       'subject_id' => $request->input('subject'),
+       'room_id' => $request->input('room'),
+       'day' => $request->input('day'),
+       'year' => $request->input('year'),
+       'semester' => $request->input('semester'),
+       'time_from' => $request->input('time_from'),
+       'time_to' => $request->input('time_to')
+       // Add more fields to update as needed
+   ]);
+
+   // Redirect back to the view with a success message or any other action
+   return redirect()->route('scheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
+       ->with('success', 'Teacher Schedule updated successfully');
+}
+
+
     public function deleteTeacherSchedule(Request $request, string $id){
         // Retrieve the schedule details to get the associated teacher ID
         $schedule = teacherschedules::findOrFail($id);

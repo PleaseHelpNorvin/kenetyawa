@@ -54,8 +54,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     // dashboard routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-       
-    Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
+    // Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
     //faculty crud routes
     Route::get('/teacherlist',[TeacherListController::class,'showTeacherList'])->name('teacherlistview');
@@ -124,13 +123,16 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule/teacheradd/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacherpost/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
     Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
+    // Route::get('/edit/teacherSched-page/{id}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
+    Route::get('/edit-teacher-schedule/{id}/{teacherID}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
+    Route::post('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
     // Route::post('/store-selected-teacher', 'ScheduleController@storeSelectedTeacher')->name('storeSelectedTeacher');
 
     //student schedule routes
 
     Route::get('/schedule/student/{BatchId}/{BlockId}',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
-
     Route::get('/schedule/student/addSchedule/{BatchId}/{BlockId}',[ScheduleController::class,'addStudentSchedule'])->name('addStudentSchedule');
     // addScheduleSave
     Route::post('/schedule/student/addScheduleSave/{BatchId}/{BlockId}',[ScheduleController::class,'addScheduleSave'])->name('addScheduleSave');
+  
 });

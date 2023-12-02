@@ -17,7 +17,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" style="margin-right: 10px;"
                                         onclick="return confirm('Are you sure you want to delete this batch and associated blocks & students?')">
-                                        <i class="fas fa-trash">{{ $batch->batch_name }}</i>
+                                        <i class="fas fa-trash"></i>{{ $batch->batch_name }}
                                     </button>
                                     {{-- <span>{{ $batch->batch_name }}</span> --}}
                                 </form>
