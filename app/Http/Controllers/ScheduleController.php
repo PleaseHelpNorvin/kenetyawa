@@ -19,9 +19,7 @@ class ScheduleController extends Controller
 {
     //
     
-    public function showSchedulenav(){
-        return view('admin.pages.schedule.calendar');
-    }
+
     public function showSchedule($teacherID){
         $selectTeacher = Faculty_List::latest()->get();
         $activeTeacher = $selectTeacher->firstWhere('id_no', $teacherID);

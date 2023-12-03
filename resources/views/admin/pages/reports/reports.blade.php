@@ -2,7 +2,7 @@
 @section('title', 'Profile')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container1 mt-4">
         <h2>Reports with Bootstrap Cards</h2>
         <div class="row">
             @forelse ($data as $report)

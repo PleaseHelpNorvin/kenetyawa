@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    
     @include('admin.includes.header')
 </head>
     {{-- @include('css.template_css') --}}

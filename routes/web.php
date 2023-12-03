@@ -15,6 +15,7 @@ use App\Http\Controllers\CourseListController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\SubjectListController;
 use App\Http\Controllers\TeacherListController;
+use App\Http\Controllers\CalendarEventController;
 
 
 /*
@@ -54,7 +55,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     // dashboard routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');
-    // Route::get('courselist', [CourseListController::class, 'viewCourseList'])->name('viewcourselist');
+    // Route::get('courselist', [CgourseListController::class, 'viewCourseList'])->name('viewcourselist');
 
     //faculty crud routes
     Route::get('/teacherlist',[TeacherListController::class,'showTeacherList'])->name('teacherlistview');
@@ -116,14 +117,19 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/updateroom/{id}', [RoomController::class, 'updateRoom'])->name('updateroom');
 
     //schedule routes
-    Route::get('/schedule',[ScheduleController::class,'showSchedulenav'])->name('scheduleviewnav');
-    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    Route::get('/schedule', [CalendarEventController::class, 'showSchedulenav'])->name('scheduleviewnav');
+    Route::get('/getevent', [CalendarEventController::class, 'getEvent'])->name('getevent');
+    Route::post('/createevent', [CalendarEventController::class, 'createEvent'])->name('createevent');
+    Route::post('/deleteevent', [CalendarEventController::class, 'deleteEvent'])->name('deleteevent');
+
+
+    // Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     //teacher schedule routes
     Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/teacheradd/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacherpost/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
     Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
-    // Route::get('/edit/teacherSched-page/{id}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
+    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     Route::get('/edit-teacher-schedule/{id}/{teacherID}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
     Route::post('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
     // Route::post('/store-selected-teacher', 'ScheduleController@storeSelectedTeacher')->name('storeSelectedTeacher');

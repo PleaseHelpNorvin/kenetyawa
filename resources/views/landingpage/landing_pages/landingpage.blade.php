@@ -13,7 +13,7 @@
         background: linear-gradient(-135deg, #c850c0, #4158d0);
     }
 
-    .container {
+    .container1 {
         text-align: center;
         color: #fff; /* White text color */
     }
@@ -68,7 +68,7 @@
 </style>
 <title>@yield('title')</title>
 
-<div class="container">
+<div class="container1">
 
     <header>
         <h1>School Scheduling</h1>
