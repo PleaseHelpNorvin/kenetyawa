@@ -44,6 +44,7 @@
                 </ul>
             </div>
         </nav>
+        
         <div id='calendar'></div>
 
         <script>

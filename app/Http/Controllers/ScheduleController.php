@@ -106,7 +106,7 @@ class ScheduleController extends Controller
         // Redirect to a view or route after successfully adding the schedule
         // ['teacherID' => 'null']
         // ['teacherID' => $selectTeacher->id]
-        return redirect()->route('scheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
+        return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
     }
 
     public function viewEditTeacherSched(Request $request,$id ){

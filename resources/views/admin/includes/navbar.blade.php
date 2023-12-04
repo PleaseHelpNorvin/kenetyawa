@@ -39,9 +39,6 @@
     </ul>
 </div>
 
-
-
-
 <style>
     .side-menu a.active {
         background-color: white; 

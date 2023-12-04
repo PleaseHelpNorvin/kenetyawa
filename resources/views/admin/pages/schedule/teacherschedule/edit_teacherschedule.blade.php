@@ -101,7 +101,7 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Update Schedule</button>
-                    <a href="{{ route('scheduleview',['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id]) }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('teacherscheduleview',['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id]) }}" class="btn btn-danger">Cancel</a>
                 </div>
             </form>
         </div>

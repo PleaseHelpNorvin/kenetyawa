@@ -72,7 +72,7 @@
                 <!-- Footer content if needed -->
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Add Schedule</button>
-                    <a href="{{ route('scheduleview', ['teacherID' => $teacher->id_no]) }}" type="button" class="btn btn-danger">Close</a>
+                    <a href="{{ route('teacherscheduleview', ['teacherID' => $teacher->id_no]) }}" type="button" class="btn btn-danger">Close</a>
                 </div>
                 </form>
             </div>
