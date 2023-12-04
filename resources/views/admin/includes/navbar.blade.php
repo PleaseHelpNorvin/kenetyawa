@@ -44,7 +44,7 @@
 
 <style>
     .side-menu a.active {
-        background-color: while; 
+        background-color: white; 
         color: black;
       
     }

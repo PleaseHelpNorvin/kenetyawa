@@ -129,7 +129,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/schedule/teacheradd/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacherpost/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
     Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
-    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('teacherscheduleview');
     Route::get('/edit-teacher-schedule/{id}/{teacherID}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
     Route::post('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
     // Route::post('/store-selected-teacher', 'ScheduleController@storeSelectedTeacher')->name('storeSelectedTeacher');

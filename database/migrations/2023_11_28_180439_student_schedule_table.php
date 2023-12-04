@@ -22,12 +22,6 @@ return new class extends Migration
             $table->time('time_in');
             $table->time('time_out');
             $table->timestamps();
-
-            // Foreign key constraints
-     
-            // Add more foreign key constraints if needed
-
-            // You can customize the migration further based on your requirements
         });
     }
 

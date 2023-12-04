@@ -11,10 +11,17 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <li class="nav-item"><a href="{{ route('scheduleview', ['teacherID' => 'null']) }}" class="nav-link {{ request()->routeIs('scheduleview*') ? 'active' : '' }}">Teacher Schedule</a></li>
+                <li class="nav-item">
+                    <a href="{{ route('scheduleviewnav')}}"
+                        class="nav-link {{ request()->routeIs('scheduleviewnav*') ? 'active' : '' }}">Event |</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('teacherscheduleview', ['teacherID' => 'null']) }}" 
+                        class="nav-link {{ request()->routeIs('teacherscheduleview*') ? 'active' : '' }}">Teacher Schedule |</a>
+                </li>
                 <li class="nav-item">
                   <a href="{{ route('studentscheduleview', ['BatchId' => 'null' ,'BlockId' => 'null']) }}"
-                      class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule</a>
+                        class="nav-link {{ request()->routeIs('studentscheduleview') ? 'active' : '' }}">Student Schedule </a>
               </li>
             </ul>
         </div>
@@ -26,7 +33,7 @@
         </button>
         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             @foreach ($selectTeacher as $teacher)
-                <a class="dropdown-item select-teacher" href="{{ route('scheduleview', ['teacherID' => $teacher->id_no]) }}">{{ $teacher->name }}</a>
+                <a class="dropdown-item select-teacher" href="{{ route('teacherscheduleview', ['teacherID' => $teacher->id_no]) }}">{{ $teacher->name }}</a>
             @endforeach
         </div>
         <a href="{{ route('addteacherschedule') }}" class="btn btn-primary">Add Teacher Schedule</a>
