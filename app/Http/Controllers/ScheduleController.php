@@ -152,7 +152,7 @@ class ScheduleController extends Controller
    ]);
 
    // Redirect back to the view with a success message or any other action
-   return redirect()->route('scheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
+   return redirect()->route('teacherscheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
        ->with('success', 'Teacher Schedule updated successfully');
 }
 
@@ -166,7 +166,7 @@ class ScheduleController extends Controller
         $schedule->delete();
         
         // Redirect to scheduleview route with the teacherID parameter
-        return redirect()->route('scheduleview', ['teacherID' => $teacherID])->with('message', 'Successfully deleted');
+        return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('message', 'Successfully deleted');
     }
 
     //STUDENT SCHEDULE FUNCTIONS

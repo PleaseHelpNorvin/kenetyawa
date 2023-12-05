@@ -23,13 +23,12 @@
     <div class="container mt-3">
 
         <!-- Navigation Links -->
-        <!-- Navigation Links -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border">
             <div class="container-fluid">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a href="{{ route('scheduleviewnav')}}"
-                            class="nav-link {{ request()->routeIs('scheduleviewnav*') ? 'active' : '' }}">Event |</a> 
+                            class="nav-link {{ request()->routeIs('scheduleviewnav*') ? 'active' : '' }}">Event |</a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('teacherscheduleview', ['teacherID' => 'null']) }}" 
@@ -42,7 +41,7 @@
                 </ul>
             </div>
         </nav>
-
+        
         <div class="form-group">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
