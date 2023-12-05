@@ -68,7 +68,7 @@
                             href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">{{ $block->block_name }}</a>
                     @endforeach
                 </div>
-            </div>
+            </div>  
         @endif
 
     @endsection
