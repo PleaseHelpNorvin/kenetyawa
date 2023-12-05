@@ -173,14 +173,17 @@ class ScheduleController extends Controller
     public function showStudentSchedule($BatchId, $BlockId) {
         $getBtach = batch::get();
         $getBlock = [];
-    
+$selectStudentSchedule = [];
         if ($BatchId != 'null') {
             $getBlock = block::where('batch_id', $BatchId)->get();
         }
-    
+
+        if ($BatchId != 'null' && $BlockId != 'null') {
+            $selectStudentSchedule = StudentSchedule::get();
+        }
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
-        $selectStudentSchedule = StudentSchedule::get();
+    
     
         return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch','findBlock','selectStudentSchedule'));
     }
