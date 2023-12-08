@@ -14,8 +14,9 @@
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Teachers</h5>
-                                <p class="card-text">Manage teachers' information.</p>
-                                <a href="#" class="btn btn-primary">View</a>
+                                
+                                <p class="card-text">{{$teacherCount}}</p>
+                                <a href="{{ route('teacherlistview')}}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -23,8 +24,8 @@
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Students</h5>
-                                <p class="card-text">View and manage student details.</p>
-                                <a href="#" class="btn btn-primary">View</a>
+                                <p class="card-text">{{$studentCount}}</p>
+                                <a href="{{$studentViewUrl}}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -32,8 +33,8 @@
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Subjects</h5>
-                                <p class="card-text">Explore and manage subjects.</p>
-                                <a href="#" class="btn btn-primary">View</a>
+                                <p class="card-text">{{$subjectCount}}</p>
+                                <a href="{{route('subjectlistview')}}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -41,8 +42,8 @@
                         <div class="card shadow mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">Rooms</h5>
-                                <p class="card-text">Manage classroom details.</p>
-                                <a href="#" class="btn btn-primary">View</a>
+                                <p class="card-text">{{$roomCount}}</p>
+                                <a href="{{route('showroom')}}" class="btn btn-primary">View</a>
                             </div>
                         </div>
                     </div>
@@ -51,9 +52,9 @@
                     <div class="col-md-12">
                         <div class="card shadow mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">Other Content</h5>
-                                <p class="card-text">Additional content or wide view cards can be placed here.</p>
-                                <a href="#" class="btn btn-primary">Explore</a>
+                                <h5 class="card-title">Reports</h5>
+                                <p class="card-text">{{$reportCount}}</p>
+                                <a href="{{route('reportsview')}}" class="btn btn-primary">Explore</a>
                             </div>
                         </div>
                     </div>
