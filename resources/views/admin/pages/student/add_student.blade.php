@@ -19,6 +19,18 @@
             @enderror
         </div>
         <div class="form-group">
+            <label for="inputStatus">Status</label>
+            <select name="status" class="form-control" id="inputStatus">
+                {{-- <option value=""></option> --}}
+                <option value="Regular">Regular</option>
+                <option value="Replacement">Replacement</option>
+                <!-- Add more options if needed -->
+            </select>
+            @error('status')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="inputName">Name</label>
             <input type="text" name="student_name" class="form-control" id="inputName" placeholder="Enter Name">
             @error('student_name')

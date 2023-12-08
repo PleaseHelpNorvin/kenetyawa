@@ -72,6 +72,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     //student crud routes
     Route::get('students/{batchId}/{block}', [StudentController::class, 'StudentListView'])->name('studentview');
+    Route::get('/students/{batch_id}/{block}/{status}', [StudentController::class, 'StudentListView'])->name('studentview.status');
+
     Route::get('studentslistadd/{batchId}/{block}', [StudentController::class, 'showaddstudent'])->name('add.student');
     Route::post('studentslistadd/{batchId}/{block}', [StudentController::class, 'CreateStudents'])->name('add.savestudent');
     

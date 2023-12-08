@@ -8,11 +8,24 @@
                 @csrf
                 @method('PUT')
               
+                <label for="edit_student_student_no">Student No:</label>
+                <input type="text" id="edit_student_student_no" name="student_no" class="form-control" value="{{ $selectstudent->student_no }}">
+                
                 <label for="edit_student_name">Name:</label>
                 <input type="text" id="edit_student_name" name="name" class="form-control" value="{{ $selectstudent->name }}">
 
-                <label for="edit_student_student_no">Student No:</label>
-                <input type="text" id="edit_student_student_no" name="student_no" class="form-control" value="{{ $selectstudent->student_no }}">
+                <div class="form-group">
+                    <label for="inputStatus">Status</label>
+                    <select name="status" class="form-control" id="inputStatus">
+                        <option value=""></option>
+                        <option value="Regular">Regular</option>
+                        <option value="Replacement">Replacement</option>
+                        <!-- Add more options if needed -->
+                    </select>
+                    @error('status')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
 
                 <label for="edit_student_batch">Batch:</label>
                 <input type="text" id="edit_student_batch" name="batch" class="form-control" value="{{ $selectstudent->batch }}">
