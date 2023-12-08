@@ -15,6 +15,9 @@
     .navbar-nav .nav-item .nav-link.active {
         color: blue;
     }
+    .nav-link.active1 {
+        color: blue;
+    }
 </style>
 
 <div class="container mt-3">
@@ -58,13 +61,15 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select Block
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @foreach ($getBlock as $block)
-                    <a class="dropdown-item select-teacher"
-                        href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">{{ $block->block_name }}</a>
-                @endforeach
-            </div>
-        </div>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    @foreach ($getBlock as $block)
+        <a class="dropdown-item select-teacher"
+            href="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}">
+            {{ $block->block_name }}
+        </a>
+    @endforeach
+</div>
+
     @endif
 
     @if($selectStudentSchedule)
@@ -73,67 +78,88 @@
 
         <!-- Day navigation bar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    @foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
-                        <li class="nav-item" style="margin-right: 80px;">
-                            <a class="nav-link" href="#{{ strtolower($day) }}"
-                                onclick="showContent(this, '{{ strtolower($day) }}')">{{ $day }}</a>
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-        </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
+                <li class="nav-item {{ strtolower($day) === 'monday' ? 'active' : '' }}" style="margin-right: 130px;">
+                    <a class="nav-link" href="#{{ strtolower($day) }}" onclick="showContent(this, '{{ strtolower($day) }}')">{{ $day }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</nav>
+
 
         <!-- Student schedule for each day -->
-        @foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
+        @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
             <div id="{{ strtolower($day) }}-content" class="nav-content">
-                <table class="table table-striped teacherschedule" data-block="" data-batch="">
+
+          
+          
+          
+                        @php
+                $sortedSchedules = $selectStudentSchedule->where('day', $day)->sortBy(function ($schedule) {
+                    return $schedule->time_in ? strtotime($schedule->time_in) : PHP_INT_MAX;
+                });
+            @endphp
+                <table class="table table-bordered teacherschedule" data-block="" data-batch="">
                     <thead>
                         <tr>
+                        <th>Time</th>
                             <th>Block</th>
                             <th>Batch</th>
                             <th>Room</th>
                             <th>Subject</th>
                             <th>Teacher</th>
-                            <th>Time</th>
+                       
                             <th>Day</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($selectStudentSchedule as $sched)
-                            @if ($sched->day == $day)
-                                <tr>
-                                    <td>{{ $findBatch->batch_name }}</td>
-                                    <td>{{ $findBlock->block_name }}</td>
-                                    <td>{{ $sched->room_code }}</td>
-                                    <td>{{ $sched->subject_name}}</td>
-                                    <td>{{ $sched->teacher_name	 }}</td>
-                                    <td>
-                                            @if ($sched->time_in && $sched->time_out)
-                                                {{ date('h:i A', strtotime($sched->time_in)) }} -
-                                                {{ date('h:i A', strtotime($sched->time_out)) }}
-                                            @else
-                                                Time not available
-                                            @endif
-                                        </td>
-                                    <td>{{ $sched->day }}</td>
-                                   
-                                    <td>
-                                        <form action="" method="POST">
-                                            <a href="{{-- Add your edit URL here --}}"
-                                                class="btn btn-primary"><i class="fas fa-edit"></i></a> @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endif
-                        @empty
-                            {{-- <p>No schedule inputted</p> --}}
-                        @endforelse
-                    </tbody>
+                    @forelse ($sortedSchedules as $sched)
+        @if ($sched->day == $day)
+        
+        <!-- pwede ka sa tr mag in ani pero maconflict ang color -->
+        <!-- class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }} -->
+            <tr>
+                <td class = "table-primary">
+                    @if ($sched->time_in && $sched->time_out)
+                        {{ date('h:i A', strtotime($sched->time_in)) }} -
+                        {{ date('h:i A', strtotime($sched->time_out)) }}
+                    @else
+                        Time not available
+                    @endif
+                </td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBatch->batch_name }}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBlock->block_name }}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->room_code }}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->subject_name}}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->teacher_name }}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->day }}</td>
+                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->status }}</td>
+                <td  class="d-flex align-items-center" > {{-- Use flexbox for vertical alignment --}}
+                    
+                <form action="{{ route('edit.student.schedule', ['id' => $sched->id,'BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}" method="GET" class="mr-2">
+    @csrf
+    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+</form>
+
+                    <form action="{{ route('delete.student.schedule', ['id' => $sched->id]) }}" method="POST"
+                        onsubmit="return confirm('Are you sure you want to delete this schedule?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                    </form>
+                </td>
+            </tr>
+        @endif
+    @empty
+        {{-- <p>No schedule inputted</p> --}}
+    @endforelse
+</tbody>
+
                 </table>
             </div>
         @endforeach
@@ -141,6 +167,10 @@
 </div>
 
 <script>
+     document.addEventListener("DOMContentLoaded", function() {
+        // Show content for Monday by default
+        showContent(document.querySelector('.nav-link.active1'), 'monday');
+    });
         function showContent(element, day) {
             var allContent = document.getElementsByClassName('nav-content');
             for (var i = 0; i < allContent.length; i++) {

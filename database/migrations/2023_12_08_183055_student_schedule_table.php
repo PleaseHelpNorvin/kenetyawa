@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('subject_name');
             $table->string('teacher_name');
             $table->string('day');
+            $table->string('status');
             $table->time('time_in');
             $table->time('time_out');
             $table->timestamps();

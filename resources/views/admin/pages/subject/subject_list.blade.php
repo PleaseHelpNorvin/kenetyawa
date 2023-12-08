@@ -76,8 +76,8 @@
                                         <td class="">
                                 
                                         
-                                        <p>Subject: <b>{{ $subject->subjectname}}</b></p>
-                                          <p>Description: <small><b>{{ $subject->subjectcode}}</b></small></p>
+                                        <p>Subject Name: <b>{{ $subject->subjectname}}</b></p>
+                                          <p>Subject Code: <small><b>{{ $subject->subjectcode}}</b></small></p>
 
                                         </td>
                                      <td>

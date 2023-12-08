@@ -41,14 +41,13 @@
                     <div class="form-group">
                         <label for="day">Day:</label>
                         <select class="form-control" id="day" name="day" >
-                            <option value=""><--Select Day--></option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
                             <option value="Thursday">Thursday</option>
                             <option value="Friday">Friday</option>
                             <option value="Saturday">Saturday</option>
-                            <!-- Add more options if needed -->
+                         
                         </select>
                     </div>
                     <div class="form-group">

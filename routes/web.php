@@ -143,4 +143,11 @@ Route::group(['middleware' => 'auth'], function(){
     // addScheduleSave
     Route::post('/schedule/student/addScheduleSave/{BatchId}/{BlockId}',[ScheduleController::class,'addScheduleSave'])->name('addScheduleSave');
   
+    
+
+Route::delete('/delete-student-schedule/{id}', [ScheduleController::class, 'deletestudentschedule'])->name('delete.student.schedule');
+Route::get('/edit-student-schedule/{id}/{BatchId}/{BlockId}', [ScheduleController::class, 'editstudentschedule'])->name('edit.student.schedule');
+
+Route::put('/updatestudentschedule/{id}/{BatchId}/{BlockId}', [ScheduleController::class, 'updatestudentschedule'])->name('update.studentschedule');
+
 });

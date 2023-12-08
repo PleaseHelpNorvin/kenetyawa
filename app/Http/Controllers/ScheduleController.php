@@ -209,6 +209,7 @@ $selectStudentSchedule = [];
             'subject_name' => 'required|string|max:255',
             'teacher_name' => 'required|string|max:255',
             'day' => 'required',
+            'status' => 'required',
             'time_in' => 'required|date_format:H:i',
             'time_out' => 'required|date_format:H:i|after:time_in',
         ]);
@@ -218,7 +219,66 @@ $selectStudentSchedule = [];
         return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
     }
 
-   
+   public function deletestudentschedule($id){
+    $schedule = StudentSchedule::find($id);
 
+    if (!$schedule) {
+        return redirect()->back()->with('error', 'Schedule not found.');
+    }
+
+    $schedule->delete();
+
+    return redirect()->back()->with('success', 'Schedule deleted successfully!');
+   }
+
+   public function editstudentschedule($id,$BatchId, $BlockId)
+   
+   {
     
+    $findBatch = batch::find($BatchId);
+    $findBlock = block::find($BlockId);
+    $selectTeacher = Faculty_List::get();
+    $selectSubject = subject::get();
+    $selectRoom = room::get();
+       
+       $studentSchedule = StudentSchedule::find($id);
+
+      
+       if (!$studentSchedule) {
+           abort(404, 'Student Schedule not found');
+       }
+
+       return view('admin.pages.schedule.studentschedule.edit_studentschedule', compact('studentSchedule','selectTeacher','selectSubject','selectRoom', 'findBatch','findBlock'));
+   }
+
+
+
+   public function updatestudentschedule(Request $request, $id,$BatchId, $BlockId)
+    {
+        $findBatch = batch::find($BatchId);
+        $findBlock = block::find($BlockId);
+        $request->validate([
+          
+        ]);
+
+        $studentSchedule = StudentSchedule::find($id);
+
+        if (!$studentSchedule) {
+            abort(404, 'Student Schedule not found');
+        }
+
+  
+        $studentSchedule->update([
+            'teacher_name' => $request->input('teacher_name'),
+            'subject_name' => $request->input('subject_name'),
+            'room_code' => $request->input('room_code'),
+            'status' => $request->input('status'),
+            'day' => $request->input('day'),
+            'time_in' => $request->input('time_in'),
+            'time_out' => $request->input('time_out'),
+        ]);
+
+        // Redirect back or to a specific route after updating
+        return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
+    }
 }

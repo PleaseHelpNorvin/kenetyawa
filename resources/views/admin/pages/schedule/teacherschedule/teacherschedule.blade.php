@@ -83,7 +83,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-                        @foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
+                        @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
                             <li class="nav-item" style="margin-right: 80px;">
                                 <a class="nav-link" href="#{{ strtolower($day) }}"
                                     onclick="showContent(this, '{{ strtolower($day) }}')">{{ $day }}</a>
@@ -93,28 +93,31 @@
                 </div>
             </nav>
 
-            @foreach (['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
+            @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
                 <div id="{{ strtolower($day) }}-content" class="nav-content">
+                @php
+    $sortedSchedules = $teacherSchedules->where('day', $day)->sortBy(function ($sched) {
+        return $sched->time_from ? strtotime($sched->time_from) : PHP_INT_MAX;
+    });
+@endphp
                     <table class="table table-striped teacherschedule" data-block="" data-batch="">
                         <thead>
                             <tr>
+                            <th>Time</th>
                                 <th>Subject</th>
                                 <th>Room</th>
                                 <th>Day</th>
-                                <th>Time</th>
+                             
                                 <th>Year</th>
                                 <th>Semester</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($teacherSchedules as $sched)
+                        @forelse ($sortedSchedules as $sched)
                                 @if ($sched->day == $day)
                                     <tr>
-                                        <td>{{ $sched->subjectname }}</td>
-                                        <td>{{ $sched->roomcode }}</td>
-                                        <td>{{ $sched->day }}</td>
-                                        <td>
+                                    <td class="table-primary">
                                             @if ($sched->time_from && $sched->time_to)
                                                 {{ date('h:i A', strtotime($sched->time_from)) }} -
                                                 {{ date('h:i A', strtotime($sched->time_to)) }}
@@ -122,6 +125,10 @@
                                                 Time not available
                                             @endif
                                         </td>
+                                        <td>{{ $sched->subjectname }}</td>
+                                        <td>{{ $sched->roomcode }}</td>
+                                        <td>{{ $sched->day }}</td>
+                                       
                                         <td>{{ $sched->year }}</td>
                                         <td>{{ $sched->semester }}</td>
                                         <td>
@@ -145,6 +152,10 @@
     </div>
 
     <script>
+         document.addEventListener("DOMContentLoaded", function() {
+        // Show content for Monday by default
+        showContent(document.querySelector('.nav-link.active1'), 'monday');
+    });
         function showContent(element, day) {
             var allContent = document.getElementsByClassName('nav-content');
             for (var i = 0; i < allContent.length; i++) {

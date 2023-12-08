@@ -26,10 +26,10 @@ class DashboardController extends Controller
         //dashboard to student url
         $batch = batch::first(); 
         $batchId = $batch ? $batch->id : null;
-        $studentViewUrl = route('studentview', ['batchId' => $batchId, 'block' => 'null']);
+        // $studentViewUrl = route('studentview', ['batchId' => $batchId, 'block' => 'null']);
         
 
-        return view('admin.pages.dashboard.dashboard', compact('teacherCount','studentCount','subjectCount','roomCount','reportCount','studentViewUrl'));
+        return view('admin.pages.dashboard.dashboard');
     }
     
     // public function schedule(){

@@ -16,6 +16,7 @@ class StudentSchedule extends Model
         'subject_name',
         'teacher_name',
         'day',
+        'status',
         'time_in',
         'time_out',
     ];

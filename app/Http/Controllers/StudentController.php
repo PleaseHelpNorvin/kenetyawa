@@ -25,21 +25,22 @@ class StudentController extends Controller
 
 public function StudentListView($batch_id, $block, $status = null){
 
-    $batches = Batch::all();
-    $blocks = Block::all();
+    $batches = batch::all();
+    $blocks = block::all();
    
     $students = [];
     $selectedBatch = null;
     $selectedBlock = null;
 
     if ($batch_id != 'null') {
-        $selectedBlock = Block::find($block);
-        $selectedBatch = Batch::find($batch_id);
-        $blocks = Block::where('batch_id', $batch_id)->get();
+        $selectedBlock = block::find($block);
+        $selectedBatch = batch::find($batch_id);
+        $blocks = block::where('batch_id', $batch_id)->get();
     }
 
     if ($batch_id != 'null' && $block != 'null') {
-        $selectedBlock = Block::find($block);
+        $selectedBatch = batch::find($batch_id);
+        $selectedBlock = block::find($block);
         $studentsQuery = students::where('batch', $batch_id)
             ->where('block', $block);
 
