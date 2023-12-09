@@ -9,6 +9,9 @@ use App\Models\subject;
 use App\Models\batch;
 use App\Models\block;
 use App\Models\StudentSchedule;
+use App\Models\students;
+
+
 
 use App\Utils\Paginate;
 use Illuminate\Support\Arr;
@@ -173,33 +176,38 @@ class ScheduleController extends Controller
     public function showStudentSchedule($BatchId, $BlockId) {
         $getBtach = batch::get();
         $getBlock = [];
-$selectStudentSchedule = [];
+        $selectStudentSchedule = [];
+        $student = [];
+
         if ($BatchId != 'null') {
             $getBlock = block::where('batch_id', $BatchId)->get();
         }
 
         if ($BatchId != 'null' && $BlockId != 'null') {
             $selectStudentSchedule = StudentSchedule::get();
+            $student = students::get();
+            // dd($student);
         }
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
     
     
-        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch','findBlock','selectStudentSchedule'));
+        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch','findBlock','selectStudentSchedule','student'));
     }
     
 
     public function addStudentSchedule($BatchId, $BlockId){
+        $selectStudent = students::get();
         $selectTeacher = Faculty_List::get();
         $selectSubject = subject::get();
         $selectRoom = room::get();
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
-        return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch','findBlock','selectTeacher','selectSubject','selectRoom'));
+        return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch','findBlock','selectTeacher','selectSubject','selectRoom','selectStudent'));
     }
 
     public function addScheduleSave(Request $request ,$BatchId, $BlockId)
-    {
+    {   
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
         $request->validate([
@@ -207,6 +215,7 @@ $selectStudentSchedule = [];
             'batch_id' => 'required',
             'room_code' => 'required|string|max:255',
             'subject_name' => 'required|string|max:255',
+            'student_name' => 'required|string|max:255',
             'teacher_name' => 'required|string|max:255',
             'day' => 'required',
             'status' => 'required',
@@ -238,6 +247,7 @@ $selectStudentSchedule = [];
     $findBatch = batch::find($BatchId);
     $findBlock = block::find($BlockId);
     $selectTeacher = Faculty_List::get();
+    $selectStudent= students::get();
     $selectSubject = subject::get();
     $selectRoom = room::get();
        
@@ -248,7 +258,7 @@ $selectStudentSchedule = [];
            abort(404, 'Student Schedule not found');
        }
 
-       return view('admin.pages.schedule.studentschedule.edit_studentschedule', compact('studentSchedule','selectTeacher','selectSubject','selectRoom', 'findBatch','findBlock'));
+       return view('admin.pages.schedule.studentschedule.edit_studentschedule', compact('studentSchedule','selectTeacher','selectSubject','selectRoom', 'findBatch','findBlock','selectStudent'));
    }
 
 
@@ -281,4 +291,35 @@ $selectStudentSchedule = [];
         // Redirect back or to a specific route after updating
         return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
     }
+    // public function studentsearch(Request $request)
+    // {
+    //     $searchQuery = $request->input('search_student');
+        
+    //     // Find BatchId and BlockId from the request or any source as per your application logic
+    //     $batchId = 1; // Replace with the actual BatchId
+    //     $blockId = 1; // Replace with the actual BlockId
+
+    //     // Perform the search operation
+    //     $data = StudentSchedule::where('student_name', 'LIKE', '%' . $searchQuery . '%')->paginate(0);
+
+    //     // Redirect to the studentscheduleview route with BatchId and BlockId
+    //     return redirect()->route('studentscheduleview', ['BatchId' => $batchId, 'BlockId' => $blockId])
+    //         ->with('data', $data); // Pass the search results using with() to the studentscheduleview route
+    // }
+    // public function studentsearch(Request $request, $BatchId, $BlockId)
+    // {
+    //     $searchQuery = $request->input('search_student');
+    
+    //     // Perform the search operation
+    //     $data = StudentSchedule::where('student_name', 'LIKE', '%' . $searchQuery . '%')
+    //     ->where('batch_id', $BatchId) // Filter by BatchId
+    //     ->where('block_id', $BlockId) // Filter by BlockId
+    //     ->paginate(10);
+
+    //     // Redirect to the studentscheduleview route with updated BatchId and BlockId
+    //     return redirect()->route('studentscheduleview', [
+    //         'BatchId' => $BatchId, // Use the current BatchId
+    //         'BlockId' => $BlockId, // Use the current BlockId
+    //     ])->with('data', $data); // Pass the search results using with() to the studentscheduleview route
+    // }
 }

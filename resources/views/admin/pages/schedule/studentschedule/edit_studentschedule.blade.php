@@ -33,6 +33,21 @@
                 <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
+        
+        <div class="form-group">
+            <label for="teacher_name">Student Name:</label>
+            <select class="form-control" id="teacher_name" name="student_name" disabled>
+                {{-- <option value="" selected disabled>qSelect Student</option> --}}
+                @foreach ($selectStudent as $students)
+                    <option value="{{ $students->name }}" {{ old('student_name') == $students->name ? 'selected' : '' }}>
+                        {{ $students->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('student_name')
+                <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
 
         <div class="form-group">
             <label for="subject_name">Subject Name:</label>

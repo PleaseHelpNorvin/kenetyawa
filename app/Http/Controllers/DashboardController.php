@@ -15,21 +15,21 @@ use App\Models\batch;
 
 class DashboardController extends Controller
 {
-    //
+    
     public function showDashboard(){
-        $teacherCount = Faculty_List::get()->count();
-        $studentCount = students::get()->count();
-        $subjectCount = subject::get()->count();
-        $roomCount = room::get()->count();
-        $reportCount = report::get()->count();
+        $teacherCount = Faculty_List::count();
+        $studentCount = students::count();
+        $subjectCount = subject::count();
+        $roomCount = room::count();
+        $reportCount = report::count();
 
         //dashboard to student url
         $batch = batch::first(); 
         $batchId = $batch ? $batch->id : null;
-        // $studentViewUrl = route('studentview', ['batchId' => $batchId, 'block' => 'null']);
+        $studentViewUrl = $batchId ? route('studentview', ['batchId' => $batchId, 'block' => 'null']) : null;
         
 
-        return view('admin.pages.dashboard.dashboard');
+        return view('admin.pages.dashboard.dashboard', compact('teacherCount','studentCount','subjectCount','roomCount','reportCount','studentViewUrl'));
     }
     
     // public function schedule(){

@@ -31,7 +31,7 @@
             </ul>
         </li> --}}
         <li @if(Request::is('scheduleviewnav*')) class="active" @endif><a href="{{ route('scheduleviewnav')}}"><i class="fa fa-calendar"></i> Schedule</a></li>
-        <li @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}"><i class="fas fa-chalkboard-teacher"></i> Faculty List</a></li>
+        <li @if(Request::is('teacherlist*')) class="active" @endif><a href="{{ route('teacherlistview') }}"><i class="fas fa-chalkboard-teacher"></i> Teacher List</a></li>
         <li @if(Request::is('students*')) class="active" @endif><a href="{{ route('studentview',['batchId' => 'null', 'block' => 'null']) }}" ><i class="fa fa-graduation-cap"></i> Student List</a></li>
         <li @if(Request::is('subjectlist*')) class="active" @endif><a href="{{ route('subjectlistview') }}" ><i class="fa fa-book"></i> Subject List</a></li>
         <li @if(Request::is('roomlist*')) class="active" @endif><a href="{{ route('showroom') }}" ><i class="fa fa-solid fa-hotel"></i> Room List</a></li>

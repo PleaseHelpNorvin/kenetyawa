@@ -14,6 +14,7 @@ class StudentSchedule extends Model
         'batch_id',
         'room_code',
         'subject_name',
+        'student_name',
         'teacher_name',
         'day',
         'status',
