@@ -173,7 +173,8 @@ class ScheduleController extends Controller
     }
 
     //STUDENT SCHEDULE FUNCTIONS
-    public function showStudentSchedule($BatchId, $BlockId) {
+    public function showStudentSchedule($BatchId, $BlockId){
+
         $getBtach = batch::get();
         $getBlock = [];
         $selectStudentSchedule = [];
@@ -184,26 +185,34 @@ class ScheduleController extends Controller
         }
 
         if ($BatchId != 'null' && $BlockId != 'null') {
-            $selectStudentSchedule = StudentSchedule::get();
-            $student = students::get();
-            // dd($student);
+            
+            $selectStudentSchedule = StudentSchedule::where('batch_id', $BatchId)
+                ->where('block_id', $BlockId)
+                ->get();
+
+            $student = students::where('batch', $BatchId)
+                ->where('block', $BlockId)
+                ->get();
         }
+
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
-    
-    
-        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch','findBlock','selectStudentSchedule','student'));
+
+        return view('admin.pages.schedule.studentschedule.studentschedule', compact('getBtach', 'getBlock', 'findBatch', 'findBlock', 'selectStudentSchedule', 'student'));
     }
-    
 
     public function addStudentSchedule($BatchId, $BlockId){
-        $selectStudent = students::get();
+        $selectStudent = students::where('batch', $BatchId)
+            ->where('block', $BlockId) 
+            ->get();
+    
         $selectTeacher = Faculty_List::get();
         $selectSubject = subject::get();
         $selectRoom = room::get();
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
-        return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch','findBlock','selectTeacher','selectSubject','selectRoom','selectStudent'));
+    
+        return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch', 'findBlock', 'selectTeacher', 'selectSubject', 'selectRoom', 'selectStudent'));
     }
 
     public function addScheduleSave(Request $request ,$BatchId, $BlockId)
