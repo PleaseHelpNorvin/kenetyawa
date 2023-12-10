@@ -149,7 +149,9 @@ Route::delete('/delete-student-schedule/{id}', [ScheduleController::class, 'dele
 Route::get('/edit-student-schedule/{id}/{BatchId}/{BlockId}', [ScheduleController::class, 'editstudentschedule'])->name('edit.student.schedule');
 
 Route::put('/updatestudentschedule/{id}/{BatchId}/{BlockId}', [ScheduleController::class, 'updatestudentschedule'])->name('update.studentschedule');
-// Route::get('/searchschedulestudent/{BatchId}/{BlockId}', [ScheduleController::class, 'studentsearch'])
+// Route::get('/searchschedulestudent/{BatchId}/{BlockId}/{data}', [ScheduleController::class, 'studentsearch'])
 //     ->name('studentschedule.search');
+// Route::get('/searchschedulestudent/{BatchId}/{BlockId}', [ScheduleController::class, 'studentsearch'])->name('studentschedule.search');
+
 
 });
