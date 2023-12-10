@@ -44,14 +44,21 @@ Route::group(['middleware' => 'guest'], function(){
     //Auths routes
     Route::post('/register',[AuthController::class,'registerAuth'])->name('register');
     Route::post('/login',[AuthController::class,'loginAuth'])->name('login');
-    Route::post('/teacheridpost',[AuthController::class,'teacherIdPost'])->name('teacheridpost');
+    // Route::post('/teacheridpost/{teacherId}', [AuthController::class, 'teacherIdPost'])->name('teacheridpost');
+    Route::post('/teacheridpost', [AuthController::class, 'teacherIdPost'])->name('teacheridpost');
+
     Route::post('/studentidpost', [AuthController::class,'studentIdPost'])->name('studentidpost');
 });
 
-    Route::get('/teacherinfo', [AuthController::class, 'teacherInfo'])->name('teacherinfo');
+// Route::middleware('checkUserRole')->group(function () {
+    Route::get('/teacherinfo/{teacher_Id}', [AuthController::class, 'teacherInfo'])->name('teacherinfo');
+    // Route::get('/logged-in-teacher-schedule', [AuthController::class, 'showLoggedInTeacherSchedule'])->name('logged-in-teacher-schedule');
+
     Route::get('/studentinfo', [AuthController::class, 'studentInfo'])->name('studentinfo');
+//  });
 
 Route::group(['middleware' => 'auth'], function(){
+
     Route::get('/logout', [AuthController::class,'logout'])->name('logout'); 
     // dashboard routes
     Route::get('/dashboard',[DashboardController::class,'showDashboard'])->name('dashboardview');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\students;
 use App\Models\Faculty_List;
+use App\Models\teacherschedules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,22 +20,36 @@ class AuthController extends Controller
     public function teacherID(){
         return view('admin.auth.teacherID');
     }
-    public function teacherInfo(){
-        return view('admin.auth.teacherInfo');
-    }
     public function teacherIdPost(Request $request){
-        // dd($request->teacherID);
-
-       $teacherid = Faculty_List::where('id_no',$request->teacherID)->first();
-    //    dd($teacherid);
-
-       if($teacherid){
-        return redirect()->route('teacherinfo') -> with('success', 'Login Sucessful');
-       }
-       return back()-> with('message','bogoa sa giatay kalimot sa password');
+        $teacherId = $request->teacherID; // Get teacherID from the form input
+    
+        $teacher = Faculty_List::where('id_no', $teacherId)->first();
+    
+        if($teacher){
+            return redirect()->route('teacherinfo', ['teacher_Id' => $teacher->id_no])->with('success', 'Login Successful');
+        }
+    
+        return back()->with('message', 'Invalid Teacher ID');
     }
 
+
+    public function teacherInfo(Request $request, $teacherId) {
+        $teacher = Faculty_List::where('id_no', $teacherId)->first();
+
+        if (!$teacher) {
+            return back()->with('message', 'Teacher not found');
+        }
+        // $teacher
+        $loggedInTeacherSchedules = teacherschedules::where('faculty_list_id', $teacher->id_no)->get();
+    
+        // return view('admin.auth.teacherInfo', ['loggedInTeacher' => $teacher,'loggedInTeacherSchedules' => $loggedInTeacherSchedules,]);
+        return view('admin.auth.teacherInfo', compact('teacher', 'loggedInTeacherSchedules'));
+
+    }
+  
    
+
+//    =============================================================================
 
     public function studentID(){
         return view('admin.auth.studentID');
