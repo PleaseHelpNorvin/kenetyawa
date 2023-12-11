@@ -23,4 +23,5 @@ class BlockController extends Controller
 
         return redirect()->back()->with('success', 'Block added successfully');
     }
+    //done sent ni elai
 }

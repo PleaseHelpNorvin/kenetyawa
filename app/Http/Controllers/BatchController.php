@@ -23,4 +23,5 @@ class BatchController extends Controller
 
         return redirect()->back()->with('success', 'Batch added successfully');
     }
+    //done sent ni elai
 }

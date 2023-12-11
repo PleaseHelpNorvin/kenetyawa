@@ -17,8 +17,6 @@ class ProfileController extends Controller
         $request->validate([
             'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        // dd($request->user()->image);
         
         if (auth()->check() && auth()->user()->image) {
             File::delete(public_path('images/' . auth()->user()->image));

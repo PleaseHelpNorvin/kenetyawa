@@ -2,8 +2,17 @@
 @section('title', 'Log in Teacher Schedule')
 
 @section('content')
-    @if ($loggedInTeacherSchedules)
+    @if ($teacherLoginInfo)
         <h1>{{ $teacher->name }}'s Schedule</h1>
+        <div class="form-group">
+            <br>
+            <form class="form-inline my-2 my-lg-0" method="get"
+                >
+                <input class="form-control mr-sm-3" value="{{Request('search_teacherSchedDay')}}" name="search_teacherSchedDay" type="search"
+                    placeholder="Enter Day" >
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
@@ -18,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($loggedInTeacherSchedules as $schedule)
+                    @foreach ($teacherLoginInfo as $schedule)
                     <tr>
                         <td>{{ $schedule->day }}</td>
                         <td>{{ date('h:i A', strtotime($schedule->time_from)) }}</td>

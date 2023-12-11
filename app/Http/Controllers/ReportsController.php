@@ -54,12 +54,13 @@ class ReportsController extends Controller
 
         return view('admin.pages.reports.edit_reports', compact('data'));
     }
-    public function editReport(Request $request, $id)
-    {
+
+    public function editReport(Request $request, $id){
+
         $validatedData = $request->validate([
             'Report_Title' => 'required|max:255',
             'Description' => 'required',
-            'Image' => 'image|mimes:jpeg,png,jpg,gif|max:4080', // Allow image upload if needed
+            'Image' => 'image|mimes:jpeg,png,jpg,gif|max:4080', 
         ]);
 
         $report = Report::findOrFail($id);

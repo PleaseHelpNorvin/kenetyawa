@@ -35,6 +35,7 @@ class TeacherListController extends Controller
         ]);
         return redirect('teacherlist')->with('message',"Teacher Updated Successfully");
     }
+
     public function addteacher(){
         return view('admin.pages.teacher.add_teacher');
     }
@@ -62,8 +63,6 @@ class TeacherListController extends Controller
             'faculty_email' => 'required|email'
         ]);
 
-        // $data = $request->all();
-
         Faculty_List::create([
             'id_no' => $validatedData['id_no'],
             'name' => $validatedData['faculty_name'],
@@ -72,11 +71,6 @@ class TeacherListController extends Controller
         ]);
         return redirect()->route('teacherlistview')->with('success', 'Faculty member added successfully');
     }
-
-    // public function showFaculty(){
-    //     $data = Faculty_List::all();
-    //     return compact($data);
-    // }
    
     public function deleteFaculty(Request $request, string $id){
         

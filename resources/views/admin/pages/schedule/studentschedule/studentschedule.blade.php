@@ -79,16 +79,18 @@
         @if ($selectStudentSchedule)
             <a href="{{ route('addStudentSchedule', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}"
                 class="btn btn-primary">Add Student Schedule</a>
-                {{-- <a href="{{ route('addStudentSchedule', ['BatchId' => $BlockId, 'BlockId' => $BlockId]) }}" class="btn btn-primary">Add Student Schedule</a> --}}
+            {{-- <a href="{{ route('addStudentSchedule', ['BatchId' => $BlockId, 'BlockId' => $BlockId]) }}" class="btn btn-primary">Add Student Schedule</a> --}}
 
-<!-- Search bar -->
-<div class="form-group">
-    <br>
-    <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}">
-        <input class="form-control mr-sm-3" name="search_student" type="search" placeholder="Enter student name">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
+            <!-- Search bar -->
+            <div class="form-group">
+                <br>
+                <form class="form-inline my-2 my-lg-0" method="get"
+                    action="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}">
+                    <input class="form-control mr-sm-3" name="search_studentSchedule" type="search"
+                        placeholder="Enter student name">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
 
             <!-- Day navigation bar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -141,80 +143,80 @@
                                     <!-- class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }} -->
             <tr>
                 <td class = "table-primary">
-                                @if ($sched->time_in && $sched->time_out)
+                                    @if ($sched->time_in && $sched->time_out)
     {{ date('h:i A', strtotime($sched->time_in)) }} -
-                                    {{ date('h:i A', strtotime($sched->time_out)) }}
+                                        {{ date('h:i A', strtotime($sched->time_out)) }}
 @else
     Time not available
     @endif
-                            </td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->student_name }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBatch->batch_name }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBlock->block_name }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->room_code }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->subject_name }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->teacher_name }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->day }}</td>
-                            <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->status }}</td>
-                            <td  class="d-flex align-items-center" > {{-- Use flexbox for vertical alignment --}}
-                                
-                            <form action="{{ route('edit.student.schedule', ['id' => $sched->id, 'BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}" method="GET" class="mr-2">
-                @csrf
-                <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
-            </form>
+                                </td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->student_name }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBatch->batch_name }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBlock->block_name }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->room_code }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->subject_name }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->teacher_name }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->day }}</td>
+                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->status }}</td>
+                                <td  class="d-flex align-items-center" > {{-- Use flexbox for vertical alignment --}}
+                                    
+                                <form action="{{ route('edit.student.schedule', ['id' => $sched->id, 'BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}" method="GET" class="mr-2">
+                    @csrf
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                </form>
 
-                                <form action="{{ route('delete.student.schedule', ['id' => $sched->id]) }}" method="POST"
-                                    onsubmit="return confirm('Are you sure you want to delete this schedule?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
+                                    <form action="{{ route('delete.student.schedule', ['id' => $sched->id]) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this schedule?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
     @endif
     @empty
-                    {{-- <p>No schedule inputted</p> --}}
+                        {{-- <p>No schedule inputted</p> --}}
     @endforelse
-            </tbody>
+                </tbody>
 
-                            </table>
-                        </div>
+                                </table>
+                            </div>
     @endforeach
-                @endif
-            </div>
+                    @endif
+                </div>
 
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    // Show content for Monday by default
-                    showContent(document.querySelector('.nav-link.active1'), 'monday');
-                });
-
-                function showContent(element, day) {
-                    var allContent = document.getElementsByClassName('nav-content');
-                    for (var i = 0; i < allContent.length; i++) {
-                        allContent[i].style.display = 'none';
-                    }
-                    var selectedContent = document.getElementById(day + '-content');
-                    if (selectedContent) {
-                        selectedContent.style.display = 'block';
-                    }
-
-                    // Reset background color for all navigation items and set text color to white
-                    var allItems = document.querySelectorAll('.nav-item');
-                    allItems.forEach(function(item) {
-                        item.style.backgroundColor = '';
-                        item.style.color = '#ffffff'; // Set text color to white
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Show content for Monday by default
+                        showContent(document.querySelector('.nav-link.active1'), 'monday');
                     });
 
-                    // Set background color for the clicked navigation item
-                    element.parentNode.style.backgroundColor = '#007bff';
-                    element.parentNode.classList.add('rounded');
-                }
-            </script>
+                    function showContent(element, day) {
+                        var allContent = document.getElementsByClassName('nav-content');
+                        for (var i = 0; i < allContent.length; i++) {
+                            allContent[i].style.display = 'none';
+                        }
+                        var selectedContent = document.getElementById(day + '-content');
+                        if (selectedContent) {
+                            selectedContent.style.display = 'block';
+                        }
 
-                <style>
-                    .navbar-nav .nav-item .nav-link.active {
-                        color: blue;
+                        // Reset background color for all navigation items and set text color to white
+                        var allItems = document.querySelectorAll('.nav-item');
+                        allItems.forEach(function(item) {
+                            item.style.backgroundColor = '';
+                            item.style.color = '#ffffff'; // Set text color to white
+                        });
+
+                        // Set background color for the clicked navigation item
+                        element.parentNode.style.backgroundColor = '#007bff';
+                        element.parentNode.classList.add('rounded');
                     }
-                </style>
+                </script>
+
+                    <style>
+                        .navbar-nav .nav-item .nav-link.active {
+                            color: blue;
+                        }
+                    </style>
 @endsection

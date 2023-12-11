@@ -12,9 +12,11 @@ class RoomController extends Controller
         $data = room::latest()->get();
         return view('admin.pages.room.room', compact('data'));
     }
+
     public function addRoompage(){
         return view('admin.pages.room.add_room');
     }
+
     public function addRoomPost(Request $request){
 
         $validatedData = $request->validate([
@@ -26,6 +28,7 @@ class RoomController extends Controller
         ]);
         return redirect()->route('showroom')->with('success','subject added successfully');
     }
+
     public function deleteRoom(Request $request, string $id){
         
         $data = room::where('id', $id)->delete();
@@ -33,11 +36,13 @@ class RoomController extends Controller
         return redirect()->route('showroom')->with('message','Successfully deleted');
         
     }
+
     public function editRoompage($id){
         $room = room::find($id);
 
         return view('admin.pages.room.edit_room', compact('room'));
     }
+    
     public function updateRoom(Request $request, $id){
         $room = room::find($id);
         $validatedData = $request->validate([

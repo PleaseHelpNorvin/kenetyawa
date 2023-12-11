@@ -47,7 +47,6 @@ class SubjectListController extends Controller
             'subjectname' => $validatedData['Subject_name'],
         ]);
         return redirect()->route('subjectlistview')->with('message',"Teacher Updated Successfully");
-        // return view('admin.pages.subject.subject_list')->with('message','Sucessfully Edited');
     }
 
     public function deleteSubject(Request $request, string $id){

@@ -28,27 +28,22 @@ class ScheduleController extends Controller
         $activeTeacher = $selectTeacher->firstWhere('id_no', $teacherID);
 
 
-        $teacherSchedules = []; // Initialize $teacherSchedules variable
+        $teacherSchedules = []; 
         $selectRoom = room::find($teacherID);
         $selectSubject = subject::find($teacherID);
       
 
         if ($teacherID === 'null') {
-            // Handle when $teacherId is null
+        
             $selectTeacher = Faculty_List::latest()->get();
+
         } else {
-            
-            // Handle when $teacherId is not null
             
             $teacherSchedules = teacherschedules::leftJoin('rooms', 'teacherschedule.room_id', '=', 'rooms.roomcode')
             ->leftJoin('subject', 'teacherschedule.subject_id', '=', 'subject.subjectcode')
             ->where('teacherschedule.faculty_list_id', $teacherID)
             ->select('teacherschedule.*', 'rooms.roomcode', 'subject.subjectcode','subject.subjectname')
-            ->get();
-          
-            // $selectRoom = room::find($teacherID);
-            // $selectSubject = subject::find($teacherID);
-                            
+            ->get();                
         }
         return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher', 'teacherSchedules', 'selectRoom', 'selectSubject', 'activeTeacher'));    
     }
@@ -56,30 +51,22 @@ class ScheduleController extends Controller
     public function showTeacherSchedule(){
      
         $selectTeacher = Faculty_List::latest()->get();
-        // $activeTeacher = $selectTeacher->firstWhere('id_no', $teacherID);
-
 
         return view('admin.pages.schedule.teacherschedule.teacherschedule', compact('selectTeacher'));
     
     }
 
     public function addTeacherSchedulepage(Request $request){
-        // $selectSchedule = teacherschedules::find('teacherID');
-        // $selectTeacherId = Faculty_List::find($teacherID);
+
         $selectTeacher = Faculty_List::get();
         $selectSubject = subject::get();
         $selectRoom = room::get();
-        // dd($selectTeacher);
+       
         return view('admin.pages.schedule.teacherschedule.add_teacherschedule', compact('selectTeacher','selectSubject','selectRoom') );
     }
 
-    public function addTeacherSchedulePost(Request $request ){
-        // $selectTeacher = Faculty_List::find($teacherID);
-        // dd(addTeacherSchedulePost);
-        // $selectSubject = Subject::find($request->subject); // Assuming subject ID comes from the form
-        // $selectRoom = Room::find($request->room);
+    public function addTeacherSchedulePost(Request $request){
 
-        // Validate the incoming request data
         $validatedData = $request->validate([
             'teacher_name' => 'required',
             'subject' => 'required',
@@ -93,8 +80,8 @@ class ScheduleController extends Controller
 
         $teacherID = $validatedData['teacher_name'];
 
-        // Create a new TeacherSchedule instance and populate it with validated data
         $newSchedule = teacherschedules::create([
+
             'faculty_list_id' => $validatedData['teacher_name'],
             'subject_id' => $validatedData['subject'],
             'room_id' => $validatedData['room'],
@@ -103,16 +90,14 @@ class ScheduleController extends Controller
             'semester' => $validatedData['semester'],
             'time_from' => $validatedData['time_from'],
             'time_to' => $validatedData['time_to'],
-            // Add other fields as needed
+       
         ]);
-        // return redirect()->route('studentview', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id])->with('success', 'Student added successfully');
-        // Redirect to a view or route after successfully adding the schedule
-        // ['teacherID' => 'null']
-        // ['teacherID' => $selectTeacher->id]
+       
         return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
     }
 
     public function viewEditTeacherSched(Request $request,$id ){
+
         $teacherSchedule = teacherschedules::findOrFail($id);
         
         $teachers = Faculty_List::get();
@@ -128,55 +113,51 @@ class ScheduleController extends Controller
 
     public function updateTeacherSchedPost(Request $request, $id){
 
-   $teacherSchedule = teacherschedules::findOrFail($id);
+        $teacherSchedule = teacherschedules::findOrFail($id);
 
-   $validatedData = $request->validate([
-       'teacher_name' => 'required',
-       'subject' => 'required',
-       'room' => 'required',
-       'day' => 'required',
-       'year' => 'required',
-       'semester' => 'required',
-       'time_from' => 'required',
-       'time_to' => 'required'
-   ]);
+        $validatedData = $request->validate([
+            'teacher_name' => 'required',
+            'subject' => 'required',
+            'room' => 'required',
+            'day' => 'required',
+            'year' => 'required',
+            'semester' => 'required',
+            'time_from' => 'required',
+            'time_to' => 'required'
+        ]);
 
-   // Update the teacher schedule using the update method
-   $teacherSchedule->update([
-       'faculty_list_id' => $request->input('teacher_name'),
-       'subject_id' => $request->input('subject'),
-       'room_id' => $request->input('room'),
-       'day' => $request->input('day'),
-       'year' => $request->input('year'),
-       'semester' => $request->input('semester'),
-       'time_from' => $request->input('time_from'),
-       'time_to' => $request->input('time_to')
-       // Add more fields to update as needed
-   ]);
+        $teacherSchedule->update([
+            'faculty_list_id' => $request->input('teacher_name'),
+            'subject_id' => $request->input('subject'),
+            'room_id' => $request->input('room'),
+            'day' => $request->input('day'),
+            'year' => $request->input('year'),
+            'semester' => $request->input('semester'),
+            'time_from' => $request->input('time_from'),
+            'time_to' => $request->input('time_to')
+        ]);
 
-   // Redirect back to the view with a success message or any other action
-   return redirect()->route('teacherscheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
+    return redirect()->route('teacherscheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
        ->with('success', 'Teacher Schedule updated successfully');
-}
+    }
 
 
     public function deleteTeacherSchedule(Request $request, string $id){
-        // Retrieve the schedule details to get the associated teacher ID
+
         $schedule = teacherschedules::findOrFail($id);
-        $teacherID = $schedule->faculty_list_id; // Assuming teacherID is stored in faculty_list_id
-    
-        // Delete the schedule
+        $teacherID = $schedule->faculty_list_id; 
+
         $schedule->delete();
         
-        // Redirect to scheduleview route with the teacherID parameter
         return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('message', 'Successfully deleted');
     }
 
-    public function showStudentSchedule(Request $request, $BatchId, $BlockId) {
+    public function showStudentSchedule(Request $request, $BatchId, $BlockId){
+
         $getBatch = batch::get();
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
-        $searchQuery = $request->input('search_student');
+        $searchQuery = $request->input('search_studentSchedule');
     
         $getBlock = [];
         $selectStudentSchedule = [];
@@ -236,47 +217,45 @@ class ScheduleController extends Controller
         return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
     }
 
-   public function deletestudentschedule($id){
-    $schedule = StudentSchedule::find($id);
+    public function deletestudentschedule($id){
+        
+        $schedule = StudentSchedule::find($id);
 
-    if (!$schedule) {
-        return redirect()->back()->with('error', 'Schedule not found.');
+        if (!$schedule) {
+            return redirect()->back()->with('error', 'Schedule not found.');
+        }
+
+        $schedule->delete();
+
+        return redirect()->back()->with('success', 'Schedule deleted successfully!');
     }
 
-    $schedule->delete();
+    public function editstudentschedule($id,$BatchId, $BlockId){
+        
+        $findBatch = batch::find($BatchId);
+        $findBlock = block::find($BlockId);
+        $selectTeacher = Faculty_List::get();
+        $selectStudent= students::get();
+        $selectSubject = subject::get();
+        $selectRoom = room::get();
+        
+        $studentSchedule = StudentSchedule::find($id);
 
-    return redirect()->back()->with('success', 'Schedule deleted successfully!');
-   }
+        
+        if (!$studentSchedule) {
+            abort(404, 'Student Schedule not found');
+        }
 
-   public function editstudentschedule($id,$BatchId, $BlockId)
-   
-   {
-    
-    $findBatch = batch::find($BatchId);
-    $findBlock = block::find($BlockId);
-    $selectTeacher = Faculty_List::get();
-    $selectStudent= students::get();
-    $selectSubject = subject::get();
-    $selectRoom = room::get();
-       
-       $studentSchedule = StudentSchedule::find($id);
-
-      
-       if (!$studentSchedule) {
-           abort(404, 'Student Schedule not found');
-       }
-
-       return view('admin.pages.schedule.studentschedule.edit_studentschedule', compact('studentSchedule','selectTeacher','selectSubject','selectRoom', 'findBatch','findBlock','selectStudent'));
-   }
+        return view('admin.pages.schedule.studentschedule.edit_studentschedule', compact('studentSchedule','selectTeacher','selectSubject','selectRoom', 'findBatch','findBlock','selectStudent'));
+    }
 
 
 
-   public function updatestudentschedule(Request $request, $id,$BatchId, $BlockId)
-    {
+    public function updatestudentschedule(Request $request, $id,$BatchId, $BlockId){
+
         $findBatch = batch::find($BatchId);
         $findBlock = block::find($BlockId);
         $request->validate([
-          
         ]);
 
         $studentSchedule = StudentSchedule::find($id);
@@ -285,7 +264,7 @@ class ScheduleController extends Controller
             abort(404, 'Student Schedule not found');
         }
 
-  
+
         $studentSchedule->update([
             'teacher_name' => $request->input('teacher_name'),
             'subject_name' => $request->input('subject_name'),
@@ -296,7 +275,6 @@ class ScheduleController extends Controller
             'time_out' => $request->input('time_out'),
         ]);
 
-        // Redirect back or to a specific route after updating
         return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
     }
 

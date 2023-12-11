@@ -25,10 +25,6 @@ return new class extends Migration
             $table->string('subject_id');
 
 
-            // $table->foreignId('faculty_list_id');
-            // $table->foreignId('room_id');
-            // $table->foreignId('subject_id');
-
             $table->timestamps();
         });
 

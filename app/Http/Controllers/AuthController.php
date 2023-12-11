@@ -21,7 +21,7 @@ class AuthController extends Controller
         return view('admin.auth.teacherID');
     }
     public function teacherIdPost(Request $request){
-        $teacherId = $request->teacherID; // Get teacherID from the form input
+        $teacherId = $request->teacherID; 
     
         $teacher = Faculty_List::where('id_no', $teacherId)->first();
     
@@ -32,18 +32,22 @@ class AuthController extends Controller
         return back()->with('message', 'Invalid Teacher ID');
     }
 
-
     public function teacherInfo(Request $request, $teacherId) {
         $teacher = Faculty_List::where('id_no', $teacherId)->first();
+        $searchQuery = $request->input('search_teacherSchedDay');
 
         if (!$teacher) {
             return back()->with('message', 'Teacher not found');
         }
-        // $teacher
-        $loggedInTeacherSchedules = teacherschedules::where('faculty_list_id', $teacher->id_no)->get();
-    
-        // return view('admin.auth.teacherInfo', ['loggedInTeacher' => $teacher,'loggedInTeacherSchedules' => $loggedInTeacherSchedules,]);
-        return view('admin.auth.teacherInfo', compact('teacher', 'loggedInTeacherSchedules'));
+
+        $loggedInTeacherSchedules = teacherschedules::where('faculty_list_id', $teacher->id_no);
+        
+        if ($searchQuery) {
+            $loggedInTeacherSchedules->where('day', 'LIKE', '%' . $searchQuery . '%');
+        }
+        $teacherLoginInfo=$loggedInTeacherSchedules->get();
+        
+        return view('admin.auth.teacherInfo', compact('teacher', 'teacherLoginInfo','searchQuery'));
 
     }
   
@@ -83,7 +87,7 @@ class AuthController extends Controller
 
         
         $data = $request->all();
-        //$check = $this->create($data);
+
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -91,15 +95,6 @@ class AuthController extends Controller
         ]);
 
         return redirect()->intended('/dashboard')->with('message','Great! You have Successfully loggedin');
-
-        // $user = new User();
-        // $user -> name = $request->name;
-        // $user -> email = $request->email;
-        // $user -> password = Hash::make($request->password);
-
-        // $user -> save();
-        
-        // return back()-> with('success', 'Register Successfully');
         
     }
     
@@ -112,15 +107,15 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-       $credentials = [ 
+    $credentials = [ 
             'email' => $request->email,
             'password' => $request->password,
-       ];
+    ];
 
-       if(Auth::attempt($credentials)){
+    if(Auth::attempt($credentials)){
         return redirect('/dashboard') -> with('success', 'Login Sucessful');
-       }
-       return back()-> with('error','bogoa sa giatay kalimot sa password');
+    }
+    return back()-> with('error','bogoa sa giatay kalimot sa password');
     }
 
     public function logout(){

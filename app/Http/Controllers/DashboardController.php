@@ -17,13 +17,13 @@ class DashboardController extends Controller
 {
     
     public function showDashboard(){
+        
         $teacherCount = Faculty_List::count();
         $studentCount = students::count();
         $subjectCount = subject::count();
         $roomCount = room::count();
         $reportCount = report::count();
 
-        //dashboard to student url
         $batch = batch::first(); 
         $batchId = $batch ? $batch->id : null;
         $studentViewUrl = $batchId ? route('studentview', ['batchId' => $batchId, 'block' => 'null']) : null;
@@ -32,7 +32,5 @@ class DashboardController extends Controller
         return view('admin.pages.dashboard.dashboard', compact('teacherCount','studentCount','subjectCount','roomCount','reportCount','studentViewUrl'));
     }
     
-    // public function schedule(){
-    //     return view('admin.pages.schedule');
-    // }
+   
 }

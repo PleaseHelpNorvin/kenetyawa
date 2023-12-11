@@ -234,7 +234,7 @@ iframe {
   justify-content: center;
   align-items: center;
   height: 80vh;
-  padding: 50px 130px 33px 95px;
+  padding: 50px 120px 50px 120px;
 }
 .center-content {
   text-align: center;
@@ -243,7 +243,7 @@ iframe {
 /*------------------------------------------------------------------
 [  ]*/
 .login100-pic {
-  width: 316px;
+  width: 245px;
 }
 
 .login100-pic img {
