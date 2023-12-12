@@ -124,7 +124,7 @@
                         <thead>
                             <tr>
                                 <th>Time</th>
-                                <th>Student</th>
+                               
                                 <th>Block</th>
                                 <th>Batch</th>
                                 <th>Room</th>
@@ -150,7 +150,7 @@
     Time not available
     @endif
                                 </td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->student_name }}</td>
+                               
                                 <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBatch->batch_name }}</td>
                                 <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBlock->block_name }}</td>
                                 <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->room_code }}</td>

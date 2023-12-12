@@ -54,7 +54,7 @@ Route::group(['middleware' => 'guest'], function(){
     Route::get('/teacherinfo/{teacher_Id}', [AuthController::class, 'teacherInfo'])->name('teacherinfo');
     // Route::get('/logged-in-teacher-schedule', [AuthController::class, 'showLoggedInTeacherSchedule'])->name('logged-in-teacher-schedule');
 
-    Route::get('/studentinfo', [AuthController::class, 'studentInfo'])->name('studentinfo');
+    Route::get('/studentinfo/{id}', [AuthController::class, 'studentInfo'])->name('studentinfo');
 //  });
 
 Route::group(['middleware' => 'auth'], function(){

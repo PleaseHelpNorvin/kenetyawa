@@ -204,7 +204,6 @@ class ScheduleController extends Controller
             'batch_id' => 'required',
             'room_code' => 'required|string|max:255',
             'subject_name' => 'required|string|max:255',
-            'student_name' => 'required|string|max:255',
             'teacher_name' => 'required|string|max:255',
             'day' => 'required',
             'status' => 'required',

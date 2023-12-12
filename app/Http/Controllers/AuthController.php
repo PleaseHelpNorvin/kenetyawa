@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\students;
 use App\Models\Faculty_List;
+use App\Models\StudentSchedule;
 use App\Models\teacherschedules;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 
 class AuthController extends Controller
 {
@@ -56,19 +58,40 @@ class AuthController extends Controller
 //    =============================================================================
 
     public function studentID(){
+        
         return view('admin.auth.studentID');
     }
-    public function studentInfo(){
-        return view('admin.auth.studentInfo');
+    public function studentInfo($id){
+        // Retrieve the student information based on the provided ID
+        $student = students::find($id);
+    
+        // Check if the student exists
+        if($student){
+            // Retrieve the batch and block information from the student
+            $block = $student->block;
+            $batch = $student->batch;
+    
+            // Retrieve the schedule for the specific block and batch
+            $getSchedulestudents = StudentSchedule::where('block_id', $block)
+                ->where('batch_id', $batch)
+                ->get();
+    
+            // Pass the student data and schedule to the 'studentInfo' view
+            return view('admin.auth.studentInfo', ['student' => $student, 'schedule' => $getSchedulestudents]);
+        }
+    
+        // If no student found, redirect back with an error message
+        return back()->with('message', 'Student not found.');
     }
+    
     public function studentIdPost(Request $request){
         // dd('studentIdPost');
         $studentid = students::where('student_no', $request->studentID)->first();
         // dd($studentid);
         if($studentid){
-            return redirect()->route('studentinfo') -> with('success', 'Login Sucessful');
+            return redirect()->route('studentinfo', ['id' => $studentid])->with('success', 'Login Successful');
         }
-        return back()-> with('message','bogoa sa giatay kalimot sa password');
+        return back()-> with('message','Wrong Student no.');
     }
 
 

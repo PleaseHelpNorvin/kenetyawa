@@ -20,7 +20,9 @@
                 <div class="login100-pic js-tilt" data-tilt>
                 <img src="{{ asset('images/aclc.png') }}" alt="Your Image">
                 </div>
+            
                 @yield('content')
+              
             </div>
         </div>
     </div>
@@ -29,6 +31,7 @@
 
 <style>
 
+  
 
 
 /*//////////////////////////////////////////////////////////////////

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('batch_id');
             $table->string('room_code');
             $table->string('subject_name');
-            $table->string('student_name');
             $table->string('teacher_name');
             $table->string('day');
             $table->string('status');
