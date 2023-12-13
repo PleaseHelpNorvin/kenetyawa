@@ -84,7 +84,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
-                            <li class="nav-item" style="margin-right: 80px;">
+                            <li class="nav-item" style="margin-right: 130px;">
                                 <a class="nav-link" href="#{{ strtolower($day) }}"
                                     onclick="showContent(this, '{{ strtolower($day) }}')">{{ $day }}</a>
                             </li>

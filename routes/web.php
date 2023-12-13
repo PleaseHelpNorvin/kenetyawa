@@ -40,6 +40,7 @@ Route::group(['middleware' => 'guest'], function(){
     Route::get('/studentID', [AuthController::class,'studentID'])->name('studentID');
     Route::get('/teacherID', [AuthController::class,'teacherID'])->name('teacherID');
     Route::get('/register',[AuthController::class,'registerView'])->name('register');
+   
     Route::get('/login',[AuthController::class,'loginView'])->name('login');
     //Auths routes
     Route::post('/register',[AuthController::class,'registerAuth'])->name('register');
@@ -55,6 +56,7 @@ Route::group(['middleware' => 'guest'], function(){
     // Route::get('/logged-in-teacher-schedule', [AuthController::class, 'showLoggedInTeacherSchedule'])->name('logged-in-teacher-schedule');
 
     Route::get('/studentinfo/{id}', [AuthController::class, 'studentInfo'])->name('studentinfo');
+    Route::get('/studentinfo/schedule/event/{id}', [CalendarEventController::class, 'showSchedulenav1'])->name('scheduleviewnav1');
 //  });
 
 Route::group(['middleware' => 'auth'], function(){
@@ -145,11 +147,17 @@ Route::group(['middleware' => 'auth'], function(){
 
     //student schedule routes
 
+    // Example of defining the route in routes/web.php
+
     Route::get('/schedule/student/{BatchId}/{BlockId}',[ScheduleController::class,'showStudentSchedule'])->name('studentscheduleview');
     Route::get('/schedule/student/addSchedule/{BatchId}/{BlockId}',[ScheduleController::class,'addStudentSchedule'])->name('addStudentSchedule');
+
+    Route::get('/schedule/student/addSchedulereplacement/{BatchId}/{BlockId}/{studentID}',[ScheduleController::class,'addSchedulereplacement'])->name('addSchedulereplacement');
     // addScheduleSave
     Route::post('/schedule/student/addScheduleSave/{BatchId}/{BlockId}',[ScheduleController::class,'addScheduleSave'])->name('addScheduleSave');
   
+Route::post('/schedule/student/addScheduleSaveReplacement/{BatchId}/{BlockId}/{studentID}', [ScheduleController::class,'addScheduleSaveReplacement'])->name('addScheduleSaveReplacement');
+
     
 
 Route::delete('/delete-student-schedule/{id}', [ScheduleController::class, 'deletestudentschedule'])->name('delete.student.schedule');
@@ -159,6 +167,16 @@ Route::put('/updatestudentschedule/{id}/{BatchId}/{BlockId}', [ScheduleControlle
 // Route::get('/searchschedulestudent/{BatchId}/{BlockId}/{data}', [ScheduleController::class, 'studentsearch'])
 //     ->name('studentschedule.search');
 // Route::get('/searchschedulestudent/{BatchId}/{BlockId}', [ScheduleController::class, 'studentsearch'])->name('studentschedule.search');
+Route::get('/schedule/student/replacement/{BatchId}/{BlockId}/{studentID}',[ScheduleController::class,'studentscheduleviewreplacement'])->name('studentreplacement');
+
+
+
+Route::delete('/deleteSchedule/{scheduleId}', [ScheduleController::class,'deleteSchedulereplacement'])->name('deleteSchedulereplacement');
+
+Route::get('/editScheduleReplacement/{BatchId}/{BlockId}/{scheduleId}', [ScheduleController::class,'editScheduleReplacement'])->name('editScheduleReplacement');
+Route::patch('/updateScheduleReplacement/{BatchId}/{BlockId}/{scheduleId}/{scheduleName}', [ScheduleController::class,'updateScheduleReplacement'])->name('updateScheduleReplacement');
+
+
 
 
 });

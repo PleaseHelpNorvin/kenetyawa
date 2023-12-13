@@ -77,19 +77,26 @@
         @endif
 
         @if ($selectStudentSchedule)
-            <a href="{{ route('addStudentSchedule', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}"
-                class="btn btn-primary">Add Student Schedule</a>
-            {{-- <a href="{{ route('addStudentSchedule', ['BatchId' => $BlockId, 'BlockId' => $BlockId]) }}" class="btn btn-primary">Add Student Schedule</a> --}}
+        
+    
 
             <!-- Search bar -->
             <div class="form-group">
                 <br>
+
+
                 <form class="form-inline my-2 my-lg-0" method="get"
                     action="{{ route('studentscheduleview', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}">
                     <input class="form-control mr-sm-3" name="search_studentSchedule" type="search"
                         placeholder="Enter student name">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
+                <br>
+                <a href="{{ route('studentreplacement', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id , 'studentID' => 'null'] ) }}"
+                class="btn btn-success">Schedule for Replacement</a>
+                
+            <a href="{{ route('addStudentSchedule', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}"
+                class="btn btn-primary">Add Student Schedule</a>
             </div>
 
             <!-- Day navigation bar -->
@@ -120,6 +127,7 @@
                             return $schedule->time_in ? strtotime($schedule->time_in) : PHP_INT_MAX;
                         });
                     @endphp
+               
                     <table class="table table-bordered teacherschedule" data-block="" data-batch="">
                         <thead>
                             <tr>
@@ -139,8 +147,8 @@
                         <tbody>
                             @forelse ($sortedSchedules as $sched)
                                 @if ($sched->day == $day)
-                                    <!-- pwede ka sa tr mag in ani pero maconflict ang color -->
-                                    <!-- class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }} -->
+
+                                @if($sched->status == 'Regular')
             <tr>
                 <td class = "table-primary">
                                     @if ($sched->time_in && $sched->time_out)
@@ -151,13 +159,13 @@
     @endif
                                 </td>
                                
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBatch->batch_name }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $findBlock->block_name }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->room_code }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->subject_name }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->teacher_name }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->day }}</td>
-                                <td class="{{ $sched->status == 'Replacement' ? 'table-warning' : ($sched->status == 'Regular' ? 'table-success' : '') }}">{{ $sched->status }}</td>
+                                <td class="table-success">{{ $findBatch->batch_name }}</td>
+                                <td class="table-success">{{ $findBlock->block_name }}</td>
+                                <td class="table-success">{{ $sched->room_code }}</td>
+                                <td class="table-success">{{ $sched->subject_name }}</td>
+                                <td class="table-success">{{ $sched->teacher_name }}</td>
+                                <td class="table-success">{{ $sched->day }}</td>
+                                <td class="table-success">{{ $sched->status }}</td>
                                 <td  class="d-flex align-items-center" > {{-- Use flexbox for vertical alignment --}}
                                     
                                 <form action="{{ route('edit.student.schedule', ['id' => $sched->id, 'BatchId' => $findBatch->id, 'BlockId' => $block->id]) }}" method="GET" class="mr-2">
@@ -173,6 +181,7 @@
                                     </form>
                                 </td>
                             </tr>
+                            @endif
     @endif
     @empty
                         {{-- <p>No schedule inputted</p> --}}

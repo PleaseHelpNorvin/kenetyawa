@@ -9,11 +9,12 @@
         </div>
     @endif
     <h1>{{ $findBatch->batch_name }} - {{ $findBlock->block_name }}</h1>
-    <form action="{{ route('addScheduleSave', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}"
+    <form action="{{ route('addScheduleSaveReplacement', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id , 'studentID' => $studentID]) }}"
         method="post">
         @csrf
         <input type="hidden" name="batch_id" value="{{ $findBatch->id }}">
         <input type="hidden" name="block_id" value="{{ $findBlock->id }}">
+        <input type="hidden" name="student_name" value="{{ $studentID}}">
 
         <div class="form-group">
             <label for="teacher_name">Teacher Name:</label>
@@ -62,8 +63,7 @@
         <div class="form-group">
             <label for="day">Status:</label>
             <select class="form-control" id="status" name="status">
-                <option value="Regular">Regular</option>
-           
+                <option value="Replacement">Replacement</option>
             </select>
             @error('status')
                 <div class="text-danger">{{ $message }}</div>

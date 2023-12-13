@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\CalendarEventMaster;
+use App\Models\students;
 
 class CalendarEventController extends Controller{
     //
@@ -35,5 +36,19 @@ class CalendarEventController extends Controller{
         $event = CalendarEventMaster::find($request->id);
         return $event->delete();
     }
-}
 
+    public function showSchedulenavstudent(){
+        $events = CalendarEventMaster::all();
+    return view('admin.pages.schedule.calendar', compact('events'));
+    }
+
+    
+    public function showSchedulenav1($id){
+        
+        $students= students::find($id);
+        $events = CalendarEventMaster::all();
+    return view('admin.auth.event', compact('events','students'));
+    }
+
+
+}
