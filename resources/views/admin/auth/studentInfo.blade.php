@@ -4,6 +4,9 @@
 
 <div class="container">
 
+
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
         <div class="container-fluid">
             <ul class="navbar-nav mx-auto">
@@ -19,7 +22,7 @@
 
 
     
-    
+ @if($student->status == 'Regular')
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -56,6 +59,46 @@
             </ul>
         </div>
     </nav>
+    @else
+
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                @foreach(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
+                    <li class="nav-item" style="margin-right: 0px;">
+                        <a class="nav-link text-center font-weight-bold text-black" href="" disable>{{ $day }} </a>
+                        
+                        <!-- Add a card for each day based on the schedule -->
+                        @foreach ($schedule as $schedules)
+                            @if($schedules->day == $day)
+                                <div class="card bg-warning text-white mb-3" style="max-width: 18rem;">
+                                    <div class="card-body">
+                                        <p class="card-text small-text text-black">
+                                            {{ \Carbon\Carbon::parse($schedules->time_in)->format('h:i A') }}
+                                            -
+                                            {{ \Carbon\Carbon::parse($schedules->time_out)->format('h:i A') }}
+                                        </p>
+                                        <h5 class="card-title small-text text-black">
+                                            Subject: {{ $schedules->subject_name }}
+                                        </h5>
+                                        <p class="card-text small-text text-black">
+                                            Teacher: {{ $schedules->teacher_name }}
+                                        </p>
+                                        <p class="card-text small-text text-black">
+                                            Room: {{ $schedules->room_code }}
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </nav>
+    
+    @endif
     <style>
         .small-text, .text-black {
             font-size: 13px; /* Adjust the font size as needed */

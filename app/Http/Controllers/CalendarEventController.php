@@ -45,9 +45,9 @@ class CalendarEventController extends Controller{
     
     public function showSchedulenav1($id){
         
-        $students= students::find($id);
+        $student= students::find($id);
         $events = CalendarEventMaster::all();
-    return view('admin.auth.event', compact('events','students'));
+    return view('admin.auth.event', compact('events','student'));
     }
 
 

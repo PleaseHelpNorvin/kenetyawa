@@ -7,6 +7,7 @@ use App\Models\students;
 use App\Models\Faculty_List;
 use App\Models\StudentSchedule;
 use App\Models\teacherschedules;
+use App\Models\studentschedulesreplacement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,23 +67,33 @@ class AuthController extends Controller
         $student = students::find($id);
     
         // Check if the student exists
-        if($student){
-            // Retrieve the batch and block information from the student
-            $block = $student->block;
-            $batch = $student->batch;
-    
-            // Retrieve the schedule for the specific block and batch
-            $getSchedulestudents = StudentSchedule::where('block_id', $block)
-                ->where('batch_id', $batch)
-                ->get();
-    
-            // Pass the student data and schedule to the 'studentInfo' view
-            return view('admin.auth.studentInfo', ['student' => $student, 'schedule' => $getSchedulestudents]);
+        if (!$student) {
+            // If no student found, redirect back with an error message
+            return back()->with('message', 'Student not found.');
         }
     
-        // If no student found, redirect back with an error message
-        return back()->with('message', 'Student not found.');
+        // Retrieve the batch and block information from the student
+        $block = $student->block;
+        $batch = $student->batch;
+       $studentName =  $student->name;
+        // Retrieve the schedule for the specific block and batch
+        $getScheduleStudents = null;
+    
+        if ($student->status == 'Regular') {
+            $getScheduleStudents = StudentSchedule::where('block_id', $block)
+                ->where('batch_id', $batch)
+                ->get();
+        } elseif ($student->status == 'Replacement') {
+            $getScheduleStudents = studentschedulesreplacement::where('block_id', $block)
+                ->where('batch_id', $batch)
+                ->where('student_name', $studentName)
+                ->get();
+        }
+    
+        // Pass the student data and schedule to the 'studentInfo' view
+        return view('admin.auth.studentInfo', ['student' => $student, 'schedule' => $getScheduleStudents]);
     }
+    
     
     public function studentIdPost(Request $request){
         // dd('studentIdPost');

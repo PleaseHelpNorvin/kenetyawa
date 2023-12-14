@@ -62,8 +62,7 @@
     <div class="profile-dropdown">
         <button id="profile-button" class="profile-button">
         
-    
-Name
+        {{ $student->name}}
 
         </button>
         <div id="profile-content" class="profile-content">

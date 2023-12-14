@@ -31,10 +31,10 @@
     <div class="container-fluid">
         <ul class="navbar-nav mx-auto">
         <li class="nav-item">
-                <a href="{{route('studentinfo',['id' =>  $students->id] )}}" class="nav-link font-weight-bold">Schedule</a>
+                <a href="{{route('studentinfo',['id' =>  $student->id] )}}" class="nav-link font-weight-bold">Schedule</a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('scheduleviewnav1',['id' =>  $students->id] )}}" class="nav-link font-weight-bold">Event </a>
+                <a href="{{ route('scheduleviewnav1',['id' =>  $student->id] )}}" class="nav-link font-weight-bold">Event </a>
             </li>
            
         </ul>
