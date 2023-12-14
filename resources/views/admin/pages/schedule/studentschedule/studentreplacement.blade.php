@@ -69,7 +69,7 @@
 
 
         <a href="{{ route('addSchedulereplacement', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id,'studentID' => $studentID]) }}"
-   class="btn btn-primary">Add Student Schedule</a>
+   class="btn btn-primary">Add Schedule For {{$studentID}}</a>
 
 @endif
 
