@@ -37,7 +37,7 @@
                     <a href="{{ route('scheduleviewnav2',['teacher_Id' => $teacher->id]) }}" class="nav-link font-weight-bold text-black">Event </a>
                 </li>
                 <li class="nav-item  ml-5">
-                    <a href="" class="nav-link font-weight-bold text-black">Report </a>
+                    <a href="{{ route('reports.viewteacher',['teacher_Id' => $teacher->id]) }}" class="nav-link font-weight-bold text-black">Report </a>
                 </li>
             </ul>
         </div>

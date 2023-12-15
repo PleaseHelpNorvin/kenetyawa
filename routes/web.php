@@ -55,6 +55,7 @@ Route::group(['middleware' => 'guest'], function(){
 });
 
 // Route::middleware('checkUserRole')->group(function () {
+    Route::get('/reports/view/teacher/{teacher_Id}', [ReportsController::class, 'viewReportTeacher'])->name('reports.viewteacher');
     Route::get('/teacherinfo/{teacher_Id}', [AuthController::class, 'teacherInfo'])->name('teacherinfo');
     Route::get('/teacher/schedule/event/{teacher_Id}', [CalendarEventController::class, 'showSchedulenav2'])->name('scheduleviewnav2');
     // Route::get('/logged-in-teacher-schedule', [AuthController::class, 'showLoggedInTeacherSchedule'])->name('logged-in-teacher-schedule');

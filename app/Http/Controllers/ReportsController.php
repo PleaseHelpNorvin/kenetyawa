@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\report;
 use App\Models\students;
+use App\Models\Faculty_List;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -110,7 +111,13 @@ public function updateStatus($id)
         $reports = report::where('name', $studentName)->get();
         return view('admin.auth.StudentReport',compact('student','reports'));
     }
-
+    
+    public function viewReportTeacher($id){
+        $teacher = Faculty_List::find($id);
+        $teachertName = $teacher->name;
+        $reports = report::where('name', $teachertName)->get();
+        return view('admin.auth.TeacherReport',compact('teacher','reports'));
+    }
     public function addReportStudent(Request $request){
 
         

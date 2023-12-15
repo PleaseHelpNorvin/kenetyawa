@@ -24,19 +24,18 @@ class AuthController extends Controller
         return view('admin.auth.teacherID');
     }
     public function teacherIdPost(Request $request){
-        $teacherId = $request->teacherID; 
-    
-        $teacher = Faculty_List::where('id_no', $teacherId)->first();
-    
+     
+        $teacher = Faculty_List::where('id_no', $request->teacherID)->first();
+      
         if($teacher){
-            return redirect()->route('teacherinfo', ['teacher_Id' => $teacher->id_no])->with('success', 'Login Successful');
+            return redirect()->route('teacherinfo', ['teacher_Id' => $teacher->id])->with('success', 'Login Successful');
         }
     
         return back()->with('message', 'Invalid Teacher ID');
     }
 
-    public function teacherInfo(Request $request, $teacherId) {
-        $teacher = Faculty_List::where('id_no', $teacherId)->first();
+    public function teacherInfo(Request $request, $teacher_Id) {
+        $teacher = Faculty_List::find($teacher_Id);
         $searchQuery = $request->input('search_teacherSchedDay');
 
         if (!$teacher) {
