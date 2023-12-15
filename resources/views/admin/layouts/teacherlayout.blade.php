@@ -62,11 +62,11 @@
     <div class="profile-dropdown">
         <button id="profile-button" class="profile-button">
         
-        {{ $student->name}}
+        {{ $teacher->name }}
 
         </button>
         <div id="profile-content" class="profile-content">
-         
+          
             <a href="{{ route('showLandingPage')}}">Log Out</a>
         </div>
     </div>

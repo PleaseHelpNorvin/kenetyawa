@@ -8,9 +8,9 @@
             <h2>Edit Teacher Schedule</h2>
         </div>
         <div class="card-body">
-            <form action="{{ route('updateteacherschedpost', ['id'=>$teacherSchedule->id])}}" method="POST">
+            <form action="{{ route('updateteacherschedpost', ['id' => $teacherSchedule->id]) }}" method="POST">
                 @csrf
-                {{-- @method('PATCH') --}}
+                @method('PATCH')
 
                 <div class="form-group">
                     <label for="teacher_name">Teacher Name:</label>

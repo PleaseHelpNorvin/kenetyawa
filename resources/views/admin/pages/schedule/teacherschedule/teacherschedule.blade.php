@@ -93,31 +93,37 @@
                 </div>
             </nav>
 
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
                 <div id="{{ strtolower($day) }}-content" class="nav-content">
-                @php
-    $sortedSchedules = $teacherSchedules->where('day', $day)->sortBy(function ($sched) {
-        return $sched->time_from ? strtotime($sched->time_from) : PHP_INT_MAX;
-    });
-@endphp
+                    @php
+                        $sortedSchedules = $teacherSchedules->where('day', $day)->sortBy(function ($sched) {
+                            return $sched->time_from ? strtotime($sched->time_from) : PHP_INT_MAX;
+                        });
+                    @endphp
                     <table class="table table-striped teacherschedule" data-block="" data-batch="">
                         <thead>
                             <tr>
-                            <th>Time</th>
+                                <th>Time</th>
                                 <th>Subject</th>
                                 <th>Room</th>
                                 <th>Day</th>
-                             
+
                                 <th>Year</th>
                                 <th>Semester</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @forelse ($sortedSchedules as $sched)
+                            @forelse ($sortedSchedules as $sched)
                                 @if ($sched->day == $day)
                                     <tr>
-                                    <td class="table-primary">
+                                        <td class="table-primary">
                                             @if ($sched->time_from && $sched->time_to)
                                                 {{ date('h:i A', strtotime($sched->time_from)) }} -
                                                 {{ date('h:i A', strtotime($sched->time_to)) }}
@@ -128,7 +134,7 @@
                                         <td>{{ $sched->subjectname }}</td>
                                         <td>{{ $sched->roomcode }}</td>
                                         <td>{{ $sched->day }}</td>
-                                       
+
                                         <td>{{ $sched->year }}</td>
                                         <td>{{ $sched->semester }}</td>
                                         <td>
@@ -152,10 +158,11 @@
     </div>
 
     <script>
-         document.addEventListener("DOMContentLoaded", function() {
-        // Show content for Monday by default
-        showContent(document.querySelector('.nav-link.active1'), 'monday');
-    });
+        document.addEventListener("DOMContentLoaded", function() {
+            // Show content for Monday by default
+            showContent(document.querySelector('.nav-link.active1'), 'monday');
+        });
+
         function showContent(element, day) {
             var allContent = document.getElementsByClassName('nav-content');
             for (var i = 0; i < allContent.length; i++) {

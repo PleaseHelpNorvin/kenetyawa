@@ -42,6 +42,7 @@ Route::group(['middleware' => 'guest'], function(){
     Route::get('/register',[AuthController::class,'registerView'])->name('register');
     Route::get('/reports/view/{id}', [ReportsController::class, 'viewReportStudent'])->name('reports.view');
     Route::post('/reports/add', [ReportsController::class, 'addReportStudent'])->name('reports.add');
+    Route::delete('/deleteReportStudent/{id}', [ReportsController::class, 'deleteReportStudent'])->name('deletereport.student');
    
     Route::get('/login',[AuthController::class,'loginView'])->name('login');
     //Auths routes
@@ -55,10 +56,12 @@ Route::group(['middleware' => 'guest'], function(){
 
 // Route::middleware('checkUserRole')->group(function () {
     Route::get('/teacherinfo/{teacher_Id}', [AuthController::class, 'teacherInfo'])->name('teacherinfo');
+    Route::get('/teacher/schedule/event/{teacher_Id}', [CalendarEventController::class, 'showSchedulenav2'])->name('scheduleviewnav2');
     // Route::get('/logged-in-teacher-schedule', [AuthController::class, 'showLoggedInTeacherSchedule'])->name('logged-in-teacher-schedule');
 
     Route::get('/studentinfo/{id}', [AuthController::class, 'studentInfo'])->name('studentinfo');
     Route::get('/studentinfo/schedule/event/{id}', [CalendarEventController::class, 'showSchedulenav1'])->name('scheduleviewnav1');
+  
 //  });
 
 Route::group(['middleware' => 'auth'], function(){
@@ -113,10 +116,13 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/deletesubject{id}', [SubjectListController::class, 'deleteSubject'])->name('deletesubject');
     Route::get('/searchstudent',[SubjectListController::class, 'search'])->name('subject.search');
 
-    //reports routes
+    //reports 
+    Route::put('/updatestatus/{id}', [ReportsController::class, 'updateStatus'])->name('updatestatus');
     Route::get('/reports',[ReportsController::class,'showReports'])->name('reportsview');
     Route::get('addreportspage', [ReportsController::class, 'addReportpage'])->name('addreportpage');
+
     Route::post('addreportpost', [ReportsController::class, 'addReport'])->name('addreport');
+   
     Route::delete('/deletereport/{id}', [ReportsController::class, 'deleteReport'])->name('deletereport');
     Route::get('/editreports/{id}', [ReportsController::class, 'editReportpage'])->name('editreportpage');
     Route::put('/update/{id}', [ReportsController::class, 'editReport'])->name('editreport');
@@ -136,17 +142,17 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('/deleteevent', [CalendarEventController::class, 'deleteEvent'])->name('deleteevent');
 
 
-    // Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
+ // Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('scheduleview');
     //teacher schedule routes
-    Route::get('/schedule/teacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
+    // Route::get('/scheduleteacher',[ScheduleController::class,'showTeacherSchedule'])->name('teacherscheduleview');
     Route::get('/schedule/teacheradd/', [ScheduleController::class, 'addTeacherSchedulepage'])->name('addteacherschedule');
     Route::post('/schedule/teacherpost/',[ScheduleController::class, 'addTeacherSchedulePost'])->name('addteacherschedulepost');
     Route::delete('/delete/teacher/{id}', [ScheduleController::class, 'deleteTeacherSchedule'])->name('deletesteacherchedule');
-    Route::get('/schedule/teacher/{teacherID}',[ScheduleController::class,'showSchedule'])->name('teacherscheduleview');
+    Route::get('/schedule/teachers/{teacherID}',[ScheduleController::class,'showSchedule'])->name('teacherscheduleview');
     Route::get('/edit-teacher-schedule/{id}/{teacherID}', [ScheduleController::class, 'viewEditTeacherSched'])->name('vieweditteachersched');
-    Route::post('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
+    Route::patch('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
     // Route::post('/store-selected-teacher', 'ScheduleController@storeSelectedTeacher')->name('storeSelectedTeacher');
-
+    // Route::patch('/update-teacher-schedule/{id}', [ScheduleController::class, 'updateTeacherSchedPost'])->name('updateteacherschedpost');
     //student schedule routes
 
     // Example of defining the route in routes/web.php

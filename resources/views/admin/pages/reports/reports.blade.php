@@ -3,29 +3,27 @@
 
 @section('content')
     <div class="container1 mt-4">
-        <h2>Reports with Bootstrap Cards</h2>
+        <h2>Reports</h2>
         <div class="row">
             @forelse ($data as $report)
                 <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="{{ asset('images/reports/' . $report->image) }}" class="card-img-top" alt="{{ $report->reporttitle }}">
+                    <div class="card {{ $report->status == 'Active' ? 'bg-danger' : 'bg-success' }}" style="width: 18rem;">
+                        <img src="{{ asset('images/reports/' . $report->image) }}" class="card-img-top" alt="{{ $report->reporttitle }}" style="max-width: 100%; height: auto;">
                         <div class="card-body">
-                            <p>ID= {{$report->id}}</p>
-                            <h5 class="card-title">{{ $report->reporttitle }}</h5>
-                            <p class="card-text">{{ $report->description }}</p>
-
-                            <form action="{{ route('deletereport', $report->id) }}" method="POST">
+                            <p class="text-dark">ID= {{$report->id}}</p>
+                            <h5 class="card-title text-dark">{{ $report->reporttitle }}</h5>
+                            <p class="card-text text-dark">{{ $report->description }}</p>
+                            <form action="{{ route('updatestatus', $report->id) }}" method="POST">
                                 @csrf
-                                @method('DELETE')
-                                <a href="{{ route('editreportpage', ['id' => $report->id]) }}" class="btn btn-primary mr-2"><i class="fas fa-edit"></i></a>
-                                <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                                @method('put')
+                                <button type="submit" class="btn btn-danger">Mark as Done</button>
                             </form>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="col-md-12">
-                    <p>No reports available.</p>
+                    <p class="text-dark">No reports available.</p>
                 </div>
             @endforelse
         </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Models\CalendarEventMaster;
 use App\Models\students;
+use App\Models\Faculty_List;
 
 class CalendarEventController extends Controller{
     //
@@ -49,6 +50,13 @@ class CalendarEventController extends Controller{
         $events = CalendarEventMaster::all();
     return view('admin.auth.event', compact('events','student'));
     }
+
+    public function showSchedulenav2($id){
+        $events = CalendarEventMaster::all();
+        $teacher = Faculty_List::find($id);
+    return view('admin.auth.eventTeacher', compact('events','teacher'));
+    }
+
 
 
 }

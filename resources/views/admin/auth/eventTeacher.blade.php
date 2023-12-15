@@ -1,4 +1,4 @@
-@extends('admin.layouts.studentlayout')
+@extends('admin.layouts.teacherlayout')
 @section('title', 'Schedule')
 
 @section('content')
@@ -31,18 +31,17 @@
         <div class="container-fluid">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item  ml-5">
-                    <a href="{{ route('studentinfo',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Schedule</a>
+                    <a href="{{ route('teacherinfo',['teacher_Id' => $teacher->id]) }}" class="nav-link font-weight-bold text-black">Schedule</a>
                 </li>
                 <li class="nav-item  ml-5">
-                    <a href="{{ route('scheduleviewnav1',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Event </a>
+                    <a href="{{ route('scheduleviewnav2',['teacher_Id' => $teacher->id]) }}" class="nav-link font-weight-bold text-black">Event </a>
                 </li>
                 <li class="nav-item  ml-5">
-                    <a href="{{ route('reports.view',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Report </a>
+                    <a href="" class="nav-link font-weight-bold text-black">Report </a>
                 </li>
             </ul>
         </div>
     </nav>
-        
         <div id='calendar'></div>
 
     </div>

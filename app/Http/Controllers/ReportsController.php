@@ -49,6 +49,26 @@ class ReportsController extends Controller
         return redirect()->route('reportsview')->with('message','Successfully deleted');
         
     }
+    public function deleteReportStudent(Request $request, string $id){
+
+        $data = report::where('id', $id)->delete();
+
+        return back();
+        
+    }
+    // In your controller
+public function updateStatus($id)
+{
+    $report = report::find($id);
+
+    if ($report) {
+        $report->update(['status' => 'Inactive']);
+        // Additional logic or redirection if needed
+    }
+
+    return back(); // Redirect back to the previous page
+}
+
 
     public function editReportpage($id){
         $data = report::find($id);
@@ -83,30 +103,40 @@ class ReportsController extends Controller
         return redirect()->route('reportsview')->with('success', 'Report updated successfully');
     }
 
-    public function addReportStudent(Request $request)
-    {
-        // Validate the incoming request data
-        $request->validate([
-            'reporttitle' => 'required|string',
-            'description' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
 
-        // Handle file upload
-        $imagePath = $request->file('image')->store('report_images', 'public');
-
-        // Create a new report entry
-        $report = report::create([
-            'reporttitle' => $request->input('reporttitle'),
-            'description' => $request->input('description'),
-            'image' => $imagePath,
-        ]);
-
-        // Optionally, you can redirect to a page after creating the report
-        return back()->with('success', 'Report added successfully.');
-    }
     public function viewReportStudent($id){
         $student = students::find($id);
-        return view('admin.auth.StudentReport',compact('student'));
+        $studentName = $student->name;
+        $reports = report::where('name', $studentName)->get();
+        return view('admin.auth.StudentReport',compact('student','reports'));
+    }
+
+    public function addReportStudent(Request $request){
+
+        
+        $validatedData = $request->validate([
+            'reporttitle' => 'required|max:255',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:4080',
+            'status' => 'required',  
+            'name' => 'required',  
+        ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imagePath = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/reports/'), $imagePath);
+
+            report::create([
+                'reporttitle' => $validatedData['reporttitle'],
+                'description' => $validatedData['description'],
+                'image' => $imagePath,
+                'status' => $validatedData['status'], 
+                'name' => $validatedData['name'],      
+            ]);
+
+            return back()->with('success', 'Report added successfully.');
+        }
+
+        return redirect()->back()->withInput()->withErrors(['Image' => 'Please select a valid image file.']);
     }
 }

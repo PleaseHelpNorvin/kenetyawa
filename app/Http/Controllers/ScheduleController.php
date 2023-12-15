@@ -67,36 +67,49 @@ class ScheduleController extends Controller
         return view('admin.pages.schedule.teacherschedule.add_teacherschedule', compact('selectTeacher','selectSubject','selectRoom') );
     }
 
+
     public function addTeacherSchedulePost(Request $request){
 
-        $validatedData = $request->validate([
-            'teacher_name' => 'required',
-            'subject' => 'required',
-            'room' => 'required',
-            'day' => 'required',
-            'year' => 'required',
-            'semester' => 'required',
-            'time_from' => 'required',
-            'time_to' => 'required',
-        ]);
+    $validatedData = $request->validate([
+        'teacher_name' => 'required',
+        'subject' => 'required',
+        'room' => 'required',
+        'day' => 'required',
+        'year' => 'required',
+        'semester' => 'required',
+        'time_from' => 'required',
+        'time_to' => 'required',
+    ]);
 
-        $teacherID = $validatedData['teacher_name'];
+    // Check for existing schedules with the same time and day
+    $existingSchedule = teacherschedules::where([
+        'room_id' => $validatedData['room'],
+        'day' => $validatedData['day'],
+        'time_from' => $validatedData['time_from'],
+        'time_to' => $validatedData['time_to'],
+    ])->exists();
 
-        $newSchedule = teacherschedules::create([
-
-            'faculty_list_id' => $validatedData['teacher_name'],
-            'subject_id' => $validatedData['subject'],
-            'room_id' => $validatedData['room'],
-            'day' => $validatedData['day'],
-            'year' => $validatedData['year'],
-            'semester' => $validatedData['semester'],
-            'time_from' => $validatedData['time_from'],
-            'time_to' => $validatedData['time_to'],
-       
-        ]);
-       
-        return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
+    if ($existingSchedule) {
+        return redirect()->back()->withInput()->withErrors(['time_conflict' => 'There is a schedule conflict for this room, time and day.']);
     }
+
+    // If no conflict, proceed to create a new schedule
+    $teacherID = $validatedData['teacher_name'];
+
+    $newSchedule = teacherschedules::create([
+        'faculty_list_id' => $validatedData['teacher_name'],
+        'subject_id' => $validatedData['subject'],
+        'room_id' => $validatedData['room'],
+        'day' => $validatedData['day'],
+        'year' => $validatedData['year'],
+        'semester' => $validatedData['semester'],
+        'time_from' => $validatedData['time_from'],
+        'time_to' => $validatedData['time_to'],
+    ]);
+
+    return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
+}
+
 
     public function viewEditTeacherSched(Request $request,$id ){
 
@@ -114,9 +127,8 @@ class ScheduleController extends Controller
     }
 
     public function updateTeacherSchedPost(Request $request, $id){
-
         $teacherSchedule = teacherschedules::findOrFail($id);
-
+    
         $validatedData = $request->validate([
             'teacher_name' => 'required',
             'subject' => 'required',
@@ -124,26 +136,31 @@ class ScheduleController extends Controller
             'day' => 'required',
             'year' => 'required',
             'semester' => 'required',
-            'time_in' => 'required',
-            'time_out' => 'required|after:time_in',
+            'time_from' => 'required',
+            'time_to' => 'required|after:time_from',
         ]);
-
-        $teacherSchedule->update([
-            'faculty_list_id' => $request->input('teacher_name'),
-            'subject_id' => $request->input('subject'),
-            'room_id' => $request->input('room'),
-            'day' => $request->input('day'),
-            'year' => $request->input('year'),
-            'semester' => $request->input('semester'),
-            'time_from' => $request->input('time_from'),
-            'time_to' => $request->input('time_to')
-        ]);
-
-    return redirect()->route('teacherscheduleview', ['id' => $teacherSchedule->id, 'teacherID' => $teacherSchedule->faculty_list_id])
-       ->with('success', 'Teacher Schedule updated successfully');
+    
+        try {
+            $teacherSchedule->update([
+                'faculty_list_id' => $request->input('teacher_name'),
+                'subject_id' => $request->input('subject'),
+                'room_id' => $request->input('room'),
+                'day' => $request->input('day'),
+                'year' => $request->input('year'),
+                'semester' => $request->input('semester'),
+                'time_from' => $request->input('time_from'),
+                'time_to' => $request->input('time_to')
+            ]);
+    
+            return redirect()->route('teacherscheduleview', [
+                'id' => $teacherSchedule->id,
+                'teacherID' => $teacherSchedule->faculty_list_id
+            ])->with('success', 'Teacher Schedule updated successfully');
+        } catch (\Exception $e) {
+            return back()->withInput()->withErrors(['error' => 'Error updating schedule']);
+        }
     }
-
-
+    
     public function deleteTeacherSchedule(Request $request, string $id){
 
         $schedule = teacherschedules::findOrFail($id);
@@ -154,6 +171,7 @@ class ScheduleController extends Controller
         return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('message', 'Successfully deleted');
     }
 
+  
     public function showStudentSchedule(Request $request, $BatchId, $BlockId){
 
         $getBatch = batch::get();
