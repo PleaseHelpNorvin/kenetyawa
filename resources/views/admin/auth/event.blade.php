@@ -28,19 +28,20 @@
 
     <div class="container" >
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
-    <div class="container-fluid">
-        <ul class="navbar-nav mx-auto">
-        <li class="nav-item">
-                <a href="{{route('studentinfo',['id' =>  $student->id] )}}" class="nav-link font-weight-bold">Schedule</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('scheduleviewnav1',['id' =>  $student->id] )}}" class="nav-link font-weight-bold">Event </a>
-            </li>
-           
-        </ul>
-    </div>
-</nav>
-
+        <div class="container-fluid">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="{{ route('studentinfo',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Schedule</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('scheduleviewnav1',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Event </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('reports.view',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Report </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
         
         <div id='calendar'></div>
 

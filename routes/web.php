@@ -40,6 +40,8 @@ Route::group(['middleware' => 'guest'], function(){
     Route::get('/studentID', [AuthController::class,'studentID'])->name('studentID');
     Route::get('/teacherID', [AuthController::class,'teacherID'])->name('teacherID');
     Route::get('/register',[AuthController::class,'registerView'])->name('register');
+    Route::get('/reports/view/{id}', [ReportsController::class, 'viewReportStudent'])->name('reports.view');
+    Route::post('/reports/add', [ReportsController::class, 'addReportStudent'])->name('reports.add');
    
     Route::get('/login',[AuthController::class,'loginView'])->name('login');
     //Auths routes

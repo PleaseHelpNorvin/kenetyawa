@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\report;
+use App\Models\students;
 use Illuminate\Http\Request;
 
 class ReportsController extends Controller
@@ -80,5 +81,32 @@ class ReportsController extends Controller
         $report->update($updatedData);
 
         return redirect()->route('reportsview')->with('success', 'Report updated successfully');
+    }
+
+    public function addReportStudent(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'reporttitle' => 'required|string',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        // Handle file upload
+        $imagePath = $request->file('image')->store('report_images', 'public');
+
+        // Create a new report entry
+        $report = report::create([
+            'reporttitle' => $request->input('reporttitle'),
+            'description' => $request->input('description'),
+            'image' => $imagePath,
+        ]);
+
+        // Optionally, you can redirect to a page after creating the report
+        return back()->with('success', 'Report added successfully.');
+    }
+    public function viewReportStudent($id){
+        $student = students::find($id);
+        return view('admin.auth.StudentReport',compact('student'));
     }
 }

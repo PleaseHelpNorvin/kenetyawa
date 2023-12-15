@@ -16,6 +16,9 @@
                 <li class="nav-item">
                     <a href="{{ route('scheduleviewnav1',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Event </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('reports.view',['id' => $student->id]) }}" class="nav-link font-weight-bold text-black">Report </a>
+                </li>
             </ul>
         </div>
     </nav>
