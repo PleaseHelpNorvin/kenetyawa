@@ -8,6 +8,16 @@
             {{ session('success') }}
         </div>
     @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <h1>{{ $findBatch->batch_name }} - {{ $findBlock->block_name }}</h1>
     <form action="{{ route('addScheduleSave', ['BatchId' => $findBatch->id, 'BlockId' => $findBlock->id]) }}"
         method="post">

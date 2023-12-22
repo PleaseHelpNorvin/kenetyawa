@@ -70,45 +70,45 @@ class ScheduleController extends Controller
 
     public function addTeacherSchedulePost(Request $request){
 
-    $validatedData = $request->validate([
-        'teacher_name' => 'required',
-        'subject' => 'required',
-        'room' => 'required',
-        'day' => 'required',
-        'year' => 'required',
-        'semester' => 'required',
-        'time_from' => 'required',
-        'time_to' => 'required',
-    ]);
-
-    // Check for existing schedules with the same time and day
-    $existingSchedule = teacherschedules::where([
-        'room_id' => $validatedData['room'],
-        'day' => $validatedData['day'],
-        'time_from' => $validatedData['time_from'],
-        'time_to' => $validatedData['time_to'],
-    ])->exists();
-
-    if ($existingSchedule) {
-        return redirect()->back()->withInput()->withErrors(['time_conflict' => 'There is a schedule conflict for this room, time and day.']);
+        $validatedData = $request->validate([
+            'teacher_name' => 'required',
+            'subject' => 'required',
+            'room' => 'required',
+            'day' => 'required',
+            'year' => 'required',
+            'semester' => 'required',
+            'time_from' => 'required',
+            'time_to' => 'required',
+        ]);
+    
+        // Check for existing schedules with the same time and day
+        $existingSchedule = teacherschedules::where([
+            'room_id' => $validatedData['room'],
+            'day' => $validatedData['day'],
+            'time_from' => $validatedData['time_from'],
+            'time_to' => $validatedData['time_to'],
+        ])->exists();
+    
+        if ($existingSchedule) {
+            return redirect()->back()->withInput()->withErrors(['time_conflict' => 'There is a schedule conflict for this room, time and day.']);
+        }
+    
+        // If no conflict, proceed to create a new schedule
+        $teacherID = $validatedData['teacher_name'];
+    
+        $newSchedule = teacherschedules::create([
+            'faculty_list_id' => $validatedData['teacher_name'],
+            'subject_id' => $validatedData['subject'],
+            'room_id' => $validatedData['room'],
+            'day' => $validatedData['day'],
+            'year' => $validatedData['year'],
+            'semester' => $validatedData['semester'],
+            'time_from' => $validatedData['time_from'],
+            'time_to' => $validatedData['time_to'],
+        ]);
+    
+        return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
     }
-
-    // If no conflict, proceed to create a new schedule
-    $teacherID = $validatedData['teacher_name'];
-
-    $newSchedule = teacherschedules::create([
-        'faculty_list_id' => $validatedData['teacher_name'],
-        'subject_id' => $validatedData['subject'],
-        'room_id' => $validatedData['room'],
-        'day' => $validatedData['day'],
-        'year' => $validatedData['year'],
-        'semester' => $validatedData['semester'],
-        'time_from' => $validatedData['time_from'],
-        'time_to' => $validatedData['time_to'],
-    ]);
-
-    return redirect()->route('teacherscheduleview', ['teacherID' => $teacherID])->with('success', 'Teacher schedule added successfully!');
-}
 
 
     public function viewEditTeacherSched(Request $request,$id ){
@@ -215,26 +215,61 @@ class ScheduleController extends Controller
         return view('admin.pages.schedule.studentschedule.add_studentschedule', compact('findBatch', 'findBlock', 'selectTeacher', 'selectSubject', 'selectRoom', 'selectStudent'));
     }
 
-    public function addScheduleSave(Request $request ,$BatchId, $BlockId)
-    {   
-        $findBatch = batch::find($BatchId);
-        $findBlock = block::find($BlockId);
-        $request->validate([
-            'block_id' => 'required',
-            'batch_id' => 'required',
-            'room_code' => 'required|string|max:255',
-            'subject_name' => 'required|string|max:255',
-            'teacher_name' => 'required|string|max:255',
-            'day' => 'required',
-            'status' => 'required',
-            'time_in' => 'required|date_format:H:i',
-            'time_out' => 'required|date_format:H:i|after:time_in',
-        ]);
+    // public function addScheduleSave(Request $request ,$BatchId, $BlockId){
+           
+    //     $findBatch = batch::find($BatchId);
+    //     $findBlock = block::find($BlockId);
+    //     $request->validate([
+    //         'block_id' => 'required',
+    //         'batch_id' => 'required',
+    //         'room_code' => 'required|string|max:255',
+    //         'subject_name' => 'required|string|max:255',
+    //         'teacher_name' => 'required|string|max:255',
+    //         'day' => 'required',
+    //         'status' => 'required',
+    //         'time_in' => 'required|date_format:H:i',
+    //         'time_out' => 'required|date_format:H:i|after:time_in',
+    //     ]);
 
-        StudentSchedule::create($request->all());
+    //     StudentSchedule::create($request->all());
 
-        return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
+    //     return redirect()->route('studentscheduleview',['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
+    // }
+
+    public function addScheduleSave(Request $request, $BatchId, $BlockId)
+{   
+    $findBatch = Batch::find($BatchId);
+    $findBlock = Block::find($BlockId);
+
+    $request->validate([
+        'block_id' => 'required',
+        'batch_id' => 'required',
+        'room_code' => 'required|string|max:255',
+        'subject_name' => 'required|string|max:255',
+        'teacher_name' => 'required|string|max:255',
+        'day' => 'required',
+        'status' => 'required',
+        'time_in' => 'required|date_format:H:i',
+        'time_out' => 'required|date_format:H:i|after:time_in',
+    ]);
+
+    // Check for existing schedules with the same time range, room, and day
+    $conflictingSchedule = StudentSchedule::where([
+        'room_code' => $request->room_code,
+        'day' => $request->day,
+    ])->where(function ($query) use ($request) {
+        $query->whereBetween('time_in', [$request->time_in, $request->time_out])
+            ->orWhereBetween('time_out', [$request->time_in, $request->time_out]);
+    })->exists();
+
+    if ($conflictingSchedule) {
+        return redirect()->back()->withInput()->withErrors(['time_conflict' => 'There is a schedule conflict for this room, time, and day.']);
     }
+
+    StudentSchedule::create($request->all());
+
+    return redirect()->route('studentscheduleview', ['BatchId' => $findBatch ,'BlockId' => $findBlock])->with('success', 'Schedule added successfully!');
+}
 
     public function deletestudentschedule($id){
         

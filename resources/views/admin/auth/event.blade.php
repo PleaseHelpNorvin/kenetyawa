@@ -49,57 +49,16 @@
 
     <script>
         $(document).ready(function() {
-            var calendar = $('#calendar').fullCalendar({
+            $('#calendar').fullCalendar({
                 header: {
                     left: 'prev,next today',
                     center: 'title',
                     right: 'month,basicWeek,basicDay'
                 },
-                navLinks: true,
-                editable: true,
-                events: "getevent",
-                displayEventTime: false,
-                eventRender: function(event, element, view) {
-                    if (event.allDay === 'true') {
-                        event.allDay = true;
-                    } else {
-                        event.allDay = false;
-                    }
-                },
-                selectable: true,
-                selectHelper: true,
-                select: function(start, end, allDay) {
-                    var title = prompt('Event Title:');
-                    if (title) {
-                        var start = moment(start, 'DD.MM.YYYY').format('YYYY-MM-DD');
-                        var end = moment(end, 'DD.MM.YYYY').format('YYYY-MM-DD');
-                        $.ajax({
-                            url: "{{ URL::to('createevent') }}",
-                            data: 'title=' + title + '&start=' + start + '&end=' + end +
-                                '&_token=' + "{{ csrf_token() }}",
-                            type: "post",
-                            success: function(data) {
-                                alert("Added Successfully");
-                                $('#calendar').fullCalendar('refetchEvents');
-                            }
-                        });
-                    }
-                },
-                eventClick: function(event) {
-                    var deleteMsg = confirm("Do you really want to delete?");
-                    if (deleteMsg) {
-                        $.ajax({
-                            type: "POST",
-                            url: "{{ URL::to('deleteevent') }}",
-                            data: "&id=" + event.id + '&_token=' + "{{ csrf_token() }}",
-                            success: function(response) {
-                                if (parseInt(response) > 0) {
-                                    $('#calendar').fullCalendar('removeEvents', event.id);
-                                    alert("Deleted Successfully");
-                                }
-                            }
-                        });
-                    }
+                events: {
+                    url: '{{ route("getevents") }}',
+                    method: 'GET',
+                    textColor: 'white'
                 }
             });
         });

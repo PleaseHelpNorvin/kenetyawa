@@ -114,7 +114,11 @@
                 </div>
             </nav>
 
-
+            @if(session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <!-- Student schedule for each day -->
             @foreach (['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] as $day)
                 <div id="{{ strtolower($day) }}-content" class="nav-content">

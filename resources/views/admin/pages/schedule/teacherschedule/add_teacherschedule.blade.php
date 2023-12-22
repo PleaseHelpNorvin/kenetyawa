@@ -26,6 +26,9 @@
                                 <option value="{{ $teacher->id_no }}">{{ $teacher->name }}</option>
                             @endforeach
                         </select>
+                        @error('teacher_name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="subject">Subject:</label>
@@ -35,6 +38,9 @@
                                 <option value="{{ $subject->subjectcode }}">{{ $subject->subjectcode }}</option>
                             @endforeach
                         </select>
+                        @error('subject')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="room">Room:</label>
@@ -44,32 +50,50 @@
                                 <option value="{{ $room->roomcode }}">{{ $room->roomcode }}</option>
                             @endforeach
                         </select>
+                        @error('room')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="day">Day:</label>
                         <select class="form-control" id="day" name="day">
+                            <option value=""></option>
                             <option value="Monday">Monday</option>
                             <option value="Tuesday">Tuesday</option>
                             <option value="Wednesday">Wednesday</option>
                             <option value="Thursday">Thursday</option>
                             <option value="Friday">Friday</option>
                             <option value="Saturday">Saturday</option>
-
                         </select>
+                        @error('day')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="year">year:</label>
                         <input type="text" class="form-control" name="year">
+                        @error('year')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="year">semester:</label>
                         <input type="text" class="form-control" name="semester">
+                        @error('semester')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="time_from">Time from:</label>
                         <input type="time" class="form-control" id="time_from" name="time_from">
+                        @error('time_from')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <label for="time_to">Time to:</label>
                         <input type="time" class="form-control" id="time_to" name="time_to">
+                        @error('time_to')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
 
