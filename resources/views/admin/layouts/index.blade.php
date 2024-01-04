@@ -9,7 +9,8 @@
 <body>
 <div class="sidebar">
     <div class="logo_details">
-      <i class="bx bxl-audible icon"></i>
+      <i class='bx bx-calendar'></i>
+      {{-- <img src="{{ asset('assets/calendar/images/aclcnakedlogo.png')}}" alt="" srcset=""> --}}
       <div class="logo_name">SCHEDULING SYSTEM</div>
       <i class="bx bx-menu" id="btn"></i>
     </div>
