@@ -2,7 +2,7 @@
 @section('title', 'Add Teacher Schedule')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container mt-0">
         <div class="card">
             <div class="card-header">
                 <h2>Add Teacher Schedule</h2>

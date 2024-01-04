@@ -3,7 +3,7 @@
 @include('modals.subject_list_modal')
 
 @section('content')
-<div class="container mt-3">
+<div class="container mt-0">
 
     <div class="container-fluid">
 

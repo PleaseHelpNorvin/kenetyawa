@@ -3,7 +3,7 @@
 {{-- @include('modals.subject_list_modal') --}}
 
 @section('content')
-<div class="container">
+<div class="container mt-0">
     <h1>Add Subject</h1>
     <div class="card">
         <div class="card-body">

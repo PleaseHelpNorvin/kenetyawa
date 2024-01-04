@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 @section('title', 'Edit Teacher')
 @section('content')
-<div class="container">
+<div class="container mt-0">
     {{-- <div class="container"> --}}
     {{-- @if(isset($teacher)) --}}
     

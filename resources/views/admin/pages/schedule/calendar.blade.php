@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
 
-    <div class="container" >
+    <div class="container mt-0" >
         <nav class="navbar navbar-expand-lg navbar-light bg-light border">
             <div class="container-fluid">
                 <ul class="navbar-nav">

@@ -2,7 +2,7 @@
 @section('title', 'AddSchedule ')
 @section('content')
 
-<div class="container">
+<div class="container mt-0">
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}

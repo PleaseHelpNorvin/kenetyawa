@@ -2,7 +2,7 @@
 @section('title', 'Edit Report')
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container mt-0">
         <h2>Edit a New Report</h2>
         <form method="POST" action="{{ route('editreport', ['id' => $data ->id ])}}" enctype="multipart/form-data" method="POST">
             @csrf

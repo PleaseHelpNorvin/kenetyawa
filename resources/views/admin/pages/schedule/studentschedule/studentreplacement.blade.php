@@ -21,7 +21,7 @@
         }
     </style>
 
-    <div class="container mt-3">
+    <div class="container mt-0">
         <!-- Navigation Links -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light border">
             <div class="container-fluid">

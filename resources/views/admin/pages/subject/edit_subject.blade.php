@@ -2,7 +2,7 @@
 @section('title', 'add subject')
 
 @section('content')
-<div class="container">
+<div class="container mt-0">
     <h1>Edit Subject</h1>
     <div class="card">
         <div class="card-body">

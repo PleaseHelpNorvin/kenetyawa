@@ -1,7 +1,7 @@
 @extends('admin.layouts.index')
 
 @section('content')
-<div class="container">
+<div class="container mt-0">
     <div class="card">
         <div class="card-header">
             <h1 class="card-title">Add Teacher</h1>

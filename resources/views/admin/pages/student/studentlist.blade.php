@@ -1,9 +1,10 @@
 @extends('admin.layouts.index')
 @section('title', 'Student List')
-@include('admin.pages.student.delete_batch_modal')
-@include('admin.pages.student.delete_block_modal')
+
 
 @section('content')
+@include('admin.pages.student.delete_batch_modal')
+@include('admin.pages.student.delete_block_modal')
     <style>
         .modal {
             display: none;
@@ -51,7 +52,7 @@
         }
     </style>
 
-    <div class="container mt-3">
+    <div class="container mt-0">
         <!-- Batch links -->
         <h3>Select Batch</h3>
         <nav class="navbar navbar-expand-lg navbar-light bg-light border batch-navbar">

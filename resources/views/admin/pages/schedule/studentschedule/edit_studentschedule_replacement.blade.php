@@ -2,7 +2,7 @@
 @section('title', 'EditSchedule ')
 @section('content')
 
-<div class="container">
+<div class="container mt-0">
     <h1>Edit Schedule</h1>
 
     @if(session('success'))

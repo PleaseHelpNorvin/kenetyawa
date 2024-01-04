@@ -5,7 +5,7 @@
 
 
 
-<div class="container">
+<div class="container mt-0">
     <h5>Add Student to @if ($selectedBatch)  {{ $selectedBatch->batch_name }}  and  {{ $selectedBlock->block_name }}@endif </h5>
     <form action="{{ route('add.savestudent', ['batchId' => $selectedBatch->id, 'block' => $selectedBlock->id]) }}" method="POST">
 

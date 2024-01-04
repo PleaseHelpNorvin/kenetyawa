@@ -2,7 +2,7 @@
 @section('title', 'Student List')
 @section('content')
 
-<div class="container">
+<div class="container mt-0">
    
             <form action="{{ route('update.student', ['student' => $selectstudent->id]) }}" method="POST">
                 @csrf

@@ -2,7 +2,7 @@
 @section('title', 'Teacher List')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-0">
         <h2>Teacher List</h2>
 
         <div class="form-group">

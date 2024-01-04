@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<div class="container mt-4">
+<div class="container mt-0">
     <div class="card">
         <div class="card-header">
             <h1 class="card-title">Welcome, {{ Auth::user()->name }}!</h1>
