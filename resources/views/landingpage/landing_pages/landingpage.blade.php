@@ -12,14 +12,14 @@
         <header>
           <div class="container">
             <div class="logo">
-              <img src="./img/logo.png" alt="Logo" />
+              <img src="{{asset('assets/calendar/images/aclcnakedlogo.png')}}" alt="Logo" />
               <h3>SCHEDULING SYSTEM</h3>
             </div>
 
             <div class="links">
               <ul>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Pricing</a></li>
+                {{-- <li><a href="#">Features</a></li> --}}
+                {{-- <li><a href="#">Pricing</a></li> --}}
                 
                 <li><a href="{{ route('login')}}" class="btn">Login Admin</a></li>
                 <li><a href="/teacherID" class="btn">Login Guest</a></li>
@@ -38,19 +38,19 @@
           <div class="container">
             <div class="left">
               <div class="big-title">
-                <h1>Future is here,</h1>
-                <h1>Start Exploring now.</h1>
+                <h1> Welcome to our School</h1>
+                <h1>Scheduling system!</h1>
               </div>
               <p class="text">
-              Welcome to our School Scheduling system, designed to streamline and simplify the scheduling process for administrators, teachers, and students. Our platform offers a comprehensive solution to manage classes, assignments, and events efficiently.
+              designed to streamline and simplify the scheduling process for administrators, teachers, and students. Our platform offers a comprehensive solution to manage classes, assignments, and events efficiently.
               </p>
               <div class="cta">
-                <a href="#" class="btn">Get started</a>
+                {{-- <a href="#" class="btn">Get started</a> --}}
               </div>
             </div>
 
             <div class="right">
-              <img src="./img/person.png" alt="Person Image" class="person" />
+              <img src="{{asset('assets/calendar/images/aclclogo.png')}}" alt="Person Image" class="person" />
             </div>
           </div>
         </div>
@@ -73,8 +73,8 @@
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .light {
-  --mainColor: #64bcf4;
-  --hoverColor: #5bacdf;
+  --mainColor: #512da8;
+  --hoverColor: #8155e9;
   --backgroundColor: #f1f8fc;
   --darkOne: #312f3a;
   --darkTwo: #45424b;
@@ -83,8 +83,8 @@
 }
 
 .dark {
-  --mainColor: #64bcf4;
-  --hoverColor: #5bacdf;
+  --mainColor: #512da8;
+  --hoverColor: #8155e9;
   --backgroundColor: #192e3a;
   --darkOne: #f3f3f3;
   --darkTwo: #fff;
@@ -284,7 +284,12 @@ header .container {
 }
 
 .person {
-  width: 123%;
+  padding: 100px;
+  /* margin-right: 50px; */
+  position: absolute;
+  left: 180px;
+    top: -148px;
+  width: 100%;
   transform: translate(15%, 25px);
 }
 
@@ -432,6 +437,11 @@ header .container {
   }
 
   .person {
+    padding: 100px;
+    /* margin-right: 20px; */
+    position: absolute;
+    left: 180px;
+    top: -148px;
     width: 100%;
     transform: none;
   }
