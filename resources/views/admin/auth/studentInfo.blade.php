@@ -4,6 +4,16 @@
 
 <div class="container">
 
+<div class="topnav">
+    <a class="logo" href=""> <i class="fa fa-calendar"></i> SCHEDULING SYSTEM</a>
+    <div class="profile-dropdown">
+
+        <div id="profile-content" class="profile-content">
+         
+            <a href="{{ route('showLandingPage')}}">Log Out</a>
+        </div>
+    </div>
+</div>
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light border">
@@ -101,21 +111,26 @@
     
     @endif
     <style>
-        .small-text, .text-black {
-            font-size: 13px; /* Adjust the font size as needed */
-            color: black; /* Set text color to black */
-        }
+    .navbar-nav .nav-item {
+        margin-right: 30px; /* Increase the margin value to add more space between days */
+    }
 
-        .navbar.border {
-            border-left: 1px solid #dee2e6; /* Left border color */
-            border-right: 1px solid #dee2e6; /* Right border color */
-        }
+    .small-text, .text-black {
+        font-size: 13px; /* Adjust the font size as needed */
+        color: black; /* Set text color to black */
+    }
 
-        /* Adjust the container width */
-        .container {
-            max-width: 1200px; /* Change this value as needed */
-        }
-    </style>
+    .navbar.border {
+        border-left: 1px solid #dee2e6; /* Left border color */
+        border-right: 1px solid #dee2e6; /* Right border color */
+    }
+
+    /* Adjust the container width */
+    .container {
+        max-width: 1200px; /* Change this value as needed */
+    }
+</style>
+
 
 </div>
 

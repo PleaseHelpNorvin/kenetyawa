@@ -48,12 +48,12 @@
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Hello!</h1>
-                    <p>if you are teacher then click button</p>
+                    <p>If you are a teacher, click the button below.</p>
                     <button class="hidden" id="login">Teacher</button>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello,</h1>
-                    <p>If your a Stundent Click The Button</p>
+                    <h1>Hello! </h1>
+                    <p>If you are a student, click the button below.</p>
                     <button class="hidden" id="register">Student</button>
                 </div>
             </div>

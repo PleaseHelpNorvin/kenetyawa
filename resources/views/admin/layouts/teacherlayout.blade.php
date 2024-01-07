@@ -57,27 +57,14 @@
     <title>Login</title>
 </head>
 <body>
-<div class="topnav">
-    <a class="logo" href=""> <i class="fa fa-calendar"></i> SCHEDULING SYSTEM</a>
-    <div class="profile-dropdown">
-        <button id="profile-button" class="profile-button">
-        
-        {{ $teacher->name }}
 
-        </button>
-        <div id="profile-content" class="profile-content">
-          
-            <a href="{{ route('showLandingPage')}}">Log Out</a>
-        </div>
-    </div>
-</div>
 
     
-            <div class="container">
+          
               
                 @yield('content')
            
-            </div>
+         
        
 </body>
 </html>

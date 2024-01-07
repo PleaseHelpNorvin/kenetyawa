@@ -14,6 +14,7 @@
       <i class="bx bx-menu" id="btn"></i>
     </div>
     <ul class="nav-list">
+      
       <!-- <li>
         <i class="bx bx-search"></i>
         <input type="text" placeholder="Search...">
@@ -179,6 +180,7 @@ body{
 
 .sidebar .nav-list{
   margin-top: 20px;
+ 
   height: 100%;
 }
 

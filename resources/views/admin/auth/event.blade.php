@@ -27,6 +27,18 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.5.1/fullcalendar.min.js"></script>
 
     <div class="container" >
+        
+<div class="topnav">
+    <a class="logo" href=""> <i class="fa fa-calendar"></i> SCHEDULING SYSTEM</a>
+    <div class="profile-dropdown">
+
+        <div id="profile-content" class="profile-content">
+         
+            <a href="{{ route('showLandingPage')}}">Log Out</a>
+        </div>
+    </div>
+</div>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light border">
         <div class="container-fluid">
             <ul class="navbar-nav mx-auto">
